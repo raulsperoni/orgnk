@@ -1,0 +1,15 @@
+wildfy:
+  image: jboss/wildfly
+  ports:
+    - 8080:8080
+  links:
+    - postgresdb
+  volumes:
+    - deployments:/opt/jboss/wildfly/standalone/deployments/
+postgresdb:
+  image: postgres
+  environment:
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+  ports:
+    - 5432:5432
