@@ -6,7 +6,6 @@ import mgcoders.uy.model.VotacionAsociacion;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -24,9 +23,15 @@ public class VotacionService {
     @Inject
     private VotantesService votantesService;
 
-    public List<Votacion> getVotacionesActivas(String tokenVotante) throws Exception {
-        javax.persistence.Query query = em.createNamedQuery("VotantesService.getAsociacionActivaPorToken", VotacionAsociacion.class);
-        query.setParameter("token", tokenVotante);
+    public Votacion getVotacionPorChatIdToken(String chatId, String token) throws Exception {
+        javax.persistence.Query query = em.createNamedQuery("VotantesService.getAsociacionPorChatId", VotacionAsociacion.class);
+        query.setParameter("chatId", chatId);
+        query.setParameter("token", token);
         VotacionAsociacion res = (VotacionAsociacion) query.getSingleResult();
+        return res.getVotacion();
+    }
+
+    public void guardarVotacion(Votacion votacion) {
+        em.persist(votacion);
     }
 }

@@ -2,6 +2,7 @@ package mgcoders.uy.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,10 +27,10 @@ public class Votacion {
     private Date fechaFin;
 
     @OneToMany
-    private List<Pregunta> preguntas;
+    private List<Pregunta> preguntas = new ArrayList<>();
 
-    @OneToMany(mappedBy = "votacion")
-    private List<VotacionAsociacion> votantes;
+    @OneToMany(mappedBy = "votacion", cascade = CascadeType.PERSIST)
+    private List<VotacionAsociacion> votantes = new ArrayList<>();
 
     public void addVotante(Votante votante) {
         VotacionAsociacion asociacion = new VotacionAsociacion(this, votante);

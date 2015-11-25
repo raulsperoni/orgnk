@@ -9,6 +9,7 @@ public class VotacionAsociacionId implements Serializable {
 
     private long votacionId;
     private long votanteId;
+    private String tokenAutorizacion;
 
     @Override
     public boolean equals(Object o) {
@@ -18,7 +19,8 @@ public class VotacionAsociacionId implements Serializable {
         VotacionAsociacionId that = (VotacionAsociacionId) o;
 
         if (votacionId != that.votacionId) return false;
-        return votanteId == that.votanteId;
+        if (votanteId != that.votanteId) return false;
+        return !(tokenAutorizacion != null ? !tokenAutorizacion.equals(that.tokenAutorizacion) : that.tokenAutorizacion != null);
 
     }
 
@@ -26,6 +28,7 @@ public class VotacionAsociacionId implements Serializable {
     public int hashCode() {
         int result = (int) (votacionId ^ (votacionId >>> 32));
         result = 31 * result + (int) (votanteId ^ (votanteId >>> 32));
+        result = 31 * result + (tokenAutorizacion != null ? tokenAutorizacion.hashCode() : 0);
         return result;
     }
 }

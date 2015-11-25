@@ -7,9 +7,10 @@ wildfy:
   volumes:
     - deployments:/opt/jboss/wildfly/standalone/deployments/
 postgresdb:
-  image: postgres
+  build: postgres
   environment:
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: postgres
+    POSTGRES_DB: nitro
   ports:
     - 5432:5432

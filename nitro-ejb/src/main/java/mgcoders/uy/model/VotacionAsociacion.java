@@ -8,14 +8,16 @@ import javax.persistence.*;
 @Entity
 @IdClass(VotacionAsociacionId.class)
 @NamedQueries({@NamedQuery(name = "VotantesService.getAsociacionPorToken", query = "SELECT va from VotacionAsociacion va where va.tokenAutorizacion = :token"),
-        @NamedQuery(name = "VotantesService.getAsociacionPorChatId", query = "SELECT va from VotacionAsociacion va where va.chatId = :chatId")})
+        @NamedQuery(name = "VotantesService.getAsociacionPorChatId", query = "SELECT va from VotacionAsociacion va where va.chatId = :chatId and va.tokenAutorizacion = :token")})
 public class VotacionAsociacion {
 
     @Id
     private long votacionId;
     @Id
     private long votanteId;
+    @Id
     private String tokenAutorizacion;
+    @Column(unique = true)
     private String chatId;
 
     @ManyToOne
@@ -31,6 +33,7 @@ public class VotacionAsociacion {
         this.votacionId = votacion.getId();
         this.votante = votante;
         this.votanteId = votante.getId();
+        this.tokenAutorizacion = "token";
     }
 
     public VotacionAsociacion() {

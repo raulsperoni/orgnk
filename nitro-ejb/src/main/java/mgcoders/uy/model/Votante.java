@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,10 +20,15 @@ public class Votante {
     private String nombreUsuario;
 
     @OneToMany(mappedBy = "votante")
-    private List<VotacionAsociacion> votaciones;
+    private List<VotacionAsociacion> votaciones = new ArrayList<>();
 
     public String getNombreUsuario() {
         return nombreUsuario;
+    }
+
+    public Votante setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+        return this;
     }
 
     public long getId() {

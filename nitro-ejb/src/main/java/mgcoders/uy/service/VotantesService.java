@@ -53,4 +53,8 @@ public class VotantesService {
         VotacionAsociacion res = (VotacionAsociacion) query.getSingleResult();
         return res.getVotante();
     }
+
+    public void guardarVotante(Votante votante) {
+        em.persist(votante);
+    }
 }

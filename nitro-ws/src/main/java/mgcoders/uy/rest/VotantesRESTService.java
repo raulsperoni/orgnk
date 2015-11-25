@@ -22,13 +22,9 @@ public class VotantesRESTService {
     @Inject
     private Logger log;
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response existeTokenAutorizacion(@PathParam("token") String token) {
-        return Response.ok().entity(votantesService.existeAsociacionPorToken(token)).build();
-    }
 
     @GET
+    @Path("{token}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getNombreUsuarioAsociado(@PathParam("token") String token) {
         try {
@@ -40,6 +36,7 @@ public class VotantesRESTService {
     }
 
     @POST
+    @Path("user/chatid/{token}/{chatId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response setAsociacionUsuarioChatId(@PathParam("token") String token, @PathParam("chatId") String chatId) {
         try {
