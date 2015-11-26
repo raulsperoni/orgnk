@@ -22,10 +22,11 @@ public class VotacionRESTService {
     VotacionService votacionService;
 
     @GET
+    @Path("{token}/{chatId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getVotacionPorChatIdToken(@PathParam("chatId") String chatId, @PathParam("token") String token) {
+    public Response getPreguntasPorChatIdToken(@PathParam("chatId") String chatId, @PathParam("token") String token) {
         try {
-            return Response.ok().entity(votacionService.getVotacionPorChatIdToken(chatId, token)).build();
+            return Response.ok().entity(votacionService.getPreguntasPorChatIdToken(chatId, token)).build();
         } catch (Exception e) {
             return Response.noContent().build();
         }

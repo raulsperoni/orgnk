@@ -1,5 +1,7 @@
 package mgcoders.uy.rest;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import mgcoders.uy.service.VotantesService;
 
 import javax.enterprise.context.RequestScoped;
@@ -28,7 +30,10 @@ public class VotantesRESTService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getNombreUsuarioAsociado(@PathParam("token") String token) {
         try {
-            return Response.ok().entity(votantesService.getVotantePorToken(token).getNombreUsuario()).build();
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("nombre", votantesService.getVotantePorToken(token).getNombreUsuario());
+            Gson gson = new Gson();
+            return Response.ok().entity(gson.toJson(jsonObject)).build();
         } catch (Exception e) {
             log.info("No hay usuario asociado a token: " + token);
             return Response.noContent().build();
@@ -36,7 +41,7 @@ public class VotantesRESTService {
     }
 
     @POST
-    @Path("user/chatid/{token}/{chatId}")
+    @Path("{token}/{chatId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response setAsociacionUsuarioChatId(@PathParam("token") String token, @PathParam("chatId") String chatId) {
         try {

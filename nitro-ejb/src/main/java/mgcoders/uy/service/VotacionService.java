@@ -1,11 +1,13 @@
 package mgcoders.uy.service;
 
+import mgcoders.uy.model.Pregunta;
 import mgcoders.uy.model.Votacion;
 import mgcoders.uy.model.VotacionAsociacion;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -33,5 +35,9 @@ public class VotacionService {
 
     public void guardarVotacion(Votacion votacion) {
         em.persist(votacion);
+    }
+
+    public List<Pregunta> getPreguntasPorChatIdToken(String chatId, String token) throws Exception {
+        return getVotacionPorChatIdToken(chatId, token).getPreguntas();
     }
 }

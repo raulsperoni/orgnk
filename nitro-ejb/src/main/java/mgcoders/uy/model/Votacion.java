@@ -26,7 +26,7 @@ public class Votacion {
     @Temporal(TemporalType.TIME)
     private Date fechaFin;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Pregunta> preguntas = new ArrayList<>();
 
     @OneToMany(mappedBy = "votacion", cascade = CascadeType.PERSIST)

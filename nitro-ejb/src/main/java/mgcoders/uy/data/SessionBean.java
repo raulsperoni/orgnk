@@ -1,5 +1,7 @@
 package mgcoders.uy.data;
 
+import mgcoders.uy.model.Opcion;
+import mgcoders.uy.model.Pregunta;
 import mgcoders.uy.model.Votacion;
 import mgcoders.uy.model.Votante;
 import mgcoders.uy.service.VotacionService;
@@ -42,6 +44,18 @@ public class SessionBean {
         votante.setNombreUsuario("raul");
         votantesService.guardarVotante(votante);
         Votacion votacion = new Votacion();
+        Pregunta pregunta = new Pregunta();
+        pregunta.setExplicacion("Algo aca");
+        pregunta.setPregunta("MgCoders o los bobos de la ORT?");
+        pregunta.setRespuestasMinimas(0);
+        pregunta.setRespuestasMaximas(1);
+        Opcion opcion = new Opcion();
+        opcion.setDescripcion("si");
+        pregunta.getOpciones().add(opcion);
+        Opcion opcionno = new Opcion();
+        opcionno.setDescripcion("no");
+        pregunta.getOpciones().add(opcionno);
+        votacion.getPreguntas().add(pregunta);
         votacion.setFechaCreacion(new Date());
         votacion.setFechaInicio(new Date());
         votacion.setFechaFin(new Date());

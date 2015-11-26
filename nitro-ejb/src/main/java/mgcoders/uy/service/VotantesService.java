@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Stateless
@@ -44,7 +45,8 @@ public class VotantesService {
         query.setParameter("token", token);
         VotacionAsociacion res = (VotacionAsociacion) query.getSingleResult();
         res.setChatId(chatId);
-        em.refresh(res);
+        log.log(Level.INFO, "#########CHATID" + chatId);
+        em.merge(res);
     }
 
     public Votante getVotantePorChatId(String chatId) throws Exception {
