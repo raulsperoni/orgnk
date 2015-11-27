@@ -1,6 +1,8 @@
 package mgcoders.uy.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by RSperoni on 24/11/2015.
@@ -11,28 +13,24 @@ import javax.persistence.*;
         @NamedQuery(name = "VotantesService.getAsociacionPorChatId", query = "SELECT va from VotacionAsociacion va where va.chatId = :chatId and va.tokenAutorizacion = :token")})
 public class VotacionAsociacion {
 
-    @Id
-    private long votacionId;
-    @Id
-    private long votanteId;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "votacionAsociacion")
+    List<Respuesta> respuestas = new ArrayList<>();
     @Id
     private String tokenAutorizacion;
-    @Column(unique = true)
     private String chatId;
-
+    @Id
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "votacionId", referencedColumnName = "id")
+    @PrimaryKeyJoinColumn(name = "votacion_id", referencedColumnName = "id")
     private Votacion votacion;
-
+    @Id
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "votanteId", referencedColumnName = "id")
+    @PrimaryKeyJoinColumn(name = "votante_id", referencedColumnName = "id")
     private Votante votante;
 
     public VotacionAsociacion(Votacion votacion, Votante votante) {
         this.votacion = votacion;
-        this.votacionId = votacion.getId();
         this.votante = votante;
-        this.votanteId = votante.getId();
         this.tokenAutorizacion = "token";
     }
 

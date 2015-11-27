@@ -14,8 +14,7 @@ import java.util.List;
 @Inheritance
 public class Pregunta {
 
-    @OneToMany(fetch = FetchType.EAGER)
-    List<Respuesta> respuestas = new ArrayList<>();
+
     @Id
     @GeneratedValue
     private long id;
@@ -28,14 +27,6 @@ public class Pregunta {
     private int respuestasMinimas;
     private int respuestasMaximas;
 
-    public List<Respuesta> getRespuestas() {
-        return respuestas;
-    }
-
-    public Pregunta setRespuestas(List<Respuesta> respuestas) {
-        this.respuestas = respuestas;
-        return this;
-    }
 
     public long getId() {
         return id;

@@ -16,10 +16,7 @@ public class Respuesta {
     private long id;
 
     @ManyToOne
-    private Votante votante;
-
-    @ManyToOne
-    private Opcion opcion;
+    private VotacionAsociacion votacionAsociacion;
 
     @ManyToOne
     private Pregunta pregunta;

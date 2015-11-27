@@ -13,7 +13,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 package mgcoders.uy.controller;
 
 import javax.annotation.PostConstruct;
@@ -23,9 +24,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import mgcoders.uy.model.Member;
-import mgcoders.uy.service.MemberRegistration;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
 // EL name
@@ -85,3 +83,4 @@ public class MemberController {
         return errorMessage;
     }
 }
+*/
