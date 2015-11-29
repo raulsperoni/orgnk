@@ -1,5 +1,6 @@
 package mgcoders.uy.rest;
 
+import mgcoders.uy.model.Votacion;
 import mgcoders.uy.service.VotacionService;
 
 import javax.enterprise.context.RequestScoped;
@@ -9,7 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import java.util.logging.Logger;
 
 /**
  * Created by raul on 24/11/15.
@@ -21,14 +22,13 @@ public class VotacionRESTService {
     @Inject
     VotacionService votacionService;
 
+    @Inject
+    private Logger log;
+
     @GET
     @Path("{token}/{chatId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPreguntasPorChatIdToken(@PathParam("chatId") String chatId, @PathParam("token") String token) {
-        try {
-            return Response.ok().entity(votacionService.getPreguntasPorChatIdToken(chatId, token)).build();
-        } catch (Exception e) {
-            return Response.noContent().build();
-        }
+    public Votacion getVotacionPorChatIdToken(@PathParam("chatId") String chatId, @PathParam("token") String token) throws Exception {
+        return votacionService.getVotacionPorChatIdToken(chatId, token);
     }
 }

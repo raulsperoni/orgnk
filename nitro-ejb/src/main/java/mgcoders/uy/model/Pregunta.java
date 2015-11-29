@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,20 +12,24 @@ import java.util.List;
  * Created by raul on 22/11/15.
  */
 @Entity
-@Inheritance
-public class Pregunta {
+public class Pregunta implements Serializable {
 
 
     @Id
     @GeneratedValue
     private long id;
+
     @NotNull
     @NotEmpty
     private String pregunta;
+
     private String explicacion;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Opcion> opciones = new ArrayList<>();
+
     private int respuestasMinimas;
+
     private int respuestasMaximas;
 
 

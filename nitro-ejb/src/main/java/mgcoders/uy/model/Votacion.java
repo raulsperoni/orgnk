@@ -1,7 +1,11 @@
 package mgcoders.uy.model;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +14,7 @@ import java.util.List;
  * Created by raul on 22/11/15.
  */
 @Entity
-public class Votacion {
+public class Votacion implements Serializable {
 
     @Id
     @GeneratedValue
@@ -19,9 +23,11 @@ public class Votacion {
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
+
     @NotNull
     @Temporal(TemporalType.TIME)
     private Date fechaInicio;
+
     @NotNull
     @Temporal(TemporalType.TIME)
     private Date fechaFin;
@@ -29,6 +35,7 @@ public class Votacion {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Pregunta> preguntas = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "votacion", cascade = CascadeType.PERSIST)
     private List<VotacionAsociacion> votantes = new ArrayList<>();
 
@@ -72,5 +79,15 @@ public class Votacion {
 
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    @Override
+    public String toString() {
+        return "Votacion{" +
+                "id=" + id +
+                ", fechaCreacion=" + fechaCreacion +
+                ", fechaInicio=" + fechaInicio +
+                ", fechaFin=" + fechaFin +
+                '}';
     }
 }
