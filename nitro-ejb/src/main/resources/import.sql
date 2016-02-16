@@ -18,3 +18,12 @@
 -- You can use this file to load seed data into the database using SQL statements
 --DROP DATABASE  IF EXISTS NITRO;
 --CREATE DATABASE NITRO;
+
+
+--
+-- Volcado de datos para la tabla `departamento`
+--
+
+INSERT INTO departamento VALUES ('1', 'MONTEVIDEO'), ('2', 'ARTIGAS');
+
+INSERT INTO localidad VALUES (1, 'Montevideo', 1), (2, 'Rural', 1);

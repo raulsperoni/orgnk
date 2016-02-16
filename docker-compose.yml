@@ -4,6 +4,7 @@ wildfy:
     - 8080:8080
     - 9990:9990
     - 43678:43678
+    - 9092:9092
   links:
     - postgresdb
   volumes:

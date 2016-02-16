@@ -62,6 +62,7 @@ public class SessionBean {
         votacion.addVotante(votante);
         votacionService.guardarVotacion(votacion);
 
+
         em.flush();
 
 
