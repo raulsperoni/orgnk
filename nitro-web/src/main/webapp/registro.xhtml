@@ -24,187 +24,177 @@
                 template="/WEB-INF/templates/tempboo.xhtml">
     <ui:define name="content">
 
+        <b:jumbotron>HOLA</b:jumbotron>
+        <b:panelGrid colSpans="4,8">
+            <b:panel look="primary" title="Navigation menu">
+                HHHH
 
-        <h:form id="reg">
-            <h2>Registro</h2>
+            </b:panel>
+            <b:panel>
 
-            <b:container layout="fluid">
-                <b:row>
-                    <b:column colMd="2">
-                        <p:outputLabel for="nombre" value="Nombre:"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <p:inputText id="nombre" value="#{nuevaPersona.nombre}"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <b:message for="nombre" errorClass="invalid"/>
-                    </b:column>
-                </b:row>
-                <b:row>
-                    <b:column colMd="2">
-                        <p:outputLabel for="ci" value="CI:"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <p:inputText id="ci" value="#{nuevaPersona.ci}"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <b:message for="ci" errorClass="invalid"/>
-                    </b:column>
-                </b:row>
-                <b:row>
-                    <b:column colMd="2">
-                        <h:outputLabel for="cc" value="CC:"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <h:inputText id="cc" value="#{nuevaPersona.cc}"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <b:message for="cc" errorClass="invalid"/>
-                    </b:column>
-                </b:row>
-                <b:row>
-                    <b:column colMd="2">
-                        <h:outputLabel for="tel1" value="Teléfono 1:"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <h:inputText id="tel1" value="#{nuevaPersona.telefono_1}"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <b:message for="tel1" errorClass="invalid"/>
-                    </b:column>
-                </b:row>
-                <b:row>
-                    <b:column colMd="2">
-                        <h:outputLabel for="tel2" value="Teléfono 2:"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <h:inputText id="tel2" value="#{nuevaPersona.telefono_2}"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <b:message for="tel2" errorClass="invalid"/>
-                    </b:column>
-                </b:row>
-                <b:row>
-                    <b:column colMd="2">
-                        <h:outputLabel for="fecha_nac" value="Fecha Nacimiento:"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <h:inputText id="fecha_nac" value="#{nuevaPersona.fecha_nacimiento}">
-                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-                        </h:inputText> </b:column>
-                    <b:column colMd="2">
-                        <b:message for="fecha_nac" errorClass="invalid"/>
-                    </b:column>
-                </b:row>
-                <b:row>
-                    <b:column colMd="2">
-                        <h:outputLabel for="email" value="Email:"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <h:inputText id="email" value="#{nuevaPersona.email}"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <b:message for="email" errorClass="invalid"/>
-                    </b:column>
-                </b:row>
-                <b:row>
-                    <b:column colMd="2">
-                        <h:outputLabel for="depto" value="Departamento:"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <h:selectOneMenu id="depto" value="#{registroController.departamentoSeleccionado}">
-                            <f:selectItems value="#{auxController.departamentoList}" var="d" itemLabel="#{d.nombre}"
-                                           itemValue="#{d.id}"/>
-                            <f:ajax listener="#{registroController.cambioDepartamento}" event="change" render="loc"
-                                    execute="@this"/>
-                        </h:selectOneMenu> </b:column>
-                    <b:column colMd="2">
-                        <b:message for="depto" errorClass="invalid"/>
-                    </b:column>
-                </b:row>
-                <b:row>
-                    <b:column colMd="2">
-                        <h:outputLabel for="loc" value="Localidad:"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <h:selectOneMenu id="loc" value="#{registroController.localidadSeleccionada}">
-                            <f:selectItems value="#{registroController.localidades}" var="l" itemLabel="#{l.nombre}"
-                                           itemValue="#{l.id}"/>
-                        </h:selectOneMenu> </b:column>
-                    <b:column colMd="2">
-                        <b:message for="loc" errorClass="invalid"/>
-                    </b:column>
-                </b:row>
-                <b:row>
-                    <b:column colMd="2">
-                        <h:outputLabel for="barrio" value="Barrio:"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <h:inputText id="barrio" value="#{nuevaPersona.barrio}"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <b:message for="barrio" errorClass="invalid"/>
-                    </b:column>
-                </b:row>
-                <b:row>
-                    <b:column colMd="2">
-                        <h:outputLabel for="dir" value="Dirección:"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <h:inputText id="dir" value="#{nuevaPersona.direccion}"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <b:message for="dir" errorClass="invalid"/>
-                    </b:column>
-                </b:row>
-                <b:row>
-                    <b:column colMd="2">
-                        <h:outputLabel for="intereses" value="Temas de interés:"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <h:inputTextarea id="intereses" value="#{nuevaPersona.temas_interes}"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <b:message for="intereses" errorClass="invalid"/>
-                    </b:column>
-                </b:row>
-                <b:row>
-                    <b:column colMd="2">
-                        <h:outputLabel for="frec_aporte" value="Frecuencia aporte económico:"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <h:selectOneMenu id="frec_aporte" value="#{registroController.frecuenciaSeleccionada}">
-                            <f:selectItems value="#{auxController.frecuenciaList}" var="f" itemLabel="#{f.name()}"
-                                           itemValue="#{f.name()}"/>
-                        </h:selectOneMenu>
-                    </b:column>
-                    <b:column colMd="2">
-                        <b:message for="frec_aporte" errorClass="invalid"/>
-                    </b:column>
-                </b:row>
-                <b:row>
-                    <b:column colMd="2">
-                        <h:outputLabel for="monto" value="Monto aporte ecónomico:"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <h:inputText id="monto" value="#{nuevaPersona.monto_aporte}"/>
-                    </b:column>
-                    <b:column colMd="2">
-                        <b:message for="monto" errorClass="invalid"/>
-                    </b:column>
-                </b:row>
-            </b:container>
+                <h:form id="reg">
+                    <h2>Registro</h2>
 
-            <p>
-                <h:panelGrid columns="2">
-                    <h:commandButton id="register" action="#{registroController.registrar}" value="Registrar"
-                                     styleClass="register"/>
-                    <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
-                                globalOnly="true"/>
-                </h:panelGrid>
-            </p>
-        </h:form>
+                    <b:container layout="fluid">
+                        <b:row>
 
+                            <b:column colMd="3">
+                                <p:outputLabel for="nombre" value="Nombre:" class="control-label"/>
+                                <b:inputText id="nombre" value="#{nuevaPersona.nombre}"/>
+                                <b:message for="nombre" errorClass="invalid"/>
+                            </b:column>
 
+                        </b:row>
+                        <b:row>
+
+                            <b:column colMd="3">
+                                <p:outputLabel for="ci" value="CI:"/>
+                                <b:inputText id="ci" value="#{nuevaPersona.ci}"/>
+                                <b:message for="ci" errorClass="invalid"/>
+                            </b:column>
+
+                        </b:row>
+                        <b:row>
+
+                            <b:column colMd="3">
+                                <p:outputLabel for="cc" value="CC:"/>
+                                <b:inputText id="cc" value="#{nuevaPersona.cc}"/>
+                                <b:message for="cc" errorClass="invalid"/>
+                            </b:column>
+
+                        </b:row>
+                        <b:row>
+
+                            <b:column colMd="2">
+                                <p:outputLabel for="tel1" value="Teléfono 1:"/>
+                                <b:inputText id="tel1" value="#{nuevaPersona.telefono_1}"/>
+                                <b:message for="tel1" errorClass="invalid"/>
+                            </b:column>
+
+                        </b:row>
+                        <b:row>
+
+                            <b:column colMd="2">
+                                <p:outputLabel for="tel2" value="Teléfono 2:"/>
+                                <b:inputText id="tel2" value="#{nuevaPersona.telefono_2}"/>
+                                <b:message for="tel2" errorClass="invalid"/>
+                            </b:column>
+
+                        </b:row>
+                        <b:row>
+
+                            <b:column colMd="3">
+                                <p:outputLabel for="fecha_nac" value="Fecha Nacimiento:"/>
+                                <b:inputText id="fecha_nac" value="#{nuevaPersona.fecha_nacimiento}">
+                                    <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                                </b:inputText>
+                                <b:message for="fecha_nac" errorClass="invalid"/>
+                            </b:column>
+
+                        </b:row>
+                        <b:row>
+
+                            <b:column colMd="3">
+                                <p:outputLabel for="email" value="Email:"/>
+                                <b:inputText id="email" value="#{nuevaPersona.email}"/>
+                                <b:message for="email" errorClass="invalid"/>
+                            </b:column>
+
+                        </b:row>
+                        <b:row>
+
+                            <b:column colMd="2">
+                                <p:outputLabel for="depto" value="Departamento:"/>
+                                <b:selectOneMenu id="depto" value="#{registroController.departamentoSeleccionado}"
+                                                 renderLabel="false">
+                                    <f:selectItems value="#{auxController.departamentoList}" var="d"
+                                                   itemLabel="#{d.nombre}"
+                                                   itemValue="#{d.id}"/>
+                                    <f:ajax listener="#{registroController.cambioDepartamento}" event="change"
+                                            render="loc"
+                                            execute="@this"/>
+                                </b:selectOneMenu>
+                                <b:message for="depto" errorClass="invalid"/>
+                            </b:column>
+
+                        </b:row>
+                        <b:row>
+
+                            <b:column colMd="3">
+                                <p:outputLabel for="loc" value="Localidad:"/>
+                                <b:selectOneMenu id="loc" value="#{registroController.localidadSeleccionada}"
+                                                 renderLabel="false">
+                                    <f:selectItems value="#{registroController.localidades}" var="l"
+                                                   itemLabel="#{l.nombre}"
+                                                   itemValue="#{l.id}"/>
+                                </b:selectOneMenu>
+                                <b:message for="loc" errorClass="invalid"/>
+                            </b:column>
+
+                        </b:row>
+                        <b:row>
+
+                            <b:column colMd="3">
+                                <p:outputLabel for="barrio" value="Barrio:"/>
+                                <b:inputText id="barrio" value="#{nuevaPersona.barrio}"/>
+                                <b:message for="barrio" errorClass="invalid"/>
+                            </b:column>
+
+                        </b:row>
+                        <b:row>
+
+                            <b:column colMd="3">
+                                <p:outputLabel for="dir" value="Dirección:"/>
+                                <b:inputText id="dir" value="#{nuevaPersona.direccion}"/>
+                                <b:message for="dir" errorClass="invalid"/>
+                            </b:column>
+
+                        </b:row>
+                        <b:row>
+
+                            <b:column colMd="3">
+                                <p:outputLabel for="intereses" value="Temas de interés:"/>
+                                <b:inputTextarea id="intereses" value="#{nuevaPersona.temas_interes}"/>
+                                <b:message for="intereses" errorClass="invalid"/>
+                            </b:column>
+
+                        </b:row>
+                        <b:row>
+
+                            <b:column colMd="3">
+                                <p:outputLabel for="frec_aporte" value="Frecuencia aporte económico:"/>
+                                <b:selectOneMenu id="frec_aporte" value="#{registroController.frecuenciaSeleccionada}"
+                                                 renderLabel="false">
+                                    <f:selectItems value="#{auxController.frecuenciaList}" var="f"
+                                                   itemLabel="#{f.name()}"
+                                                   itemValue="#{f.name()}"/>
+                                </b:selectOneMenu>
+                                <b:message for="frec_aporte" errorClass="invalid"/>
+                            </b:column>
+
+                        </b:row>
+                        <b:row>
+
+                            <b:column colMd="3">
+                                <p:outputLabel for="monto" value="Monto aporte ecónomico:"/>
+                                <b:inputText id="monto" value="#{nuevaPersona.monto_aporte}"/>
+                                <b:message for="monto" errorClass="invalid"/>
+                            </b:column>
+
+                        </b:row>
+                    </b:container>
+
+                    <p>
+                        <h:panelGrid columns="2">
+                            <h:commandButton id="register" action="#{registroController.registrar}" value="Registrar"
+                                             styleClass="register"/>
+                            <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                                        globalOnly="true"/>
+                        </h:panelGrid>
+                    </p>
+                </h:form>
+
+            </b:panel>
+        </b:panelGrid>
     </ui:define>
 </ui:composition>

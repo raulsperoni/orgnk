@@ -10,4 +10,9 @@
         <param-value>boostrap</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>BootsFaces_USETHEME</param-name>
+        <param-value>default</param-value>
+    </context-param>
+
 </web-app>

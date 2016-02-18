@@ -3,8 +3,10 @@ package mgcoders.uy.service;
 import mgcoders.uy.model.Persona;
 
 import javax.ejb.Stateless;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.util.Date;
 import java.util.logging.Logger;
 
 /**
@@ -19,9 +21,13 @@ public class PersonaService {
     @Inject
     private EntityManager em;
 
+    @Inject
+    Event<NuevoRegistroEvent> nuevoRegistroEvent;
+
     public void registrar(Persona nuevaPersona) {
         em.persist(nuevaPersona);
-        log.info(nuevaPersona.toString());
+        NuevoRegistroEvent evt = new NuevoRegistroEvent(nuevaPersona,new Date());
+        nuevoRegistroEvent.fire(evt);
     }
 
 
