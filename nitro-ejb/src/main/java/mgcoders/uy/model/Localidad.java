@@ -3,12 +3,13 @@ package mgcoders.uy.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
 /**
  * Created by raul on 16/02/16.
  */
 @Entity
-public class Localidad {
+public class Localidad implements Serializable {
 
     @Id
     private int id;

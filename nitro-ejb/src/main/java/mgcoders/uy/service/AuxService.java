@@ -29,9 +29,8 @@ public class AuxService {
     }
 
     public List<Localidad> getLocalidades(Departamento d) {
-        System.out.println("detp loc " + d.getNombre());
-        Query query = em.createQuery("SELECT l FROM Localidad l where l.departamento = :depto");
-        query.setParameter("depto", d);
+        Query query = em.createQuery("SELECT l FROM Localidad l where l.departamento.id = :depto");
+        query.setParameter("depto", d.getId());
         return (List<Localidad>) query.getResultList();
     }
 }

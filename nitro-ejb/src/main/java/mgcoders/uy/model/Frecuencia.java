@@ -6,4 +6,5 @@ package mgcoders.uy.model;
 public enum Frecuencia {
 
     MENSUAL, BIMESTRAL, TRIMESTRAL, SEMESTRAL, ANUAL
+
 }

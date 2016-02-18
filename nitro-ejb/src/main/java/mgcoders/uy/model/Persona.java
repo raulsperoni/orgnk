@@ -7,31 +7,33 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by raul on 16/02/16.
  */
 @Entity
-public class Persona {
+public class Persona implements Serializable {
 
     @Id
     @GeneratedValue
     private long id;
 
-    @NotNull
+    @NotNull(message = "El nombre es obligatorio")
     private String nombre;
-    @Pattern(regexp = "^(([0-9]){1}.)?([0-9]){3}.([0-9]){3}-([0-9]){1}$")
+    @Pattern(regexp = "^(([0-9]){1}.)?([0-9]){3}.([0-9]){3}-([0-9]){1}$", message = "El formato debe ser: 1.111.111-1")
     private String ci;
-    @Pattern(regexp = "^([A-Z]){3}([0-9]){4,5}$")
+    @Pattern(regexp = "^(([A-Z]){3}([0-9]){4,5})?$", message = "El formato debe ser: AAA11111")
     private String cc;
-    @Past
+    @NotNull
+    @Past(message = "La fecha debe ser anterior a hoy")
     private Date fecha_nacimiento;
-    @Pattern(regexp = "^([0-9]{3})?([0-9]){8}$")
+    @Pattern(regexp = "^([0-9]{3})?([0-9]){8}$", message = "El formato debe ser 59899111111")
     private String telefono_1;
-    @Pattern(regexp = "^([0-9]{3})?([0-9]){8}$")
+    @Pattern(regexp = "^(([0-9]{3})?([0-9]){9})?$", message = "El formato debe ser 59899111111")
     private String telefono_2;
-    @Email
+    @Email(message = "El mail es incorrecto")
     private String email;
 
     private String direccion;
@@ -42,7 +44,7 @@ public class Persona {
     private String barrio;
 
     private String temas_interes;
-    @Digits(integer = 6, fraction = 0)
+    @Digits(integer = 6, fraction = 0, message = "El valor es incorrecto")
     private int monto_aporte;
     @Enumerated(EnumType.STRING)
     private Frecuencia frecuencia_aporte;
@@ -157,5 +159,26 @@ public class Persona {
 
     public void setFrecuencia_aporte(Frecuencia frecuencia_aporte) {
         this.frecuencia_aporte = frecuencia_aporte;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", ci='" + ci + '\'' +
+                ", cc='" + cc + '\'' +
+                ", fecha_nacimiento=" + fecha_nacimiento +
+                ", telefono_1='" + telefono_1 + '\'' +
+                ", telefono_2='" + telefono_2 + '\'' +
+                ", email='" + email + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", departamento=" + departamento +
+                ", localidad=" + localidad +
+                ", barrio='" + barrio + '\'' +
+                ", temas_interes='" + temas_interes + '\'' +
+                ", monto_aporte=" + monto_aporte +
+                ", frecuencia_aporte=" + frecuencia_aporte +
+                '}';
     }
 }

@@ -1,6 +1,6 @@
 package mgcoders.uy.controller;
 
-import mgcoders.uy.model.Departamento;
+import mgcoders.uy.model.Frecuencia;
 import mgcoders.uy.model.Localidad;
 import mgcoders.uy.model.Persona;
 import mgcoders.uy.service.AuxService;
@@ -33,9 +33,15 @@ public class RegistroController implements Serializable {
     @Inject
     private AuxService auxService;
 
+    @Inject
+    private AuxController auxController;
+
     private Persona nuevaPersona;
-    private List<Departamento> departamentos;
+    private int departamentoSeleccionado;
+    private int localidadSeleccionada;
+    private String frecuenciaSeleccionada;
     private List<Localidad> localidades;
+
 
     @Produces
     @Named
@@ -50,12 +56,16 @@ public class RegistroController implements Serializable {
     @PostConstruct
     public void initNewMember() {
         nuevaPersona = new Persona();
-        departamentos = auxService.getDepartamentos();
     }
 
     public void registrar() throws Exception {
         try {
+            nuevaPersona.setLocalidad(auxController.getLocalidad(localidadSeleccionada));
+            if (frecuenciaSeleccionada != null) {
+                nuevaPersona.setFrecuencia_aporte(Frecuencia.valueOf(frecuenciaSeleccionada));
+            }
             personaService.registrar(nuevaPersona);
+
             facesContext.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Registro exitoso"));
             initNewMember();
@@ -67,19 +77,42 @@ public class RegistroController implements Serializable {
     }
 
     public void cambioDepartamento(AjaxBehaviorEvent event) {
-        localidades = auxService.getLocalidades(nuevaPersona.getDepartamento());
-        System.out.println("Cambio loc " + localidades.size());
+        localidades = auxController.getLocalidades(departamentoSeleccionado);
+        nuevaPersona.setDepartamento(auxController.getDepartamento(departamentoSeleccionado));
+        System.out.println("cambio depto");
     }
 
 
-    @Produces
-    @Named
-    public List<Departamento> getDepartamentos() {
-        return departamentos;
+    public int getDepartamentoSeleccionado() {
+        return departamentoSeleccionado;
+    }
+
+    public void setDepartamentoSeleccionado(int departamentoSeleccionado) {
+        this.departamentoSeleccionado = departamentoSeleccionado;
     }
 
     public List<Localidad> getLocalidades() {
         return localidades;
+    }
+
+    public void setLocalidades(List<Localidad> localidades) {
+        this.localidades = localidades;
+    }
+
+    public int getLocalidadSeleccionada() {
+        return localidadSeleccionada;
+    }
+
+    public void setLocalidadSeleccionada(int localidadSeleccionada) {
+        this.localidadSeleccionada = localidadSeleccionada;
+    }
+
+    public String getFrecuenciaSeleccionada() {
+        return frecuenciaSeleccionada;
+    }
+
+    public void setFrecuenciaSeleccionada(String frecuenciaSeleccionada) {
+        this.frecuenciaSeleccionada = frecuenciaSeleccionada;
     }
 
     private String getRootErrorMessage(Exception e) {

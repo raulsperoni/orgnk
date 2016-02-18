@@ -20,7 +20,8 @@ public class PersonaService {
     private EntityManager em;
 
     public void registrar(Persona nuevaPersona) {
-
+        em.persist(nuevaPersona);
+        log.info(nuevaPersona.toString());
     }
 
 
