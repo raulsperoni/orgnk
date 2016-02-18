@@ -1,12 +1,12 @@
 package mgcoders.uy.service;
 
 import mgcoders.uy.model.Persona;
+import mgcoders.uy.model.Usuario;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -23,13 +23,17 @@ public class PersonaService {
     @Inject
     private EntityManager em;
 
-    public void registrar(Persona nuevaPersona) throws PersistenceException {
-        try {
-            em.persist(nuevaPersona);
-        } catch (Exception e) {
-            log.severe(e.getMessage());
-            throw new PersistenceException("No se pudo guardar el nuevo registro");
-        }
+    public void registrar(Persona nuevaPersona) {
+        boolean usuarioHabilitado = nuevaPersona.getEmail() != null;
+
+        Usuario usuario = new Usuario();
+        usuario.setNombreUsuario(usuarioHabilitado ? nuevaPersona.getEmail() : nuevaPersona.getNombre().toLowerCase().replace(' ', '_'));
+        usuario.setAllowLogin(usuarioHabilitado);
+        usuario.setPersona(nuevaPersona);
+        nuevaPersona.setUsuario(usuario);
+
+        em.persist(nuevaPersona);
+
         NuevoRegistroEvent evt = new NuevoRegistroEvent(nuevaPersona,new Date());
         nuevoRegistroEvent.fire(evt);
     }

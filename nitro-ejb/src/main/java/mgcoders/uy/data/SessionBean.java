@@ -68,5 +68,8 @@ public class SessionBean {
 
         log.info("################# BD" + votante.getVotaciones().get(0).getTokenAutorizacion());
 
+
     }
+
+
 }

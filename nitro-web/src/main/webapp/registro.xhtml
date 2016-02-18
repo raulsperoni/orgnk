@@ -23,22 +23,45 @@
 
                 template="/WEB-INF/templates/tempboo.xhtml">
     <ui:define name="content">
+        <b:container layout="fluid">
 
-        <b:jumbotron>HOLA</b:jumbotron>
-        <b:panelGrid colSpans="4,8">
-            <b:panel look="primary" title="Navigation menu">
-                HHHH
+            <b:navBar brandImg="resources/gfx/cg.png">
+                <b:navbarLinks>
+                    <b:navLink value="Ágora" href="http://agoracasagrande.uy"></b:navLink>
+                    <b:dropMenu value="Links">
+                        <b:navLink value="Action" href="#"></b:navLink>
+                        <b:navLink value="Another action" href="#"></b:navLink>
+                        <b:navLink value="Something else here" href="#"></b:navLink>
+                        <b:navLink></b:navLink>
+                        <b:navLink header="Nav header"></b:navLink>
+                        <b:navLink value="Separated link" href="#"></b:navLink>
+                        <b:navLink value="One more separated link" href="#"></b:navLink>
+                    </b:dropMenu>
+                </b:navbarLinks>
+            </b:navBar>
 
-            </b:panel>
-            <b:panel>
+            <b:panelGrid colSpans="4,8">
+                <b:column>
+                    <b:panel title="Padrón de Casa Grande" look="primary">
+                        Las personas pertenecerán a un padrón único, oficial, central y actualizado, que será protegido de acuerdo a la ley de protección de datos personales (Ley 18331). Los integrantes de Casa Grande deberán estar adheridos al Frente Amplio y respetar los Estatutos vigentes.
 
-                <h:form id="reg">
-                    <h2>Registro</h2>
+                        El padrón será abierto a toda la ciudadanía que se sienta parte de Casa Grande. Las personas podrán participar inscribiéndose en un formulario disponible de forma virtual y presencial. Desde que se participa por primera vez se pasa a ser miembro de la "ciudadanía" Casa Grande y se asumen los derechos y obligaciones concomitantes.
+                    </b:panel>
+                    <b:panel title="Términos y Condiciones del Registro" look="success">
+                        Las personas pertenecerán a un padrón único, oficial, central y actualizado, que será protegido de acuerdo a la ley de protección de datos personales (Ley 18331). Los integrantes de Casa Grande deberán estar adheridos al Frente Amplio y respetar los Estatutos vigentes.
 
-                    <b:container layout="fluid">
+                        El padrón será abierto a toda la ciudadanía que se sienta parte de Casa Grande. Las personas podrán participar inscribiéndose en un formulario disponible de forma virtual y presencial. Desde que se participa por primera vez se pasa a ser miembro de la "ciudadanía" Casa Grande y se asumen los derechos y obligaciones concomitantes.
+                    </b:panel>
+                </b:column>
+                <b:panel collapsible="false">
+                    <f:facet name="heading"><h2>Registro</h2></f:facet>
+
+                    <h:form id="reg">
+
+
                         <b:row>
 
-                            <b:column colMd="3">
+                            <b:column colMd="6" offsetMd="3">
                                 <p:outputLabel for="nombre" value="Nombre:" class="control-label"/>
                                 <b:inputText id="nombre" value="#{nuevaPersona.nombre}"/>
                                 <b:message for="nombre" errorClass="invalid"/>
@@ -47,63 +70,50 @@
                         </b:row>
                         <b:row>
 
-                            <b:column colMd="3">
+                            <b:column colMd="4" offsetMd="2">
                                 <p:outputLabel for="ci" value="CI:"/>
                                 <b:inputText id="ci" value="#{nuevaPersona.ci}"/>
                                 <b:message for="ci" errorClass="invalid"/>
                             </b:column>
-
-                        </b:row>
-                        <b:row>
-
-                            <b:column colMd="3">
+                            <b:column colMd="4">
                                 <p:outputLabel for="cc" value="CC:"/>
                                 <b:inputText id="cc" value="#{nuevaPersona.cc}"/>
                                 <b:message for="cc" errorClass="invalid"/>
                             </b:column>
-
                         </b:row>
                         <b:row>
 
-                            <b:column colMd="2">
+                            <b:column colMd="4" offsetMd="2">
                                 <p:outputLabel for="tel1" value="Teléfono 1:"/>
                                 <b:inputText id="tel1" value="#{nuevaPersona.telefono_1}"/>
                                 <b:message for="tel1" errorClass="invalid"/>
                             </b:column>
-
-                        </b:row>
-                        <b:row>
-
-                            <b:column colMd="2">
+                            <b:column colMd="4">
                                 <p:outputLabel for="tel2" value="Teléfono 2:"/>
                                 <b:inputText id="tel2" value="#{nuevaPersona.telefono_2}"/>
                                 <b:message for="tel2" errorClass="invalid"/>
                             </b:column>
-
                         </b:row>
+
                         <b:row>
 
-                            <b:column colMd="3">
+                            <b:column colMd="4" offsetMd="2">
                                 <p:outputLabel for="fecha_nac" value="Fecha Nacimiento:"/>
                                 <b:inputText id="fecha_nac" value="#{nuevaPersona.fecha_nacimiento}">
                                     <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
                                 </b:inputText>
                                 <b:message for="fecha_nac" errorClass="invalid"/>
                             </b:column>
-
-                        </b:row>
-                        <b:row>
-
-                            <b:column colMd="3">
+                            <b:column colMd="4">
                                 <p:outputLabel for="email" value="Email:"/>
                                 <b:inputText id="email" value="#{nuevaPersona.email}"/>
                                 <b:message for="email" errorClass="invalid"/>
                             </b:column>
-
                         </b:row>
+
                         <b:row>
 
-                            <b:column colMd="2">
+                            <b:column colMd="4" offsetMd="2">
                                 <p:outputLabel for="depto" value="Departamento:"/>
                                 <b:selectOneMenu id="depto" value="#{registroController.departamentoSeleccionado}"
                                                  renderLabel="false">
@@ -116,11 +126,7 @@
                                 </b:selectOneMenu>
                                 <b:message for="depto" errorClass="invalid"/>
                             </b:column>
-
-                        </b:row>
-                        <b:row>
-
-                            <b:column colMd="3">
+                            <b:column colMd="4">
                                 <p:outputLabel for="loc" value="Localidad:"/>
                                 <b:selectOneMenu id="loc" value="#{registroController.localidadSeleccionada}"
                                                  renderLabel="false">
@@ -130,29 +136,25 @@
                                 </b:selectOneMenu>
                                 <b:message for="loc" errorClass="invalid"/>
                             </b:column>
-
                         </b:row>
+
                         <b:row>
 
-                            <b:column colMd="3">
+                            <b:column colMd="4" offsetMd="2">
                                 <p:outputLabel for="barrio" value="Barrio:"/>
                                 <b:inputText id="barrio" value="#{nuevaPersona.barrio}"/>
                                 <b:message for="barrio" errorClass="invalid"/>
                             </b:column>
-
-                        </b:row>
-                        <b:row>
-
-                            <b:column colMd="3">
+                            <b:column colMd="4">
                                 <p:outputLabel for="dir" value="Dirección:"/>
                                 <b:inputText id="dir" value="#{nuevaPersona.direccion}"/>
                                 <b:message for="dir" errorClass="invalid"/>
                             </b:column>
-
                         </b:row>
+
                         <b:row>
 
-                            <b:column colMd="3">
+                            <b:column colMd="6" offsetMd="3">
                                 <p:outputLabel for="intereses" value="Temas de interés:"/>
                                 <b:inputTextarea id="intereses" value="#{nuevaPersona.temas_interes}"/>
                                 <b:message for="intereses" errorClass="invalid"/>
@@ -161,7 +163,7 @@
                         </b:row>
                         <b:row>
 
-                            <b:column colMd="3">
+                            <b:column colMd="4" offsetMd="2">
                                 <p:outputLabel for="frec_aporte" value="Frecuencia aporte económico:"/>
                                 <b:selectOneMenu id="frec_aporte" value="#{registroController.frecuenciaSeleccionada}"
                                                  renderLabel="false">
@@ -171,22 +173,18 @@
                                 </b:selectOneMenu>
                                 <b:message for="frec_aporte" errorClass="invalid"/>
                             </b:column>
-
-                        </b:row>
-                        <b:row>
-
-                            <b:column colMd="3">
+                            <b:column colMd="4">
                                 <p:outputLabel for="monto" value="Monto aporte ecónomico:"/>
                                 <b:inputText id="monto" value="#{nuevaPersona.monto_aporte}"/>
                                 <b:message for="monto" errorClass="invalid"/>
                             </b:column>
-
                         </b:row>
+
                         <b:row>
-                            <b:column colMd="3">
+                            <b:column colMd="4" offsetMd="4">
 
                                 <b:commandButton id="register" action="#{registroController.registrar}"
-                                                 value="Registrar"
+                                                 value="Registrar" look="primary" size="lg"
                                                  styleClass="register"/>
                                 <b:messages styleClass="messages" errorClass="invalid" infoClass="valid"
                                             warnClass="warning"
@@ -194,12 +192,13 @@
                             </b:column>
 
                         </b:row>
-                    </b:container>
 
 
-                </h:form>
+                    </h:form>
 
-            </b:panel>
-        </b:panelGrid>
+                </b:panel>
+            </b:panelGrid>
+        </b:container>
+
     </ui:define>
 </ui:composition>
