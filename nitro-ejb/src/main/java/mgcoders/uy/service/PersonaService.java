@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -16,16 +17,19 @@ import java.util.logging.Logger;
 public class PersonaService {
 
     @Inject
+    Event<NuevoRegistroEvent> nuevoRegistroEvent;
+    @Inject
     private Logger log;
-
     @Inject
     private EntityManager em;
 
-    @Inject
-    Event<NuevoRegistroEvent> nuevoRegistroEvent;
-
-    public void registrar(Persona nuevaPersona) {
-        em.persist(nuevaPersona);
+    public void registrar(Persona nuevaPersona) throws PersistenceException {
+        try {
+            em.persist(nuevaPersona);
+        } catch (Exception e) {
+            log.severe(e.getMessage());
+            throw new PersistenceException("No se pudo guardar el nuevo registro");
+        }
         NuevoRegistroEvent evt = new NuevoRegistroEvent(nuevaPersona,new Date());
         nuevoRegistroEvent.fire(evt);
     }

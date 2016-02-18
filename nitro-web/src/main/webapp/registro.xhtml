@@ -182,16 +182,21 @@
                             </b:column>
 
                         </b:row>
+                        <b:row>
+                            <b:column colMd="3">
+
+                                <b:commandButton id="register" action="#{registroController.registrar}"
+                                                 value="Registrar"
+                                                 styleClass="register"/>
+                                <b:messages styleClass="messages" errorClass="invalid" infoClass="valid"
+                                            warnClass="warning"
+                                            globalOnly="true"/>
+                            </b:column>
+
+                        </b:row>
                     </b:container>
 
-                    <p>
-                        <h:panelGrid columns="2">
-                            <h:commandButton id="register" action="#{registroController.registrar}" value="Registrar"
-                                             styleClass="register"/>
-                            <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
-                                        globalOnly="true"/>
-                        </h:panelGrid>
-                    </p>
+
                 </h:form>
 
             </b:panel>
