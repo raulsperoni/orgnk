@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by raul on 16/02/16.
@@ -35,6 +36,9 @@ public class RegistroController implements Serializable {
 
     @Inject
     private AuxController auxController;
+
+    @Inject
+    private Logger log;
 
     private Persona nuevaPersona;
     private int departamentoSeleccionado;
@@ -64,7 +68,9 @@ public class RegistroController implements Serializable {
             if (frecuenciaSeleccionada != null) {
                 nuevaPersona.setFrecuencia_aporte(Frecuencia.valueOf(frecuenciaSeleccionada));
             }
+            log.info("REG METHOD CONTROLLER");
             personaService.registrar(nuevaPersona);
+
 
             facesContext.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Registro exitoso"));

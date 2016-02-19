@@ -1,7 +1,6 @@
 package mgcoders.uy.service;
 
 import mgcoders.uy.model.Persona;
-import mgcoders.uy.model.Usuario;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
@@ -24,17 +23,9 @@ public class PersonaService {
     private EntityManager em;
 
     public void registrar(Persona nuevaPersona) {
-        boolean usuarioHabilitado = nuevaPersona.getEmail() != null;
-
-        Usuario usuario = new Usuario();
-        usuario.setNombreUsuario(usuarioHabilitado ? nuevaPersona.getEmail() : nuevaPersona.getNombre().toLowerCase().replace(' ', '_'));
-        usuario.setAllowLogin(usuarioHabilitado);
-        usuario.setPersona(nuevaPersona);
-        nuevaPersona.setUsuario(usuario);
-
+        log.info("REG METHOD SERVICE");
         em.persist(nuevaPersona);
-
-        NuevoRegistroEvent evt = new NuevoRegistroEvent(nuevaPersona,new Date());
+        NuevoRegistroEvent evt = new NuevoRegistroEvent(nuevaPersona.getId(), new Date());
         nuevoRegistroEvent.fire(evt);
     }
 

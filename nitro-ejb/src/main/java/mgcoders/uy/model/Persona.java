@@ -51,15 +51,9 @@ public class Persona implements Serializable {
     @Enumerated(EnumType.STRING)
     private Frecuencia frecuencia_aporte;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Usuario usuario;
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public long getId() {
+        return id;
     }
 
     public String getNombre() {

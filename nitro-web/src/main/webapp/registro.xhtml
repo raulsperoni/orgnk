@@ -190,10 +190,9 @@
                         <b:row>
                             <b:column colMd="4" offsetMd="4">
 
-                                <b:commandButton id="register" action="#{registroController.registrar}"
-                                                 value="Registrar" look="primary" size="lg"
-                                                 styleClass="register"/>
-                                <b:messages styleClass="messages" errorClass="invalid" infoClass="valid"
+                                <b:commandButton action="#{registroController.registrar}" ajax="true" update="messages"
+                                                 value="Registrar" look="primary" size="lg"/>
+                                <b:messages id="messages" styleClass="messages" errorClass="invalid" infoClass="valid"
                                             warnClass="warning"
                                             globalOnly="true"/>
                             </b:column>

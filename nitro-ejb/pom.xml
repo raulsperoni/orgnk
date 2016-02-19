@@ -109,6 +109,12 @@
             <version>2.2.2</version>
         </dependency>
 
+        <!-- JERSEY -->
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>1.8</version>
+        </dependency>
 
 
     </dependencies>
