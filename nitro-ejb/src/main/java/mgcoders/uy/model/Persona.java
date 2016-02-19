@@ -22,23 +22,24 @@ public class Persona implements Serializable {
 
     @NotNull(message = "El nombre es obligatorio")
     private String nombre;
-    @Pattern(regexp = "^(([0-9]){1}.)?([0-9]){3}.([0-9]){3}-([0-9]){1}$", message = "El formato debe ser: 1.111.111-1")
+    @Pattern(regexp = "^(([0-9]){1}.)?([0-9]){3}.([0-9]){3}-([0-9]){1}$", message = "El formato de la cédula debe ser: 1.111.111-1")
     @Column(unique = true)
     private String ci;
-    @Pattern(regexp = "^(([A-Z]){3}([0-9]){4,5})?$", message = "El formato debe ser: AAA11111")
+    @Pattern(regexp = "^(([A-Z]){3}([0-9]){4,5})?$", message = "El formato de la credencial debe ser: AAA11111")
     private String cc;
-    @NotNull
+    @NotNull(message = "La fecha de nacimiento no puede estar vacía")
     @Past(message = "La fecha debe ser anterior a hoy")
     private Date fecha_nacimiento;
-    @Pattern(regexp = "^([0-9]{3})?([0-9]){8}$", message = "El formato debe ser 59899111111")
+    @Pattern(regexp = "^([0-9]{3})?([0-9]){8}$", message = "El formato del teléfono debe ser 59899111111")
     private String telefono_1;
-    @Pattern(regexp = "^(([0-9]{3})?([0-9]){9})?$", message = "El formato debe ser 59899111111")
+    @Pattern(regexp = "^(([0-9]{3})?([0-9]){9})?$", message = "El formato del teléfono debe ser 59899111111")
     private String telefono_2;
     @Email(message = "El mail es incorrecto")
     @Column(unique = true)
     private String email;
 
     private String direccion;
+    @NotNull(message = "El departamento no puede estar vacío")
     @ManyToOne
     private Departamento departamento;
     @ManyToOne
