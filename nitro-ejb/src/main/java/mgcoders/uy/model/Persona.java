@@ -21,6 +21,7 @@ public class Persona implements Serializable {
     private long id;
 
     private boolean enabled = false;
+    private String password;
 
     @NotNull(message = "El nombre es obligatorio")
     private String nombre;
@@ -177,6 +178,14 @@ public class Persona implements Serializable {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

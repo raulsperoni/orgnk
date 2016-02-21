@@ -19,6 +19,7 @@ public class DiscourseUser implements Serializable {
     private String name;
     private String email;
     private Boolean active;
+    private long discourseUserId;
 
     @OneToOne
     private Persona persona;
@@ -31,7 +32,15 @@ public class DiscourseUser implements Serializable {
         this.username = persona.getNombre().toLowerCase().replace(' ', '_');
         this.email = persona.getEmail();
         this.active = true;
-        //this.persona = persona;
+        this.persona = persona;
+    }
+
+    public long getDiscourseUserId() {
+        return discourseUserId;
+    }
+
+    public void setDiscourseUserId(long discourseUserId) {
+        this.discourseUserId = discourseUserId;
     }
 
     public Persona getPersona() {

@@ -1,13 +1,15 @@
 package mgcoders.uy.service.users;
 
 import mgcoders.uy.model.Persona;
-import mgcoders.uy.service.NuevoRegistroEvent;
+import mgcoders.uy.service.PersonaActivadaEvent;
 import mgcoders.uy.service.discourse.DiscourseAPIService;
 import mgcoders.uy.service.discourse.DiscourseUser;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.enterprise.event.Observes;
+import javax.enterprise.event.TransactionPhase;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.logging.Logger;
@@ -26,14 +28,22 @@ public class UserService {
     private EntityManager em;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    //@Observes(during = TransactionPhase.AFTER_SUCCESS)
-    public void nuevoUsuario(NuevoRegistroEvent event) {
+    public void nuevoUsuario(@Observes(during = TransactionPhase.AFTER_SUCCESS) PersonaActivadaEvent event) {
 
         Persona persona = em.find(Persona.class, event.getPersona_id());
-        DiscourseUser nuevoUsuario = new DiscourseUser(persona);
+
+
+        DiscourseUser nuevoUsuario = discourseAPIService.searchUser(persona.getEmail());
+
+        if (nuevoUsuario == null) {
+            nuevoUsuario = new DiscourseUser(persona);
+
+        }
+
         em.persist(nuevoUsuario);
 
-        discourseAPIService.createUser(nuevoUsuario);
+        long discourse_user_id = discourseAPIService.createUser(nuevoUsuario);
+        nuevoUsuario.setDiscourseUserId(discourse_user_id);
 
         log.info("Usuario creado: " + nuevoUsuario.toString());
 

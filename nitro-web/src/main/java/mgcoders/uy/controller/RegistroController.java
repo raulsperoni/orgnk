@@ -48,6 +48,7 @@ public class RegistroController implements Serializable {
     private int localidadSeleccionada;
     private String frecuenciaSeleccionada;
     private List<Localidad> localidades;
+    private boolean success;
 
 
     @Produces
@@ -77,6 +78,7 @@ public class RegistroController implements Serializable {
             facesContext.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Le hemos enviado un correo para verificar su email."));
             initNewMember();
+            success = true;
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "El registro falló");
@@ -140,5 +142,13 @@ public class RegistroController implements Serializable {
         }
         // This is the root cause message
         return errorMessage;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 }

@@ -3,6 +3,7 @@ package mgcoders.uy.service;
 import mgcoders.uy.model.ActivationToken;
 
 import javax.ejb.Stateless;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -15,6 +16,8 @@ import java.util.logging.Logger;
 @Stateless
 public class ActivationService {
 
+    @Inject
+    Event<PersonaActivadaEvent> personaActivadaEvent;
     @Inject
     private Logger log;
     @Inject
@@ -30,6 +33,7 @@ public class ActivationService {
             if (activationToken.getExpiryDate().after(new Date()) && !activationToken.isVerified()) {
                 activationToken.setVerified(true);
                 activationToken.getPersona().setEnabled(true);
+                personaActivadaEvent.fire(new PersonaActivadaEvent(activationToken.getPersona().getId(), new Date()));
                 return true;
             } else return activationToken.isVerified();
 
