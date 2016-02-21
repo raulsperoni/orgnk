@@ -20,6 +20,8 @@ public class Persona implements Serializable {
     @GeneratedValue
     private long id;
 
+    private boolean enabled = false;
+
     @NotNull(message = "El nombre es obligatorio")
     private String nombre;
     @Pattern(regexp = "^(([0-9]){1}.)?([0-9]){3}.([0-9]){3}-([0-9]){1}$", message = "El formato de la cédula debe ser: 1.111.111-1")
@@ -167,6 +169,14 @@ public class Persona implements Serializable {
 
     public void setFrecuencia_aporte(Frecuencia frecuencia_aporte) {
         this.frecuencia_aporte = frecuencia_aporte;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override

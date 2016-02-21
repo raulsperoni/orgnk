@@ -22,16 +22,16 @@
 
 <h:head/>
 <h:body>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
-                xmlns:b="http://bootsfaces.net/ui"
+    <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    xmlns:f="http://java.sun.com/jsf/core"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:b="http://bootsfaces.net/ui"
 
-                template="/WEB-INF/templates/tempboo.xhtml">
+                    template="/WEB-INF/templates/tempboo.xhtml">
     <ui:define name="content">
 
-        <b:panel collapsible="false" title="Registro" look="default">
+        <b:panel id="regpanel" collapsible="false" title="Registro" look="default">
 
 
             <h:form id="registro">
@@ -40,12 +40,12 @@
                         <b:row>
 
                             <b:column colMd="4" offsetMd="2">
-                                <p:outputLabel for="nombre" value="Nombre:" class="control-label"/>
+                                <h:outputLabel for="nombre" value="Nombre:" class="control-label"/>
                                 <b:inputText id="nombre" value="#{nuevaPersona.nombre}"/>
 
                             </b:column>
                             <b:column colMd="4">
-                                <p:outputLabel for="email" value="Email:"/>
+                                <h:outputLabel for="email" value="Email:"/>
                                 <b:inputText id="email" value="#{nuevaPersona.email}"/>
                             </b:column>
 
@@ -53,15 +53,15 @@
                         <b:row>
 
                             <b:column colMd="3" offsetMd="2">
-                                <p:outputLabel for="ci" value="CI:"/>
+                                <h:outputLabel for="ci" value="CI:"/>
                                 <b:inputText id="ci" value="#{nuevaPersona.ci}"/>
                             </b:column>
                             <b:column colMd="3">
-                                <p:outputLabel for="cc" value="CC:"/>
+                                <h:outputLabel for="cc" value="CC:"/>
                                 <b:inputText id="cc" value="#{nuevaPersona.cc}"/>
                             </b:column>
                             <b:column colMd="2">
-                                <p:outputLabel for="fecha_nac" value="Nacimiento:"/>
+                                <h:outputLabel for="fecha_nac" value="Nacimiento:"/>
                                 <b:inputText id="fecha_nac" value="#{nuevaPersona.fecha_nacimiento}">
                                     <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
                                 </b:inputText>
@@ -70,11 +70,11 @@
                         <b:row>
 
                             <b:column colMd="4" offsetMd="2">
-                                <p:outputLabel for="tel1" value="Teléfono 1:"/>
+                                <h:outputLabel for="tel1" value="Teléfono 1:"/>
                                 <b:inputText id="tel1" value="#{nuevaPersona.telefono_1}"/>
                             </b:column>
                             <b:column colMd="4">
-                                <p:outputLabel for="tel2" value="Teléfono 2:"/>
+                                <h:outputLabel for="tel2" value="Teléfono 2:"/>
                                 <b:inputText id="tel2" value="#{nuevaPersona.telefono_2}"/>
                             </b:column>
                         </b:row>
@@ -84,7 +84,7 @@
                         <b:row>
 
                             <b:column colMd="4" offsetMd="2">
-                                <p:outputLabel for="depto" value="Departamento:"/>
+                                <h:outputLabel for="depto" value="Departamento:"/>
                                 <b:selectOneMenu id="depto" value="#{registroController.departamentoSeleccionado}"
                                                  renderLabel="false">
                                     <f:selectItems value="#{auxController.departamentoList}" var="d"
@@ -96,7 +96,7 @@
                                 </b:selectOneMenu>
                             </b:column>
                             <b:column colMd="4">
-                                <p:outputLabel for="loc" value="Localidad:"/>
+                                <h:outputLabel for="loc" value="Localidad:"/>
                                 <b:selectOneMenu id="loc" value="#{registroController.localidadSeleccionada}"
                                                  renderLabel="false">
                                     <f:selectItems value="#{registroController.localidades}" var="l"
@@ -109,11 +109,11 @@
                         <b:row>
 
                             <b:column colMd="4" offsetMd="2">
-                                <p:outputLabel for="barrio" value="Barrio:"/>
+                                <h:outputLabel for="barrio" value="Barrio:"/>
                                 <b:inputText id="barrio" value="#{nuevaPersona.barrio}"/>
                             </b:column>
                             <b:column colMd="4">
-                                <p:outputLabel for="dir" value="Dirección:"/>
+                                <h:outputLabel for="dir" value="Dirección:"/>
                                 <b:inputText id="dir" value="#{nuevaPersona.direccion}"/>
                             </b:column>
                         </b:row>
@@ -121,12 +121,12 @@
                         <b:row>
 
                             <b:column colMd="4" offsetMd="2">
-                                <p:outputLabel for="intereses" value="Temas de interés:"/>
+                                <h:outputLabel for="intereses" value="Temas de interés:"/>
                                 <b:inputTextarea id="intereses" value="#{nuevaPersona.temas_interes}" rows="4"/>
                             </b:column>
                             <b:column colMd="4">
 
-                                <p:outputLabel for="frec_aporte" value="Frecuencia aporte económico:"/>
+                                <h:outputLabel for="frec_aporte" value="Frecuencia aporte económico:"/>
                                 <b:selectOneMenu id="frec_aporte" value="#{registroController.frecuenciaSeleccionada}"
                                                  renderLabel="false">
                                     <f:selectItems value="#{auxController.frecuenciaList}" var="f"
@@ -134,7 +134,7 @@
                                                    itemValue="#{f.name()}"/>
                                 </b:selectOneMenu>
 
-                                <p:outputLabel for="monto" value="Monto aporte ecónomico:"/>
+                                <h:outputLabel for="monto" value="Monto aporte ecónomico:"/>
                                 <b:inputText id="monto" value="#{nuevaPersona.monto_aporte}"/>
 
 
@@ -147,8 +147,9 @@
                             <b:column colMd="6" offsetMd="6">
 
                                 <b:commandButton action="#{registroController.registrar}" ajax="true"
-                                                 update="@form messages"
-                                                 value="Registrar" look="primary" styleClass="pull-right" span="20px"/>
+                                                 update="@form messages regpanel"
+                                                 value="Registrar" look="primary" styleClass="pull-right" span="20px"
+                                                 oncomplete="regpanel.hide();"/>
 
                             </b:column>
 

@@ -5,6 +5,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.core.MultivaluedMap;
@@ -23,10 +24,11 @@ public class DiscourseAPIService {
     @Inject
     private Logger log;
 
-    public DiscourseAPIService() {
 
+    @PostConstruct
+    public void init() {
         try {
-            properties.load(getClass().getResourceAsStream(getClass().getPackage().getName() + "/" + PROPERTIES_FILE));
+            properties.load(DiscourseAPIService.class.getResourceAsStream(PROPERTIES_FILE));
         } catch (IOException e) {
             log.severe("Failed to load discourse properties file: " + e.getMessage());
             e.printStackTrace();
@@ -67,6 +69,7 @@ public class DiscourseAPIService {
         params.add("email", user.getEmail());
         params.add("active", user.getActive() ? "1" : "0");
         webResource.queryParams(params);
+        log.info(webResource.toString());
         ClientResponse response = webResource.type("application/json")
                 .post(ClientResponse.class);
         if (response.getStatus() != 201) {

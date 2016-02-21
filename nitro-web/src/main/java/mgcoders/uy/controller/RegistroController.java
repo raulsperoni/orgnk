@@ -40,6 +40,9 @@ public class RegistroController implements Serializable {
     @Inject
     private Logger log;
 
+    @Inject
+    private SessionController sessionController;
+
     private Persona nuevaPersona;
     private int departamentoSeleccionado;
     private int localidadSeleccionada;
@@ -68,12 +71,11 @@ public class RegistroController implements Serializable {
             if (frecuenciaSeleccionada != null) {
                 nuevaPersona.setFrecuencia_aporte(Frecuencia.valueOf(frecuenciaSeleccionada));
             }
-            log.info("REG METHOD CONTROLLER");
+
             personaService.registrar(nuevaPersona);
-
-
+            sessionController.setPersonaConectada(nuevaPersona);
             facesContext.addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Registro exitoso"));
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Le hemos enviado un correo para verificar su email."));
             initNewMember();
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);

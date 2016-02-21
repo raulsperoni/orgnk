@@ -2,6 +2,7 @@ package mgcoders.uy.service.email;
 
 import com.sendgrid.SendGrid;
 import com.sendgrid.SendGridException;
+import mgcoders.uy.model.ActivationToken;
 import mgcoders.uy.model.Persona;
 import mgcoders.uy.service.NuevoRegistroEvent;
 
@@ -12,6 +13,7 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.event.TransactionPhase;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 /**
@@ -29,17 +31,21 @@ public class NotificacionService {
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void sendNotificacionRegistro(@Observes(during= TransactionPhase.AFTER_SUCCESS) NuevoRegistroEvent event){
 
-        //log.info(event.toString());
-
+        //Persist verification token
+        String token = UUID.randomUUID().toString();
         Persona persona = em.find(Persona.class, event.getPersona_id());
+        ActivationToken activationToken = new ActivationToken(token, persona);
+        em.persist(activationToken);
 
+        //Send it
         SendGrid sendgrid = new SendGrid(SENDGRID_API_KEY);
 
         SendGrid.Email email = new SendGrid.Email();
         email.addTo(persona.getEmail());
+        String confirmationUrl = "http://localhost:8080/nitro-web/activacion.jsf?token=" + token;
         email.setFrom("padron@agoracasagrande.uy");
-        email.setSubject("Se ha registrado en el Padrón de Casa Grande");
-        email.setText("Gracias, " + persona.getNombre());
+        email.setText("Gracias, " + persona.getNombre() + "Se ha registrado en el Padrón de Casa Grande, debemos verificar su email, por favor haga click en el siguiente link: " + confirmationUrl);
+        email.setSubject("Padrón Casa Grande, activación");
 
         try {
             SendGrid.Response response = sendgrid.send(email);

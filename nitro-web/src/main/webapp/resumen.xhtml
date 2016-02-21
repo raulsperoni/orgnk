@@ -26,11 +26,13 @@
                     xmlns:ui="http://java.sun.com/jsf/facelets"
                     xmlns:h="http://java.sun.com/jsf/html"
                     xmlns:b="http://bootsfaces.net/ui"
-
+                    xmlns:p="http://primefaces.org/ui"
                     template="/WEB-INF/templates/tempboo.xhtml">
         <ui:define name="content">
 
-            <b:panel title="OK!"></b:panel>
+            <b:panel title="OK!">
+                <p:outputLabel>#{sessionController.personaConectada.toString()}</p:outputLabel>
+            </b:panel>
 
         </ui:define>
     </ui:composition>

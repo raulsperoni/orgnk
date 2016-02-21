@@ -2,13 +2,12 @@ package mgcoders.uy.service.users;
 
 import mgcoders.uy.model.Persona;
 import mgcoders.uy.service.NuevoRegistroEvent;
+import mgcoders.uy.service.discourse.DiscourseAPIService;
 import mgcoders.uy.service.discourse.DiscourseUser;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.enterprise.event.Observes;
-import javax.enterprise.event.TransactionPhase;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.logging.Logger;
@@ -20,26 +19,24 @@ import java.util.logging.Logger;
 public class UserService {
 
     @Inject
+    DiscourseAPIService discourseAPIService;
+    @Inject
     private Logger log;
-
     @Inject
     private EntityManager em;
 
-    //@Inject
-    //DiscourseAPIService discourseAPIService;
-
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public void nuevoUsuario(@Observes(during = TransactionPhase.AFTER_SUCCESS) NuevoRegistroEvent event) {
+    //@Observes(during = TransactionPhase.AFTER_SUCCESS)
+    public void nuevoUsuario(NuevoRegistroEvent event) {
 
         Persona persona = em.find(Persona.class, event.getPersona_id());
         DiscourseUser nuevoUsuario = new DiscourseUser(persona);
         em.persist(nuevoUsuario);
 
+        discourseAPIService.createUser(nuevoUsuario);
+
         log.info("Usuario creado: " + nuevoUsuario.toString());
-        //discourseAPIService.searchUser("raulsperoni@gmail.com");
 
-
-        //TODO: ACA INVOCAR DISCOURSEBEAN Y METER EL USUARIO POR REST
 
     }
 

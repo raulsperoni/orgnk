@@ -6,6 +6,7 @@ import mgcoders.uy.model.Votacion;
 import mgcoders.uy.model.Votante;
 import mgcoders.uy.service.VotacionService;
 import mgcoders.uy.service.VotantesService;
+import mgcoders.uy.service.discourse.DiscourseAPIService;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -27,10 +28,10 @@ public class SessionBean {
 
     @Inject
     VotantesService votantesService;
-
+    @Inject
+    DiscourseAPIService discourseAPIService;
     @Inject
     private EntityManager em;
-
     @Inject
     private Logger log;
 

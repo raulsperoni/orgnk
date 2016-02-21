@@ -23,7 +23,6 @@ public class PersonaService {
     private EntityManager em;
 
     public void registrar(Persona nuevaPersona) {
-        log.info("REG METHOD SERVICE");
         em.persist(nuevaPersona);
         NuevoRegistroEvent evt = new NuevoRegistroEvent(nuevaPersona.getId(), new Date());
         nuevoRegistroEvent.fire(evt);
