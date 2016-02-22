@@ -37,15 +37,16 @@ public class UserService {
 
         if (nuevoUsuario == null) {
             nuevoUsuario = new DiscourseUser(persona);
+            log.info("Usuario no existe creando en discourse... ");
+            long discourse_user_id = discourseAPIService.createUser(nuevoUsuario);
+            nuevoUsuario.setId(discourse_user_id);
 
+        } else {
+            log.info("Usuario existe en discourse... " + nuevoUsuario.getId());
         }
 
         em.persist(nuevoUsuario);
-
-        long discourse_user_id = discourseAPIService.createUser(nuevoUsuario);
-        nuevoUsuario.setDiscourseUserId(discourse_user_id);
-
-        log.info("Usuario creado: " + nuevoUsuario.toString());
+        log.info("Usuario creado en el sistema: " + nuevoUsuario.toString());
 
 
     }

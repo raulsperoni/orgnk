@@ -20,6 +20,13 @@
 -->
 <h:head/>
 <h:body>
+    <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:b="http://bootsfaces.net/ui"
+
+                    template="/WEB-INF/templates/tempboo.xhtml">
+        <ui:define name="content">
 
 
     <b:container>
@@ -33,6 +40,9 @@
 
             El padrón será abierto a toda la ciudadanía que se sienta parte de Casa Grande. Las personas podrán participar inscribiéndose en un formulario disponible de forma virtual y presencial. Desde que se participa por primera vez se pasa a ser miembro de la "ciudadanía" Casa Grande y se asumen los derechos y obligaciones concomitantes.
         </b:panel> </b:container>
+
+        </ui:define>
+    </ui:composition>
 </h:body>
 
 

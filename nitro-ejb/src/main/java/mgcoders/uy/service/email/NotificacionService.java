@@ -41,10 +41,10 @@ public class NotificacionService {
         SendGrid sendgrid = new SendGrid(SENDGRID_API_KEY);
 
         SendGrid.Email email = new SendGrid.Email();
-        email.addTo(persona.getEmail());
+        email.addTo("raulsperoni@gmail.com");//persona.getEmail());
         String confirmationUrl = "http://localhost:8080/nitro-web/activacion.jsf?token=" + token;
         email.setFrom("padron@agoracasagrande.uy");
-        email.setText("Gracias, " + persona.getNombre() + "Se ha registrado en el Padrón de Casa Grande, debemos verificar su email, por favor haga click en el siguiente link: " + confirmationUrl);
+        email.setText("Gracias, " + persona.getNombre() + " Se ha registrado en el Padrón de Casa Grande, debemos verificar su email, por favor haga click en el siguiente link: " + confirmationUrl);
         email.setSubject("Padrón Casa Grande, activación");
 
         try {

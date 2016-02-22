@@ -29,138 +29,138 @@
                     xmlns:b="http://bootsfaces.net/ui"
 
                     template="/WEB-INF/templates/tempboo.xhtml">
-    <ui:define name="content">
+        <ui:define name="content">
 
-        <b:panel id="regpanel" collapsible="false" title="Registro" look="default">
-
-
-            <h:form id="registro">
+            <b:panel id="regpanel" collapsible="false" title="Registro" look="default">
 
 
-                        <b:row>
-
-                            <b:column colMd="4" offsetMd="2">
-                                <h:outputLabel for="nombre" value="Nombre:" class="control-label"/>
-                                <b:inputText id="nombre" value="#{nuevaPersona.nombre}"/>
-
-                            </b:column>
-                            <b:column colMd="4">
-                                <h:outputLabel for="email" value="Email:"/>
-                                <b:inputText id="email" value="#{nuevaPersona.email}"/>
-                            </b:column>
-
-                        </b:row>
-                        <b:row>
-
-                            <b:column colMd="3" offsetMd="2">
-                                <h:outputLabel for="ci" value="CI:"/>
-                                <b:inputText id="ci" value="#{nuevaPersona.ci}"/>
-                            </b:column>
-                            <b:column colMd="3">
-                                <h:outputLabel for="cc" value="CC:"/>
-                                <b:inputText id="cc" value="#{nuevaPersona.cc}"/>
-                            </b:column>
-                            <b:column colMd="2">
-                                <h:outputLabel for="fecha_nac" value="Nacimiento:"/>
-                                <b:inputText id="fecha_nac" value="#{nuevaPersona.fecha_nacimiento}">
-                                    <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-                                </b:inputText>
-                            </b:column>
-                        </b:row>
-                        <b:row>
-
-                            <b:column colMd="4" offsetMd="2">
-                                <h:outputLabel for="tel1" value="Teléfono 1:"/>
-                                <b:inputText id="tel1" value="#{nuevaPersona.telefono_1}"/>
-                            </b:column>
-                            <b:column colMd="4">
-                                <h:outputLabel for="tel2" value="Teléfono 2:"/>
-                                <b:inputText id="tel2" value="#{nuevaPersona.telefono_2}"/>
-                            </b:column>
-                        </b:row>
+                <h:form id="registro">
 
 
+                    <b:row>
 
-                        <b:row>
+                        <b:column colMd="4" offsetMd="2">
+                            <h:outputLabel for="nombre" value="Nombre:" class="control-label"/>
+                            <b:inputText id="nombre" value="#{nuevaPersona.nombre}"/>
 
-                            <b:column colMd="4" offsetMd="2">
-                                <h:outputLabel for="depto" value="Departamento:"/>
-                                <b:selectOneMenu id="depto" value="#{registroController.departamentoSeleccionado}"
-                                                 renderLabel="false">
-                                    <f:selectItems value="#{auxController.departamentoList}" var="d"
-                                                   itemLabel="#{d.nombre}"
-                                                   itemValue="#{d.id}"/>
-                                    <f:ajax listener="#{registroController.cambioDepartamento}" event="change"
-                                            render="loc"
-                                            execute="@this"/>
-                                </b:selectOneMenu>
-                            </b:column>
-                            <b:column colMd="4">
-                                <h:outputLabel for="loc" value="Localidad:"/>
-                                <b:selectOneMenu id="loc" value="#{registroController.localidadSeleccionada}"
-                                                 renderLabel="false">
-                                    <f:selectItems value="#{registroController.localidades}" var="l"
-                                                   itemLabel="#{l.nombre}"
-                                                   itemValue="#{l.id}"/>
-                                </b:selectOneMenu>
-                            </b:column>
-                        </b:row>
+                        </b:column>
+                        <b:column colMd="4">
+                            <h:outputLabel for="email" value="Email:"/>
+                            <b:inputText id="email" value="#{nuevaPersona.email}"/>
+                        </b:column>
 
-                        <b:row>
+                    </b:row>
+                    <b:row>
 
-                            <b:column colMd="4" offsetMd="2">
-                                <h:outputLabel for="barrio" value="Barrio:"/>
-                                <b:inputText id="barrio" value="#{nuevaPersona.barrio}"/>
-                            </b:column>
-                            <b:column colMd="4">
-                                <h:outputLabel for="dir" value="Dirección:"/>
-                                <b:inputText id="dir" value="#{nuevaPersona.direccion}"/>
-                            </b:column>
-                        </b:row>
+                        <b:column colMd="3" offsetMd="2">
+                            <h:outputLabel for="ci" value="CI:"/>
+                            <b:inputText id="ci" value="#{nuevaPersona.ci}"/>
+                        </b:column>
+                        <b:column colMd="3">
+                            <h:outputLabel for="cc" value="CC:"/>
+                            <b:inputText id="cc" value="#{nuevaPersona.cc}"/>
+                        </b:column>
+                        <b:column colMd="2">
+                            <h:outputLabel for="fecha_nac" value="Nacimiento:"/>
+                            <b:inputText id="fecha_nac" value="#{nuevaPersona.fecha_nacimiento}">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                            </b:inputText>
+                        </b:column>
+                    </b:row>
+                    <b:row>
 
-                        <b:row>
-
-                            <b:column colMd="4" offsetMd="2">
-                                <h:outputLabel for="intereses" value="Temas de interés:"/>
-                                <b:inputTextarea id="intereses" value="#{nuevaPersona.temas_interes}" rows="4"/>
-                            </b:column>
-                            <b:column colMd="4">
-
-                                <h:outputLabel for="frec_aporte" value="Frecuencia aporte económico:"/>
-                                <b:selectOneMenu id="frec_aporte" value="#{registroController.frecuenciaSeleccionada}"
-                                                 renderLabel="false">
-                                    <f:selectItems value="#{auxController.frecuenciaList}" var="f"
-                                                   itemLabel="#{f.name()}"
-                                                   itemValue="#{f.name()}"/>
-                                </b:selectOneMenu>
-
-                                <h:outputLabel for="monto" value="Monto aporte ecónomico:"/>
-                                <b:inputText id="monto" value="#{nuevaPersona.monto_aporte}"/>
+                        <b:column colMd="4" offsetMd="2">
+                            <h:outputLabel for="tel1" value="Teléfono 1:"/>
+                            <b:inputText id="tel1" value="#{nuevaPersona.telefono_1}"/>
+                        </b:column>
+                        <b:column colMd="4">
+                            <h:outputLabel for="tel2" value="Teléfono 2:"/>
+                            <b:inputText id="tel2" value="#{nuevaPersona.telefono_2}"/>
+                        </b:column>
+                    </b:row>
 
 
-                            </b:column>
+                    <b:row>
 
-                        </b:row>
+                        <b:column colMd="4" offsetMd="2">
+                            <h:outputLabel for="depto" value="Departamento:"/>
+                            <b:selectOneMenu id="depto" value="#{registroController.departamentoSeleccionado}"
+                                             renderLabel="false">
+                                <f:selectItems value="#{auxController.departamentoList}" var="d"
+                                               itemLabel="#{d.nombre}"
+                                               itemValue="#{d.id}"/>
+                                <f:ajax listener="#{registroController.cambioDepartamento}" event="change"
+                                        render="loc"
+                                        execute="@this"/>
+                            </b:selectOneMenu>
+                        </b:column>
+                        <b:column colMd="4">
+                            <h:outputLabel for="loc" value="Localidad:"/>
+                            <b:selectOneMenu id="loc" value="#{registroController.localidadSeleccionada}"
+                                             renderLabel="false">
+                                <f:selectItems value="#{registroController.localidades}" var="l"
+                                               itemLabel="#{l.nombre}"
+                                               itemValue="#{l.id}"/>
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+
+                        <b:column colMd="4" offsetMd="2">
+                            <h:outputLabel for="barrio" value="Barrio:"/>
+                            <b:inputText id="barrio" value="#{nuevaPersona.barrio}"/>
+                        </b:column>
+                        <b:column colMd="4">
+                            <h:outputLabel for="dir" value="Dirección:"/>
+                            <b:inputText id="dir" value="#{nuevaPersona.direccion}"/>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+
+                        <b:column colMd="4" offsetMd="2">
+                            <h:outputLabel for="intereses" value="Temas de interés:"/>
+                            <b:inputTextarea id="intereses" value="#{nuevaPersona.temas_interes}" rows="4"/>
+                        </b:column>
+                        <b:column colMd="4">
+
+                            <h:outputLabel for="frec_aporte" value="Frecuencia aporte económico:"/>
+                            <b:selectOneMenu id="frec_aporte" value="#{registroController.frecuenciaSeleccionada}"
+                                             renderLabel="false">
+                                <f:selectItems value="#{auxController.frecuenciaList}" var="f"
+                                               itemLabel="#{f.name()}"
+                                               itemValue="#{f.name()}"/>
+                            </b:selectOneMenu>
+
+                            <h:outputLabel for="monto" value="Monto aporte ecónomico:"/>
+                            <b:inputText id="monto" value="#{nuevaPersona.monto_aporte}"/>
 
 
-                        <b:row>
-                            <b:column colMd="6" offsetMd="6">
+                        </b:column>
 
-                                <b:commandButton action="#{registroController.registrar}" ajax="true"
-                                                 update="@form messages regpanel"
-                                                 value="Registrar" look="primary" styleClass="pull-right" span="20px"
-                                />
-
-                            </b:column>
-
-                        </b:row>
+                    </b:row>
 
 
-                    </h:form>
+                    <b:row>
+                        <b:column colMd="6" offsetMd="6">
 
-                </b:panel>
+                            <b:commandButton action="#{registroController.registrar}" ajax="true"
+                                             update="@form messages regpanel"
+                                             value="Registrar" look="primary" styleClass="pull-right" span="20px"
+                                    />
 
-    </ui:define>
-</ui:composition>
+                        </b:column>
+
+                    </b:row>
+
+
+                </h:form>
+
+
+            </b:panel>
+
+        </ui:define>
+    </ui:composition>
 </h:body>
 </html>
