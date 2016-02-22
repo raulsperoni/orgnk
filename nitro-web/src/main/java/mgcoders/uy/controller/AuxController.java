@@ -30,6 +30,7 @@ public class AuxController {
     private Map<Integer, List<Localidad>> localidadMap = new HashMap<>();
     private Map<Integer, Departamento> departamentoMap = new HashMap<>();
     private Map<Integer, Localidad> localidadIndividualMap = new HashMap<>();
+    private List<Integer> montos = new ArrayList<>(Arrays.asList(10, 20, 50, 100, 200, 500));
 
     @PostConstruct
     private void initialize() {
@@ -44,6 +45,14 @@ public class AuxController {
         }
 
     }
+
+
+    @Named
+    @Produces
+    public List<Integer> getMontos() {
+        return montos;
+    }
+
 
     @Named
     @Produces

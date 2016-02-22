@@ -17,7 +17,7 @@
 
     <context-param>
         <param-name>BootsFaces_THEME</param-name>
-        <param-value>simplex</param-value>
+        <param-value>paper</param-value>
     </context-param>
 
 
