@@ -1,9 +1,9 @@
 package mgcoders.uy.model;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -23,7 +23,7 @@ public class Persona implements Serializable {
     private boolean enabled = false;
     private String password;
 
-    @NotNull(message = "El nombre es obligatorio")
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
     @Pattern(regexp = "^(([0-9]){1}.)?([0-9]){3}.([0-9]){3}-([0-9]){1}$", message = "El formato de la cédula debe ser: 1.111.111-1")
     @Column(unique = true)
@@ -37,6 +37,7 @@ public class Persona implements Serializable {
     private String telefono_1;
     @Pattern(regexp = "^(([0-9]{3})?([0-9]){9})?$", message = "El formato del teléfono debe ser 59899111111")
     private String telefono_2;
+    @NotBlank(message = "Necesitamos un email para contactarte")
     @Email(message = "El mail es incorrecto")
     @Column(unique = true)
     private String email;
@@ -50,7 +51,8 @@ public class Persona implements Serializable {
     private String barrio;
 
     private String temas_interes;
-    @Digits(integer = 6, fraction = 0, message = "El valor es incorrecto")
+
+    @NotNull(message = "Debe elegir un monto")
     private int monto_aporte;
     @Enumerated(EnumType.STRING)
     private Frecuencia frecuencia_aporte;

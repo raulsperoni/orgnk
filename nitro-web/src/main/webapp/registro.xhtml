@@ -144,9 +144,14 @@
                                     <h:outputLabel for="monto" value="Monto:"/>
                                     <b:selectOneMenu id="monto" value="#{nuevaPersona.monto_aporte}" renderLabel="false"
                                                      tooltip="El monto que podrías aportar">
-                                        <f:selectItems value="#{auxController.montos}" var="m"
-                                                       itemLabel="#{m.toString()}"
-                                                       itemValue="#{m}"/>
+                                        <f:selectItem itemLabel="10" itemValue="#{10}"/>
+                                        <f:selectItem itemLabel="20" itemValue="#{20}"/>
+                                        <f:selectItem itemLabel="50" itemValue="#{50}"/>
+                                        <f:selectItem itemLabel="100" itemValue="#{100}"/>
+                                        <f:selectItem itemLabel="200" itemValue="#{200}"/>
+                                        <f:selectItem itemLabel="600" itemValue="#{500}"/>
+
+
                                     </b:selectOneMenu>
                                 </b:column>
                             </b:row>
@@ -156,7 +161,6 @@
                         </b:column>
 
                     </b:row>
-
 
                     <b:row>
                         <b:column colMd="6" offsetMd="6">

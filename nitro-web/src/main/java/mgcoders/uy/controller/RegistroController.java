@@ -14,6 +14,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.ConstraintViolationException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
@@ -79,9 +80,11 @@ public class RegistroController implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Le hemos enviado un correo para verificar su email."));
             initNewMember();
             success = true;
+        } catch (ConstraintViolationException e) {
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "La cédula o el email ya existen");
+            facesContext.addMessage(null, m);
         } catch (Exception e) {
-            String errorMessage = getRootErrorMessage(e);
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "El registro falló");
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "error del sistema, contáctenos");
             facesContext.addMessage(null, m);
         }
     }
