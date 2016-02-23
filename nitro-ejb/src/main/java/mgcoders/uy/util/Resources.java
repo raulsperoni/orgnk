@@ -16,6 +16,9 @@
  */
 package mgcoders.uy.util;
 
+import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.persistence.EntityManager;
@@ -34,7 +37,11 @@ import java.util.logging.Logger;
  * private EntityManager em;
  * </pre>
  */
+@ApplicationScoped
 public class Resources {
+
+    public Resources() {
+    }
 
     @Produces
     @PersistenceContext
