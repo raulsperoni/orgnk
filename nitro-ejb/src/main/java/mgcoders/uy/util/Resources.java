@@ -16,13 +16,12 @@
  */
 package mgcoders.uy.util;
 
-import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 
 /**
@@ -40,12 +39,14 @@ import java.util.logging.Logger;
 @ApplicationScoped
 public class Resources {
 
-    public Resources() {
-    }
-
+    @Produces
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     @Produces
     @PersistenceContext
     private EntityManager em;
+
+    public Resources() {
+    }
 
     @Produces
     public Logger produceLog(InjectionPoint injectionPoint) {

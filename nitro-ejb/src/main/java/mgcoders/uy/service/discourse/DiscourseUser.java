@@ -4,6 +4,7 @@ import mgcoders.uy.model.Persona;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
 
@@ -21,6 +22,7 @@ public class DiscourseUser implements Serializable {
     private Boolean active;
 
     @OneToOne
+    @JoinColumn(referencedColumnName = "id")
     private Persona persona;
 
     public DiscourseUser() {

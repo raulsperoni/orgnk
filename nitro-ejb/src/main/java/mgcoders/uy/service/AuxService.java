@@ -1,5 +1,6 @@
 package mgcoders.uy.service;
 
+import mgcoders.uy.model.Actividad;
 import mgcoders.uy.model.Departamento;
 import mgcoders.uy.model.Localidad;
 
@@ -32,5 +33,10 @@ public class AuxService {
         Query query = em.createQuery("SELECT l FROM Localidad l where l.departamento.id = :depto");
         query.setParameter("depto", d.getId());
         return (List<Localidad>) query.getResultList();
+    }
+
+    public List<Actividad> getActividades() {
+        Query query = em.createQuery("SELECT a FROM Actividad a");
+        return (List<Actividad>) query.getResultList();
     }
 }

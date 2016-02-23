@@ -1,6 +1,7 @@
 package mgcoders.uy.service;
 
 import mgcoders.uy.model.ActivationToken;
+import mgcoders.uy.model.Persona;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
@@ -23,7 +24,7 @@ public class ActivationService {
     @Inject
     private EntityManager em;
 
-    public boolean check(String key) {
+    public Persona check(String key) {
 
         try {
 
@@ -34,15 +35,17 @@ public class ActivationService {
                 activationToken.setVerified(true);
                 activationToken.getPersona().setEnabled(true);
                 personaActivadaEvent.fire(new PersonaActivadaEvent(activationToken.getPersona().getId(), new Date()));
-                return true;
-            } else return activationToken.isVerified();
+                return activationToken.getPersona();
+            } else return activationToken.getPersona();
 
         } catch (Exception e) {
             e.printStackTrace();
             log.info("Verification token was not found");
-            return false;
+            return null;
 
         }
 
     }
+
+
 }

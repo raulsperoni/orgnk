@@ -3,7 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui"
->
+        >
 
 <h:head/>
 <h:body>
@@ -13,15 +13,63 @@
 
                     template="/WEB-INF/templates/tempboo.xhtml">
         <ui:define name="content">
-            <b:panel title="OK!">
-                <h:outputLabel value="Hello, world"/>
+            <b:panel title="Registro Correcto">
+                <h:outputLabel value="#{activationController.persona.nombre}, te damos la bienvenida a Casa Grande."/>
                 <h:panelGroup layout="block" rendered="#{activationController.valid}">
-                    <p>Your account is successfully activated!</p>
+                    <p>Tu correo electrónico fue correctamente validado y el registro fue correcto.</p>
 
-                    <p><h:link outcome="home">Go to home page</h:link></p>
+                    <h:panelGroup rendered="#{ultimaActividad != null}">
+
+                        <h:outputLabel value="Próxima actividad: #{ultimaActividad.nombre}"/>
+
+                        <p>Desde: #{ultimaActividad.fechaDesde}</p>
+
+                        <p>Hasta: #{ultimaActividad.fechaHasta}</p>
+
+                        <p>#{ultimaActividad.descripcion}</p>
+
+                        <h:form>
+                            <b:row>
+
+                                <b:column colMd="2" offsetMd="4">
+                                    <h:outputLabel for="asiste" value="Asistirás?" class="control-label"/>
+                                    <b:selectBooleanCheckbox id="asiste"
+                                                             value="#{activationController.asistencia.asiste}"
+                                                             tooltip="Si pensás asistir o no"/>
+                                </b:column>
+                                <b:column colMd="2">
+                                    <h:outputLabel for="alojamiento" value="Alojamiento:" class="control-label"/>
+                                    <b:selectBooleanCheckbox id="alojamiento"
+                                                             value="#{activationController.asistencia.requiereAlojamiento}"
+                                                             tooltip="En caso de ser posible, requerís alojamiento en casa de un compañero?"/>
+                                </b:column>
+
+
+                            </b:row>
+                            <b:row>
+                                <b:column colMd="3" offsetMd="4">
+                                    <h:outputLabel for="coment" value="Comentario a los organizadores:"/>
+                                    <b:inputTextarea id="coment" value="#{activationController.asistencia.comentario}"
+                                                     rows="3"
+                                                     tooltip="Algo que nos quieras comentar previo a la actividad"/>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column colMd="3" offsetMd="4">
+
+                                    <b:commandButton action="#{activationController.registrarAsistencia}" ajax="true"
+                                                     update="@form messages"
+                                                     value="Registrar Asistencia" look="primary" styleClass="pull-right"
+                                                     span="20px"
+                                            />
+
+                                </b:column>
+                            </b:row>
+                        </h:form>
+                    </h:panelGroup>
                 </h:panelGroup>
                 <h:panelGroup layout="block" rendered="#{!activationController.valid}">
-                    <p>Activation failed! Please enter your email address to try once again.</p>
+                    <p>La activación falló!</p>
                     <h:form>
                         ...
                     </h:form>

@@ -1,5 +1,6 @@
 package mgcoders.uy.controller;
 
+import mgcoders.uy.model.Actividad;
 import mgcoders.uy.model.Departamento;
 import mgcoders.uy.model.Frecuencia;
 import mgcoders.uy.model.Localidad;
@@ -31,6 +32,7 @@ public class AuxController {
     private Map<Integer, Departamento> departamentoMap = new HashMap<>();
     private Map<Integer, Localidad> localidadIndividualMap = new HashMap<>();
     private Integer[] montos = {10, 20, 50, 100, 200, 500};
+    private List<Actividad> actividadList;
 
     @PostConstruct
     private void initialize() {
@@ -43,6 +45,7 @@ public class AuxController {
             localidadMap.put(depto.getId(), localidades);
             departamentoMap.put(depto.getId(), depto);
         }
+        actividadList = auxService.getActividades();
 
     }
 
@@ -64,6 +67,12 @@ public class AuxController {
     @Produces
     public List<Frecuencia> getFrecuenciaList() {
         return new ArrayList<>(Arrays.asList(Frecuencia.values()));
+    }
+
+    @Named
+    @Produces
+    public Actividad getUltimaActividad() {
+        return actividadList.size() > 0 ? actividadList.get(0) : null;
     }
 
     public Departamento getDepartamento(int idDepartamento) {

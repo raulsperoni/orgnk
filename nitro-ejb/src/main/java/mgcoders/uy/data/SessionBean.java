@@ -1,9 +1,6 @@
 package mgcoders.uy.data;
 
-import mgcoders.uy.model.Opcion;
-import mgcoders.uy.model.Pregunta;
-import mgcoders.uy.model.Votacion;
-import mgcoders.uy.model.Votante;
+import mgcoders.uy.model.*;
 import mgcoders.uy.service.VotacionService;
 import mgcoders.uy.service.VotantesService;
 import mgcoders.uy.service.discourse.DiscourseAPIService;
@@ -13,6 +10,8 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -34,6 +33,8 @@ public class SessionBean {
     private EntityManager em;
     @Inject
     private Logger log;
+    @Inject
+    private SimpleDateFormat simpleDateFormat;
 
 
     public SessionBean() {
@@ -70,6 +71,18 @@ public class SessionBean {
         log.info("################# BD" + votante.getVotaciones().get(0).getTokenAutorizacion());
 
 
+        Actividad actividad = new Actividad();
+        actividad.setNombre("Encuentro Nacional");
+
+        try {
+            actividad.setFechaDesde(simpleDateFormat.parse("12/03/2016 08:30"));
+            actividad.setFechaHasta(simpleDateFormat.parse("13/03/2016 16:00"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        actividad.setDescripcion("Seguiremos consolidandonos como organización política y estaremos discutiendo también sobre nuestra otra casa, el Frente Amplio.");
+        em.persist(actividad);
     }
 
 
