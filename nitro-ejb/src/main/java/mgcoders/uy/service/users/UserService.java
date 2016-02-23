@@ -3,6 +3,7 @@ package mgcoders.uy.service.users;
 import mgcoders.uy.model.Persona;
 import mgcoders.uy.service.PersonaActivadaEvent;
 import mgcoders.uy.service.discourse.DiscourseAPIService;
+import mgcoders.uy.service.discourse.DiscourseCreateUserResponse;
 import mgcoders.uy.service.discourse.DiscourseUser;
 
 import javax.ejb.Stateless;
@@ -38,15 +39,23 @@ public class UserService {
         if (nuevoUsuario == null) {
             nuevoUsuario = new DiscourseUser(persona);
             log.info("Usuario no existe creando en discourse... ");
-            long discourse_user_id = discourseAPIService.createUser(nuevoUsuario);
-            nuevoUsuario.setId(discourse_user_id);
-
+            DiscourseCreateUserResponse response = discourseAPIService.createUser(nuevoUsuario);
+            if (response.isSuccess()) {
+                nuevoUsuario.setId(response.getUser_id());
+                em.persist(nuevoUsuario);
+                log.info("Usuario creado en el sistema: " + nuevoUsuario.toString());
+                if (discourseAPIService.aprobarUsuario(nuevoUsuario)) {
+                    nuevoUsuario.setApproved(true);
+                    log.info("Usuario aprobado en discourse: " + nuevoUsuario.toString());
+                }
+            } else {
+                log.severe("No se pudo crear usuario en el sistema: " + nuevoUsuario.toString());
+            }
         } else {
             log.info("Usuario existe en discourse... " + nuevoUsuario.getId());
+            em.persist(nuevoUsuario);
+            log.info("Usuario creado en el sistema: " + nuevoUsuario.toString());
         }
-
-        em.persist(nuevoUsuario);
-        log.info("Usuario creado en el sistema: " + nuevoUsuario.toString());
 
 
     }

@@ -8,15 +8,17 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
-import com.sun.jersey.api.json.JSONConfiguration;
+import com.sun.jersey.api.representation.Form;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
+import mgcoders.uy.model.Properties;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
-import java.io.IOException;
-import java.util.Properties;
+import javax.ws.rs.core.UriBuilder;
 import java.util.logging.Logger;
 
 /**
@@ -25,41 +27,38 @@ import java.util.logging.Logger;
 @Stateless
 public class DiscourseAPIService {
 
-    private static final String PROPERTIES_FILE = "discourse.properties";
-    private static Properties properties = new Properties();
+    private static String DISCOURSE_API_KEY;
+    private static String DISCOURSE_API_USER;
+    private static String DISCOURSE_API_HOST;
     @Inject
     private Logger log;
-
+    @Inject
+    private EntityManager em;
 
     @PostConstruct
     public void init() {
-        try {
-            properties.load(DiscourseAPIService.class.getResourceAsStream(PROPERTIES_FILE));
-        } catch (IOException e) {
-            log.severe("Failed to load discourse properties file: " + e.getMessage());
-            e.printStackTrace();
-        }
+        Properties properties = em.find(Properties.class, "discourse_api_key");
+        DISCOURSE_API_KEY = properties.getValue();
+        properties = em.find(Properties.class, "discourse_api_user");
+        DISCOURSE_API_USER = properties.getValue();
+        properties = em.find(Properties.class, "discourse_api_host");
+        DISCOURSE_API_HOST = properties.getValue();
     }
 
 
     public DiscourseUser searchUser(String email) {
-        Client client = Client.create();
-        WebResource webResource = client.resource(properties.getProperty("host"));
+
+        ClientConfig config = new DefaultClientConfig();
+        Client client = Client.create(config);
+        WebResource service = client.resource(UriBuilder.fromUri(DISCOURSE_API_HOST).build());
         MultivaluedMap<String, String> params = new MultivaluedMapImpl();
-        params.add("api_key", properties.get("api_key").toString());
+        params.add("api_key", DISCOURSE_API_KEY);
+        params.add("api_user", DISCOURSE_API_USER);
         params.add("filter", email);
-        ClientResponse response = webResource
-                .path(properties.getProperty("user_search"))
-                .queryParams(params)
-                .accept("application/json")
-                .get(ClientResponse.class);
+        String output = service.path("admin/users/list/active.json").queryParams(params).accept(MediaType.APPLICATION_JSON).get(String.class);
 
-        if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : "
-                    + response.getStatus());
-        }
 
-        String output = response.getEntity(String.class);
+
         log.info("Respuesta buscar usuario: " + output);
         Gson gson = new Gson();
         JsonParser parser = new JsonParser();
@@ -74,35 +73,46 @@ public class DiscourseAPIService {
 
     }
 
-    public long createUser(DiscourseUser user) {
+    public DiscourseCreateUserResponse createUser(DiscourseUser user) {
 
-        ClientConfig clientConfig = new DefaultClientConfig();
-        clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
-        Client client = Client.create(clientConfig);
-
-        WebResource webResource = client.resource(properties.getProperty("host"));
-
+        ClientConfig config = new DefaultClientConfig();
+        Client client = Client.create(config);
+        WebResource webResource = client.resource(UriBuilder.fromUri(DISCOURSE_API_HOST).build());
         MultivaluedMap<String, String> params = new MultivaluedMapImpl();
-        params.add("username", user.getUsername());
-        params.add("name", user.getName());
-        params.add("password", "eeeeeeeeee");
-        params.add("email", user.getEmail());
-        params.add("active", "true");
-        params.add("api-key", properties.getProperty("api-key"));
-        ClientResponse response = webResource.path(properties.getProperty("users")).queryParams(params).accept("application/json")
-                .type("application/json").post(ClientResponse.class);
-
-        if (response.getClientResponseStatus().getStatusCode() > 201) {
-            log.severe("NAAAA: " + response.getClientResponseStatus().getStatusCode());
-        }
-
+        params.add("api_key", DISCOURSE_API_KEY);
+        params.add("api_user", DISCOURSE_API_USER);
+        Form formData = new Form();
+        formData.add("username", user.getUsername());
+        formData.add("name", user.getName());
+        formData.add("password", "lalalalala");
+        formData.add("email", user.getEmail());
+        formData.add("active", "true");
+        ClientResponse response = webResource.path("users").queryParams(params).type(MediaType.APPLICATION_FORM_URLENCODED).accept(MediaType.APPLICATION_JSON_TYPE).post(ClientResponse.class, formData);
         String output = response.getEntity(String.class);
+
+
         log.info("Respuesta crear usuario: " + output);
         Gson gson = new Gson();
         DiscourseCreateUserResponse resp = gson.fromJson(output, DiscourseCreateUserResponse.class);
         if (resp.isSuccess()) log.info(resp.getMessage());
         else log.severe(resp.getMessage());
-        return resp.getUser_id();
+        return resp;
+    }
+
+
+    public boolean aprobarUsuario(DiscourseUser user) {
+
+        ClientConfig config = new DefaultClientConfig();
+        Client client = Client.create(config);
+        WebResource service = client.resource(UriBuilder.fromUri(DISCOURSE_API_HOST).build());
+        MultivaluedMap<String, String> params = new MultivaluedMapImpl();
+        params.add("api_key", DISCOURSE_API_KEY);
+        params.add("api_user", DISCOURSE_API_USER);
+        ClientResponse response = service.path("admin/users").path(String.valueOf(user.getId())).path("approve").queryParams(params).accept(MediaType.APPLICATION_JSON).put(ClientResponse.class);
+        log.info("Respuesta aprobar usuario: " + response.getStatus());
+        return response.getStatus() == 200;
+
+
     }
 
 

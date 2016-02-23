@@ -17,9 +17,10 @@ public class DiscourseUser implements Serializable {
     @Id
     private long id;
     private String username;
-    private String name;
     private String email;
     private Boolean active;
+    private Boolean approved;
+    private String name;
 
     @OneToOne
     @JoinColumn(referencedColumnName = "id")
@@ -29,11 +30,12 @@ public class DiscourseUser implements Serializable {
     }
 
     public DiscourseUser(Persona persona) {
-        this.name = persona.getNombre();
         this.username = persona.getNombre().toLowerCase().replace(' ', '_');
         this.email = persona.getEmail();
         this.active = true;
         this.persona = persona;
+        this.approved = false;
+        this.name = persona.getNombre();
     }
 
 
@@ -61,14 +63,6 @@ public class DiscourseUser implements Serializable {
         this.username = username;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -85,14 +79,30 @@ public class DiscourseUser implements Serializable {
         this.active = active;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
+    }
+
     @Override
     public String toString() {
         return "DiscourseUser{" +
-                "active=" + active +
-                ", email='" + email + '\'' +
-                ", name='" + name + '\'' +
+                "id=" + id +
                 ", username='" + username + '\'' +
-                ", id=" + id +
+                ", email='" + email + '\'' +
+                ", active=" + active +
+                ", approved=" + approved +
                 '}';
     }
 }
