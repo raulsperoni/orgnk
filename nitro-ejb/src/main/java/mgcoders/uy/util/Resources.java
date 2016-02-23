@@ -16,7 +16,6 @@
  */
 package mgcoders.uy.util;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.persistence.EntityManager;
@@ -36,13 +35,14 @@ import java.util.logging.Logger;
  * private EntityManager em;
  * </pre>
  */
-@ApplicationScoped
+
 public class Resources {
 
     @Produces
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
     @Produces
-    @PersistenceContext
+    @PersistenceContext(name = "primary")
     private EntityManager em;
 
     public Resources() {

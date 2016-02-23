@@ -13,7 +13,6 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
-import java.util.logging.Logger;
 
 /**
  * Created by raul on 21/02/16.
@@ -28,8 +27,7 @@ public class ActivationController {
     ActividadService actividadService;
     @Inject
     private FacesContext facesContext;
-    @Inject
-    private Logger log;
+
 
 
     @ManagedProperty(value = "#{param.token}")
@@ -40,7 +38,7 @@ public class ActivationController {
 
     @PostConstruct
     public void init() {
-        log.info("## token recibido" + key);
+        //log.info("## token recibido" + key);
         persona = activationService.check(key);
         valid = persona != null;
         asistencia = new Asistencia();

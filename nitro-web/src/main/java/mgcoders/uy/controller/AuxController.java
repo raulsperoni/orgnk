@@ -12,7 +12,6 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.*;
-import java.util.logging.Logger;
 
 /**
  * Created by raul on 17/02/16.
@@ -24,8 +23,6 @@ public class AuxController {
     @Inject
     AuxService auxService;
 
-    @Inject
-    private Logger log;
 
     private List<Departamento> departamentoList;
     private Map<Integer, List<Localidad>> localidadMap = new HashMap<>();

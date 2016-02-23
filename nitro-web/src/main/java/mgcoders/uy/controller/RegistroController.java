@@ -17,7 +17,6 @@ import javax.inject.Named;
 import javax.validation.ConstraintViolationException;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created by raul on 16/02/16.
@@ -38,8 +37,6 @@ public class RegistroController implements Serializable {
     @Inject
     private AuxController auxController;
 
-    @Inject
-    private Logger log;
 
     @Inject
     private SessionController sessionController;
