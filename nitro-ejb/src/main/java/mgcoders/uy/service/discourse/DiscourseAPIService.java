@@ -10,7 +10,6 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.representation.Form;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
-import mgcoders.uy.model.Properties;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -19,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.UriBuilder;
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -30,19 +30,19 @@ public class DiscourseAPIService {
     private static String DISCOURSE_API_KEY;
     private static String DISCOURSE_API_USER;
     private static String DISCOURSE_API_HOST;
+
     @Inject
     private Logger log;
     @Inject
     private EntityManager em;
+    @Inject
+    private Map<String, String> organikaProperties;
 
     @PostConstruct
     public void init() {
-        Properties properties = em.find(Properties.class, "discourse_api_key");
-        DISCOURSE_API_KEY = properties.getValue();
-        properties = em.find(Properties.class, "discourse_api_user");
-        DISCOURSE_API_USER = properties.getValue();
-        properties = em.find(Properties.class, "discourse_api_host");
-        DISCOURSE_API_HOST = properties.getValue();
+        DISCOURSE_API_KEY = organikaProperties.get("discourse_api_key");
+        DISCOURSE_API_USER = organikaProperties.get("discourse_api_user");
+        DISCOURSE_API_HOST = organikaProperties.get("discourse_api_host");
     }
 
 

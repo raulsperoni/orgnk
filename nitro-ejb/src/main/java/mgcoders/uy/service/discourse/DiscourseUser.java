@@ -2,10 +2,7 @@ package mgcoders.uy.service.discourse;
 
 import mgcoders.uy.model.Persona;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -15,15 +12,19 @@ import java.io.Serializable;
 public class DiscourseUser implements Serializable {
 
     @Id
+    private long persona_id;
     private long id;
     private String username;
     private String email;
     private Boolean active;
     private Boolean approved;
     private String name;
+    private Boolean error;
+    private String errorMessage;
 
+    @JoinColumn(name = "persona_id")
     @OneToOne
-    @JoinColumn(referencedColumnName = "id")
+    @MapsId
     private Persona persona;
 
     public DiscourseUser() {
@@ -36,8 +37,24 @@ public class DiscourseUser implements Serializable {
         this.persona = persona;
         this.approved = false;
         this.name = persona.getNombre();
+        this.error = false;
     }
 
+    public Boolean getError() {
+        return error;
+    }
+
+    public void setError(Boolean error) {
+        this.error = error;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
 
     public Persona getPersona() {
         return persona;

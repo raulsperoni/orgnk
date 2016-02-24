@@ -29,11 +29,9 @@ public class UserService {
     private EntityManager em;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public void nuevoUsuario(@Observes(during = TransactionPhase.AFTER_SUCCESS) PersonaActivadaEvent event) {
+    public DiscourseUser nuevoUsuario(@Observes(during = TransactionPhase.AFTER_SUCCESS) PersonaActivadaEvent event) {
 
         Persona persona = em.find(Persona.class, event.getPersona_id());
-
-
         DiscourseUser nuevoUsuario = discourseAPIService.searchUser(persona.getEmail());
 
         if (nuevoUsuario == null) {
@@ -42,21 +40,24 @@ public class UserService {
             DiscourseCreateUserResponse response = discourseAPIService.createUser(nuevoUsuario);
             if (response.isSuccess()) {
                 nuevoUsuario.setId(response.getUser_id());
-                em.persist(nuevoUsuario);
                 log.info("Usuario creado en el sistema: " + nuevoUsuario.toString());
                 if (discourseAPIService.aprobarUsuario(nuevoUsuario)) {
                     nuevoUsuario.setApproved(true);
                     log.info("Usuario aprobado en discourse: " + nuevoUsuario.toString());
                 }
             } else {
-                log.severe("No se pudo crear usuario en el sistema: " + nuevoUsuario.toString());
+                nuevoUsuario.setError(true);
+                nuevoUsuario.setErrorMessage(response.getMessage());
+                log.severe("No se pudo crear usuario en discourse: " + nuevoUsuario.toString());
             }
         } else {
+            nuevoUsuario.setPersona(persona);
+            nuevoUsuario.setName(persona.getNombre());
             log.info("Usuario existe en discourse... " + nuevoUsuario.getId());
-            em.persist(nuevoUsuario);
-            log.info("Usuario creado en el sistema: " + nuevoUsuario.toString());
         }
-
+        em.persist(nuevoUsuario);
+        log.info("Usuario creado en el sistema: " + nuevoUsuario.toString());
+        return nuevoUsuario;
 
     }
 
