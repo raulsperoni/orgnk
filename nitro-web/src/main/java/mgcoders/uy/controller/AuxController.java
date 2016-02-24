@@ -4,7 +4,7 @@ import mgcoders.uy.model.Actividad;
 import mgcoders.uy.model.Departamento;
 import mgcoders.uy.model.Frecuencia;
 import mgcoders.uy.model.Localidad;
-import mgcoders.uy.service.AuxService;
+import mgcoders.uy.service.common.AuxService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;

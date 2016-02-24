@@ -3,8 +3,8 @@ package mgcoders.uy.controller;
 import mgcoders.uy.model.Frecuencia;
 import mgcoders.uy.model.Localidad;
 import mgcoders.uy.model.Persona;
-import mgcoders.uy.service.AuxService;
-import mgcoders.uy.service.PersonaService;
+import mgcoders.uy.service.common.AuxService;
+import mgcoders.uy.service.common.PersonaService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Produces;
@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Named
 @ViewScoped
-public class RegistroController implements Serializable {
+public class RegistrationController implements Serializable {
 
     @Inject
     private FacesContext facesContext;
@@ -74,11 +74,11 @@ public class RegistroController implements Serializable {
             personaService.registrar(nuevaPersona);
             sessionController.setPersonaConectada(nuevaPersona);
             facesContext.addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Le hemos enviado un correo para verificar su email."));
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Le hemos enviado un correo para verificar su notifications."));
             initNewMember();
             success = true;
         } catch (ConstraintViolationException e) {
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "La cédula o el email ya existen");
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "La cédula o el notifications ya existen");
             facesContext.addMessage(null, m);
         } catch (Exception e) {
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "error del sistema, contáctenos");

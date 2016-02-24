@@ -1,4 +1,4 @@
-package mgcoders.uy.service.discourse;
+package mgcoders.uy.discourse;
 
 /**
  * Created by raul on 21/02/16.

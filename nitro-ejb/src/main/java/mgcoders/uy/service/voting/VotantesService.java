@@ -1,4 +1,4 @@
-package mgcoders.uy.service;
+package mgcoders.uy.service.voting;
 
 /**
  * Created by RSperoni on 24/11/2015.

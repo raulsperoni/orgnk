@@ -1,5 +1,6 @@
-package mgcoders.uy.service;
+package mgcoders.uy.service.common;
 
+import mgcoders.uy.events.RegistrationEvent;
 import mgcoders.uy.model.Persona;
 
 import javax.ejb.Stateless;
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
 public class PersonaService {
 
     @Inject
-    Event<NuevoRegistroEvent> nuevoRegistroEvent;
+    Event<RegistrationEvent> nuevoRegistroEvent;
     @Inject
     private Logger log;
     @Inject
@@ -24,7 +25,7 @@ public class PersonaService {
 
     public void registrar(Persona nuevaPersona) {
         em.persist(nuevaPersona);
-        NuevoRegistroEvent evt = new NuevoRegistroEvent(nuevaPersona.getId(), new Date());
+        RegistrationEvent evt = new RegistrationEvent(nuevaPersona.getId(), new Date());
         nuevoRegistroEvent.fire(evt);
     }
 

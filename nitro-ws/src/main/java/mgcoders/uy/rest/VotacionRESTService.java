@@ -1,7 +1,7 @@
 package mgcoders.uy.rest;
 
 import mgcoders.uy.model.Votacion;
-import mgcoders.uy.service.VotacionService;
+import mgcoders.uy.service.voting.VotacionService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

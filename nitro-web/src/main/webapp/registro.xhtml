@@ -87,21 +87,21 @@
 
                         <b:column colMd="4" offsetMd="2">
                             <h:outputLabel for="depto" value="Departamento:"/>
-                            <b:selectOneMenu id="depto" value="#{registroController.departamentoSeleccionado}"
+                            <b:selectOneMenu id="depto" value="#{registrationController.departamentoSeleccionado}"
                                              renderLabel="false" tooltip="El departamento donde vivís">
                                 <f:selectItems value="#{auxController.departamentoList}" var="d"
                                                itemLabel="#{d.nombre}"
                                                itemValue="#{d.id}"/>
-                                <f:ajax listener="#{registroController.cambioDepartamento}" event="change"
+                                <f:ajax listener="#{registrationController.cambioDepartamento}" event="change"
                                         render="loc"
                                         execute="@this"/>
                             </b:selectOneMenu>
                         </b:column>
                         <b:column colMd="4">
                             <h:outputLabel for="loc" value="Localidad:"/>
-                            <b:selectOneMenu id="loc" value="#{registroController.localidadSeleccionada}"
+                            <b:selectOneMenu id="loc" value="#{registrationController.localidadSeleccionada}"
                                              renderLabel="false" tooltip="Tú localidad">
-                                <f:selectItems value="#{registroController.localidades}" var="l"
+                                <f:selectItems value="#{registrationController.localidades}" var="l"
                                                itemLabel="#{l.nombre}"
                                                itemValue="#{l.id}"/>
                             </b:selectOneMenu>
@@ -132,7 +132,7 @@
                                 <b:column colMd="6">
                                     <h:outputLabel for="frec_aporte" value="Frecuencia:"/>
                                     <b:selectOneMenu id="frec_aporte"
-                                                     value="#{registroController.frecuenciaSeleccionada}"
+                                                     value="#{registrationController.frecuenciaSeleccionada}"
                                                      renderLabel="false"
                                                      tooltip="La frecuencia con que podrías aportar">
                                         <f:selectItems value="#{auxController.frecuenciaList}" var="f"
@@ -165,7 +165,7 @@
                     <b:row>
                         <b:column colMd="6" offsetMd="6">
 
-                            <b:commandButton action="#{registroController.registrar}" ajax="true"
+                            <b:commandButton action="#{registrationController.registrar}" ajax="true"
                                              update="@form messages regpanel"
                                              value="Registrar" look="primary" styleClass="pull-right" span="20px"
                             />

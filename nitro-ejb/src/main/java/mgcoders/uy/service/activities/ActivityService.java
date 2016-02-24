@@ -1,4 +1,4 @@
-package mgcoders.uy.service;
+package mgcoders.uy.service.activities;
 
 import mgcoders.uy.model.Asistencia;
 
@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * Created by RSperoni on 23/02/2016.
  */
 @Stateless
-public class ActividadService {
+public class ActivityService {
 
     @Inject
     private Logger log;

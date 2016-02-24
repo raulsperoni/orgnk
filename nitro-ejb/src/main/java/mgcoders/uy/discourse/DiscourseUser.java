@@ -1,4 +1,4 @@
-package mgcoders.uy.service.discourse;
+package mgcoders.uy.discourse;
 
 import mgcoders.uy.model.Persona;
 
@@ -117,7 +117,7 @@ public class DiscourseUser implements Serializable {
         return "DiscourseUser{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
+                ", notifications='" + email + '\'' +
                 ", active=" + active +
                 ", approved=" + approved +
                 '}';

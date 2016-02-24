@@ -1,4 +1,4 @@
-package mgcoders.uy.service;
+package mgcoders.uy.service.voting;
 
 import mgcoders.uy.model.Pregunta;
 import mgcoders.uy.model.Votacion;

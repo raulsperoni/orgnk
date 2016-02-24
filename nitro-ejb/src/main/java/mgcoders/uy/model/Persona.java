@@ -37,7 +37,7 @@ public class Persona implements Serializable {
     private String telefono_1;
     @Pattern(regexp = "^(([0-9]{3})?([0-9]){9})?$", message = "El formato del teléfono debe ser 59899111111")
     private String telefono_2;
-    @NotBlank(message = "Necesitamos un email para contactarte")
+    @NotBlank(message = "Necesitamos un notifications para contactarte")
     @Email(message = "El mail es incorrecto")
     @Column(unique = true)
     private String email;
@@ -200,7 +200,7 @@ public class Persona implements Serializable {
                 ", fecha_nacimiento=" + fecha_nacimiento +
                 ", telefono_1='" + telefono_1 + '\'' +
                 ", telefono_2='" + telefono_2 + '\'' +
-                ", email='" + email + '\'' +
+                ", notifications='" + email + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", departamento=" + departamento +
                 ", localidad=" + localidad +

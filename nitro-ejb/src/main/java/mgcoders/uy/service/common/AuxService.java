@@ -1,4 +1,4 @@
-package mgcoders.uy.service;
+package mgcoders.uy.service.common;
 
 import mgcoders.uy.model.Actividad;
 import mgcoders.uy.model.Departamento;

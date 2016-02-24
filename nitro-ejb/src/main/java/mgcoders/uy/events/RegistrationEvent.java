@@ -1,4 +1,4 @@
-package mgcoders.uy.service;
+package mgcoders.uy.events;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -6,12 +6,12 @@ import java.util.Date;
 /**
  * Created by RSperoni on 18/02/2016.
  */
-public class PersonaActivadaEvent implements Serializable {
+public class RegistrationEvent implements Serializable {
 
     private long persona_id;
     private Date date;
 
-    public PersonaActivadaEvent(long persona_id, Date date) {
+    public RegistrationEvent(long persona_id, Date date) {
         this.persona_id = persona_id;
         this.date = date;
     }
@@ -34,8 +34,8 @@ public class PersonaActivadaEvent implements Serializable {
 
     @Override
     public String toString() {
-        return "PersonaActivadaEvent{" +
-                "persona_id=" + persona_id +
+        return "RegistrationEvent{" +
+                "personaId=" + persona_id +
                 ", date=" + date +
                 '}';
     }

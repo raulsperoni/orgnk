@@ -1,4 +1,4 @@
-package mgcoders.uy.service.discourse;
+package mgcoders.uy.discourse;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -10,6 +10,7 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.representation.Form;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
+import mgcoders.uy.model.Properties;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -40,9 +41,9 @@ public class DiscourseAPIService {
 
     @PostConstruct
     public void init() {
-        DISCOURSE_API_KEY = organikaProperties.get("discourse_api_key");
-        DISCOURSE_API_USER = organikaProperties.get("discourse_api_user");
-        DISCOURSE_API_HOST = organikaProperties.get("discourse_api_host");
+        DISCOURSE_API_KEY = organikaProperties.get(Properties.DISCOURSE_API_KEY);
+        DISCOURSE_API_USER = organikaProperties.get(Properties.DISCOURSE_API_USER);
+        DISCOURSE_API_HOST = organikaProperties.get(Properties.DISCOURSE_API_HOST);
     }
 
 
@@ -85,7 +86,7 @@ public class DiscourseAPIService {
         formData.add("username", user.getUsername());
         formData.add("name", user.getName());
         formData.add("password", "lalalalala");
-        formData.add("email", user.getEmail());
+        formData.add("notifications", user.getEmail());
         formData.add("active", "true");
         ClientResponse response = webResource.path("users").queryParams(params).type(MediaType.APPLICATION_FORM_URLENCODED).accept(MediaType.APPLICATION_JSON_TYPE).post(ClientResponse.class, formData);
         String output = response.getEntity(String.class);

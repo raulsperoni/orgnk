@@ -2,8 +2,8 @@ package mgcoders.uy.controller;
 
 import mgcoders.uy.model.Asistencia;
 import mgcoders.uy.model.Persona;
-import mgcoders.uy.service.ActivationService;
-import mgcoders.uy.service.ActividadService;
+import mgcoders.uy.service.activation.ActivationService;
+import mgcoders.uy.service.activities.ActivityService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -24,7 +24,7 @@ public class ActivationController {
     @Inject
     ActivationService activationService;
     @Inject
-    ActividadService actividadService;
+    ActivityService activityService;
     @Inject
     private FacesContext facesContext;
 
@@ -48,7 +48,7 @@ public class ActivationController {
     public void registrarAsistencia() throws Exception {
         try {
 
-            actividadService.registrarAsistencia(asistencia);
+            activityService.registrarAsistencia(asistencia);
             facesContext.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Gracias"));
         } catch (ConstraintViolationException e) {

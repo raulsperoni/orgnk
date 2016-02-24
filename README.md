@@ -10,7 +10,12 @@ Clonar este repositorio
 
 Desde dentro del directorio del repositorio ejecutar el siguient comando:
 
+```docker-compose compile```
 ```docker-compose up```
+
+Para que quede de fondo:
+
+```docker-compose up -d```
 
 ## Run
 

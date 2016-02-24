@@ -1,5 +1,6 @@
-package mgcoders.uy.service;
+package mgcoders.uy.service.activation;
 
+import mgcoders.uy.events.ActivationEvent;
 import mgcoders.uy.model.ActivationToken;
 import mgcoders.uy.model.Persona;
 
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
 public class ActivationService {
 
     @Inject
-    Event<PersonaActivadaEvent> personaActivadaEvent;
+    Event<ActivationEvent> personaActivadaEvent;
     @Inject
     private Logger log;
     @Inject
@@ -34,7 +35,7 @@ public class ActivationService {
             if (activationToken.getExpiryDate().after(new Date()) && !activationToken.isVerified()) {
                 activationToken.setVerified(true);
                 activationToken.getPersona().setEnabled(true);
-                personaActivadaEvent.fire(new PersonaActivadaEvent(activationToken.getPersona().getId(), new Date()));
+                personaActivadaEvent.fire(new ActivationEvent(activationToken.getPersona().getId(), new Date()));
                 return activationToken.getPersona();
             } else return activationToken.getPersona();
 

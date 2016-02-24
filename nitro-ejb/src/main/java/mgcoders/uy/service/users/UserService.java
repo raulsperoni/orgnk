@@ -1,10 +1,10 @@
 package mgcoders.uy.service.users;
 
+import mgcoders.uy.discourse.DiscourseAPIService;
+import mgcoders.uy.discourse.DiscourseCreateUserResponse;
+import mgcoders.uy.discourse.DiscourseUser;
+import mgcoders.uy.events.ActivationEvent;
 import mgcoders.uy.model.Persona;
-import mgcoders.uy.service.PersonaActivadaEvent;
-import mgcoders.uy.service.discourse.DiscourseAPIService;
-import mgcoders.uy.service.discourse.DiscourseCreateUserResponse;
-import mgcoders.uy.service.discourse.DiscourseUser;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -29,7 +29,7 @@ public class UserService {
     private EntityManager em;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public DiscourseUser nuevoUsuario(@Observes(during = TransactionPhase.AFTER_SUCCESS) PersonaActivadaEvent event) {
+    public DiscourseUser nuevoUsuario(@Observes(during = TransactionPhase.AFTER_SUCCESS) ActivationEvent event) {
 
         Persona persona = em.find(Persona.class, event.getPersona_id());
         DiscourseUser nuevoUsuario = discourseAPIService.searchUser(persona.getEmail());
