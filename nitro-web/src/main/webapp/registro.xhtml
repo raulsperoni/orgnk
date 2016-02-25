@@ -39,7 +39,7 @@
                          rendered="#{!registrationController.success}">
 
 
-                    <h:form id="registro">
+                    <h:form id="registro" styleClass="form-horizontal">
 
 
                         <b:row>
@@ -97,7 +97,7 @@
                                 <b:selectOneMenu id="depto" value="#{registrationController.departamentoSeleccionado}"
                                                  renderLabel="false" tooltip="El departamento donde vivís">
                                     <f:selectItems value="#{auxController.departamentoList}" var="d"
-                                                   itemLabel="#{d.nombre}"
+                                                   itemLabel="#{d.nombre.toUpperCase()}"
                                                    itemValue="#{d.id}"/>
                                     <f:ajax listener="#{registrationController.cambioDepartamento}" event="change"
                                             render="localidadPais"
@@ -110,7 +110,7 @@
                                     <b:selectOneMenu id="loc" value="#{registrationController.localidadSeleccionada}"
                                                      renderLabel="false" tooltip="Tú localidad">
                                         <f:selectItems value="#{registrationController.localidades}" var="l"
-                                                       itemLabel="#{l.nombre}"
+                                                       itemLabel="#{l.nombre.toUpperCase()}"
                                                        itemValue="#{l.id}"/>
                                     </b:selectOneMenu>
                                 </b:column>
@@ -119,7 +119,7 @@
                                     <b:selectOneMenu id="pais" value="#{registrationController.paisSeleccionado}"
                                                      renderLabel="false" tooltip="El país donde vivís">
                                         <f:selectItems value="#{auxController.paisList}" var="p"
-                                                       itemLabel="#{p.nombre}"
+                                                       itemLabel="#{p.nombre.toUpperCase()}"
                                                        itemValue="#{p.id}"/>
                                     </b:selectOneMenu>
                                 </b:column>

@@ -100,7 +100,7 @@ public class RegistrationController implements Serializable {
     public void cambioDepartamento(AjaxBehaviorEvent event) {
         exterior = (departamentoSeleccionado == 20);
         localidades = auxController.getLocalidades(departamentoSeleccionado);
-        paisSeleccionado = departamentoSeleccionado == 1 ? 229 : 0;
+        paisSeleccionado = departamentoSeleccionado == 20 ? 0 : 229;
         System.out.println("Depto: " + departamentoSeleccionado + " Loc: " + localidadSeleccionada + " Pais: " + paisSeleccionado);
     }
 
