@@ -57,14 +57,14 @@ public class NotificacionService {
         String cuerpo = "<div>Gracias " + persona.getNombre() + "!\n" +
                 "<div></div>\n" +
                 "Te registraste en correctamente el Padr&oacute;n de Casa Grande.\n" +
-                "<div>Para poder verificar tu notifications, por favor haz click en el siguiente enlace:</div>\n" +
+                "<div>Para poder verificar tu email, por favor haz click en el siguiente enlace:</div>\n" +
                 "<div></div>\n" +
                 "<div><a href=\"" + confirmationUrl + "\">Verificar Email</a></div>\n" +
                 "</div>\n" +
                 "<div></div>";
 
         email.setHtml(cuerpo);
-        email.setSubject("Padr&oacute;n Casa Grande, activaci&oacute;n");
+        email.setSubject("Padrón Casa Grande, activación");
 
         try {
             SendGrid.Response response = sendgrid.send(email);

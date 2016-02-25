@@ -29,7 +29,7 @@ public class UserService {
     private EntityManager em;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public DiscourseUser nuevoUsuario(@Observes(during = TransactionPhase.AFTER_SUCCESS) ActivationEvent event) {
+    public void nuevoUsuario(@Observes(during = TransactionPhase.AFTER_SUCCESS) ActivationEvent event) {
 
         Persona persona = em.find(Persona.class, event.getPersona_id());
         DiscourseUser nuevoUsuario = discourseAPIService.searchUser(persona.getEmail());
@@ -57,8 +57,11 @@ public class UserService {
         }
         em.persist(nuevoUsuario);
         log.info("Usuario creado en el sistema: " + nuevoUsuario.toString());
-        return nuevoUsuario;
-
     }
+
+    public DiscourseUser getDiscourseUser(long persona_id) {
+        return em.find(DiscourseUser.class, persona_id);
+    }
+
 
 }

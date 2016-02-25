@@ -38,16 +38,17 @@
              </b:dropMenu>
          </b:navbarLinks>-->
     </b:navBar>
-    <b:container>
+    <b:container fluid="true">
 
-
-
-
+        <b:row>
+            <b:column colMd="10" offsetMd="1">
 
                 <b:messages id="messages" showDetail="false" autoUpdate="true" closable="true" showSummary="true"/>
-                <ui:insert name="content">
-                    [Template content will be inserted here]
-                </ui:insert>
+            </b:column>
+        </b:row>
+        <ui:insert name="content">
+            [Template content will be inserted here]
+        </ui:insert>
 
     </b:container>
 

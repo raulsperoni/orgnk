@@ -13,10 +13,18 @@
 
                     template="/WEB-INF/templates/tempboo.xhtml">
         <ui:define name="content">
-            <b:panel title="Registro Correcto">
+            <b:panelGrid id="regpanel" colSpans="1,10,1">
+
+                <b:column colMd="2"></b:column>
+                <b:panel title="Registro Correcto" look="success" collapsible="false">
                 <h:outputLabel value="#{activationController.persona.nombre}, te damos la bienvenida a Casa Grande."/>
                 <h:panelGroup layout="block" rendered="#{activationController.valid}">
-                    <p>Tu correo electrónico fue correctamente validado y el registro fue correcto.</p>
+                    <p style="font-weight: 600">Tu correo electrónico fue correctamente validado y el registro fue correcto.</p>
+
+                    <p style="font-weight: 600">Podrás acceder a nuestro espacio de discusión online: <a
+                            href="http://agoracasagrande.uy">Ágora Casa Grande</a> con tu email y contraseña elegida. Si previamente accediste al Ágora deberás seguir usando la misma contraseña.
+                    </p>
+
 
                     <h:panelGroup rendered="#{ultimaActividad != null}">
 
@@ -75,6 +83,7 @@
                     </h:form>
                 </h:panelGroup>
             </b:panel>
+            </b:panelGrid>
 
         </ui:define>
     </ui:composition>

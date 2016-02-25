@@ -46,7 +46,8 @@ public class RegistrationController implements Serializable {
     private int localidadSeleccionada;
     private String frecuenciaSeleccionada;
     private List<Localidad> localidades;
-    private boolean success;
+    private boolean success = false;
+    private String passwordConfirmation;
 
 
     @Produces
@@ -62,6 +63,8 @@ public class RegistrationController implements Serializable {
     @PostConstruct
     public void initNewMember() {
         nuevaPersona = new Persona();
+        departamentoSeleccionado = 1;
+        localidadSeleccionada = 1;
     }
 
     public void registrar() throws Exception {
@@ -70,13 +73,17 @@ public class RegistrationController implements Serializable {
             if (frecuenciaSeleccionada != null) {
                 nuevaPersona.setFrecuencia_aporte(Frecuencia.valueOf(frecuenciaSeleccionada));
             }
-
-            personaService.registrar(nuevaPersona);
-            sessionController.setPersonaConectada(nuevaPersona);
-            facesContext.addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Le hemos enviado un correo para verificar su notifications."));
-            initNewMember();
-            success = true;
+            if (nuevaPersona.getPassword().equals(passwordConfirmation)) {
+                personaService.registrar(nuevaPersona);
+                sessionController.setPersonaConectada(nuevaPersona);
+                facesContext.addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Le hemos enviado un correo para verificar su email."));
+                initNewMember();
+                success = true;
+            } else {
+                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "Las contraseñas no coinciden");
+                facesContext.addMessage(null, m);
+            }
         } catch (ConstraintViolationException e) {
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "La cédula o el notifications ya existen");
             facesContext.addMessage(null, m);
@@ -92,6 +99,13 @@ public class RegistrationController implements Serializable {
         System.out.println("cambio depto");
     }
 
+    public String getPasswordConfirmation() {
+        return passwordConfirmation;
+    }
+
+    public void setPasswordConfirmation(String passwordConfirmation) {
+        this.passwordConfirmation = passwordConfirmation;
+    }
 
     public int getDepartamentoSeleccionado() {
         return departamentoSeleccionado;

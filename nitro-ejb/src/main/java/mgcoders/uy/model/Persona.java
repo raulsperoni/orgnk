@@ -1,7 +1,6 @@
 package mgcoders.uy.model;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,9 +20,11 @@ public class Persona implements Serializable {
     private long id;
 
     private boolean enabled = false;
+    @Pattern(regexp = ".{8,}", message = "La contraseña debe ser de más de 8 caracteres")
     private String password;
 
-    @NotBlank(message = "El nombre es obligatorio")
+    @NotNull
+    @Pattern(regexp = ".+", message = "El nombre es obligatorio")
     private String nombre;
     @Pattern(regexp = "^(([0-9]){1}.)?([0-9]){3}.([0-9]){3}-([0-9]){1}$", message = "El formato de la cédula debe ser: 1.111.111-1")
     @Column(unique = true)
@@ -37,7 +38,7 @@ public class Persona implements Serializable {
     private String telefono_1;
     @Pattern(regexp = "^(([0-9]{3})?([0-9]){9})?$", message = "El formato del teléfono debe ser 59899111111")
     private String telefono_2;
-    @NotBlank(message = "Necesitamos un notifications para contactarte")
+    @Pattern(regexp = ".+", message = "Necesitamos un email para contactarte")
     @Email(message = "El mail es incorrecto")
     @Column(unique = true)
     private String email;

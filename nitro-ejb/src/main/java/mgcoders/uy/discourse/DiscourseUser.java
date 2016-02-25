@@ -117,7 +117,7 @@ public class DiscourseUser implements Serializable {
         return "DiscourseUser{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", notifications='" + email + '\'' +
+                ", email='" + email + '\'' +
                 ", active=" + active +
                 ", approved=" + approved +
                 '}';
