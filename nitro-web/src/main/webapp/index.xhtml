@@ -24,34 +24,79 @@
                     xmlns:ui="http://java.sun.com/jsf/facelets"
                     xmlns:h="http://java.sun.com/jsf/html"
                     xmlns:b="http://bootsfaces.net/ui"
-
                     template="/WEB-INF/templates/tempboo.xhtml">
+
+        <ui:define name="title">Padrón Casa Grande</ui:define>
+
         <ui:define name="content">
 
 
-    <b:container>
-        <b:panel id="panel1" title="Somos y estamos" collapsed="false">
-            Somos quienes hace dos años nos animamos a abrir otras puertas y ventanas al Frente Amplio para que pudieran entrar las caras nuevas y el entusiasmo. Para revitalizar las ideas y los sueños. Somos un poco irreverentes. Por eso desafiamos el mando vertical y fuimos todos los frenteamplistas quienes decidimos sobre la candidatura a la Presidencia.
-            Nuestras listas fueron paritarias y la mayoría encabezadas por mujeres. Creemos que la renovación del Frente Amplio pasa por incorporar nuevos liderazgos, porque las generaciones debatan y construyan juntas, porque los jóvenes y las mujeres puedan tomar la palabra y estén integrados a las decisiones. Pero pasa también por reconocernos en las ideas de libertad, igualdad, justicia, democracia, que caracterizaron siempre a nuestra fuerza política. Y pasa por recuperar aquello que desde el origen hizo que los frenteamplistas nos enorgulleciéramos: el compromiso ético, la militancia, el compañerismo, la solidaridad.
-            Somos idealistas. Sí. Y perseverantes en la defensa de los derechos humanos y la no discriminación. Por eso condenamos el racismo, el sexismo y la homofobia. Porque creemos en un país capaz de garantizar todos los derechos para todas las personas y eso incluye, claro que sí, el derecho de todas y todos los uruguayos a ejercer su voto donde quiera que estén. Y a que quienes viven en el interior del país tengan las mismas posibilidades de ser escuchados y de participar en los debates y las decisiones públicas que quienes lo hacen en Montevideo.
-            Sostenemos que un país rico no es el que más tiene sino el que mejor distribuye. Defendemos el uso responsable de los bienes comunes necesarios para la sustentabilidad de la vida y queremos romper la lógica del crecimiento económico ilimitado en favor de la justicia social y ecológica.
-            Somos defensores acérrimos del 6% del PBI para la educación y de la reducción del presupuesto de las Fuerzas Armadas. Y lo seguimos sosteniendo.
-            Estamos empeñados, estamos empeñadas, en una nueva forma de hacer política donde la transparencia en la toma de decisiones y el derecho a la información, sean tan centrales como el buen trato y la confianza en un movimiento de iguales. En traer los temas de la periferia al centro del debate y en incluir, debatir y construir a lo largo y ancho del país.
-            Somos Casa Grande y porque no hay casa más grande que el Frente Amplio, estamos con el.
-            <h:button title="Quiero ser parte" look="primary"/>
-        </b:panel>
-        <b:well title="Padrón de Casa Grande">
+            <b:container fluid="true">
+                <b:row>
+                    <b:column colMd="7">
+                        <!--<b:well id="panel1" title="Somos y estamos" collapsed="false">-->
+                        <blockquote style="font-size: 14px">
+                            <h3>Somos y estamos</h3>
 
-            Las personas pertenecerán a un padrón único, oficial, central y actualizado, que será protegido de acuerdo a la ley de protección de datos personales (Ley 18331). Los integrantes de Casa Grande deberán estar adheridos al Frente Amplio y respetar los Estatutos vigentes.
 
-            El padrón será abierto a toda la ciudadanía que se sienta parte de Casa Grande. Las personas podrán participar inscribiéndose en un formulario disponible de forma virtual y presencial. Desde que se participa por primera vez se pasa a ser miembro de la "ciudadanía" Casa Grande y se asumen los derechos y obligaciones concomitantes.
-        </b:well>
+                            <p>Somos quienes hace dos años nos animamos a abrir otras puertas y ventanas al
+                                <strong>Frente Amplio</strong> para que pudieran entrar las caras nuevas y el entusiasmo. Para revitalizar las ideas y los sueños. Somos un poco irreverentes. Por eso desafiamos el mando vertical y fuimos todos los frenteamplistas quienes decidimos sobre la candidatura a la Presidencia.
+                            </p>
 
-        <b:panel title="Términos y Condiciones del Registro" look="success">
-            Las personas pertenecerán a un padrón único, oficial, central y actualizado, que será protegido de acuerdo a la ley de protección de datos personales (Ley 18331). Los integrantes de Casa Grande deberán estar adheridos al Frente Amplio y respetar los Estatutos vigentes.
+                            <p>
+                                Nuestras listas fueron paritarias y la mayoría encabezadas por mujeres. Creemos que la renovación del Frente Amplio pasa por incorporar nuevos liderazgos, porque las generaciones debatan y construyan juntas, porque los jóvenes y las mujeres puedan tomar la palabra y estén integrados a las decisiones. Pero pasa también por reconocernos en las ideas de
+                                <strong>libertad, igualdad, justicia, democracia</strong>, que caracterizaron siempre a nuestra fuerza política. Y pasa por recuperar aquello que desde el origen hizo que los frenteamplistas nos enorgulleciéramos: el compromiso ético, la militancia, el compañerismo, la solidaridad.
+                            </p>
 
-            El padrón será abierto a toda la ciudadanía que se sienta parte de Casa Grande. Las personas podrán participar inscribiéndose en un formulario disponible de forma virtual y presencial. Desde que se participa por primera vez se pasa a ser miembro de la "ciudadanía" Casa Grande y se asumen los derechos y obligaciones concomitantes.
-        </b:panel> </b:container>
+                            <p>Somos idealistas. Sí. Y perseverantes en la defensa de los derechos humanos y la no discriminación. Por eso
+                                <strong>condenamos el racismo, el sexismo y la homofobia</strong>. Porque creemos en un país capaz de garantizar todos los derechos para todas las personas y eso incluye, claro que sí, el derecho de todas y todos los uruguayos a ejercer su voto donde quiera que estén. Y a que quienes viven en el interior del país tengan las mismas posibilidades de ser escuchados y de participar en los debates y las decisiones públicas que quienes lo hacen en Montevideo.
+                            </p>
+
+                            <p>Sostenemos que un país rico no es el que más tiene sino el que mejor distribuye. Defendemos el uso responsable de los bienes comunes necesarios para la sustentabilidad de la vida y queremos romper la lógica del crecimiento económico ilimitado en favor de la
+                                <strong>justicia social y ecológica</strong>.
+                            </p>
+
+                            <p>Somos defensores acérrimos del
+                                <strong>6% del PBI para la educación</strong> y de la reducción del presupuesto de las Fuerzas Armadas. Y lo seguimos sosteniendo.
+                            </p>
+
+                            <p>
+                                Estamos empeñados, estamos empeñadas, en una nueva forma de hacer política donde la
+                                <strong>transparencia en la toma de decisiones</strong> y el derecho a la información, sean tan centrales como el buen trato y la confianza en un movimiento de iguales. En traer los temas de la periferia al centro del debate y en incluir, debatir y construir a lo largo y ancho del país.
+                            </p>
+
+                            <p>Somos
+                                <strong>Casa Grande</strong> y porque no hay casa más grande que el Frente Amplio, estamos con el.
+                            </p>
+                        </blockquote>
+                        <!--  </b:well>-->
+                    </b:column>
+                    <b:column colMd="5">
+
+                        <b:panel title="Términos y Condiciones del Registro" look="success" collapsible="false">
+                            <p style="text-align: justify">Las personas pertenecerán a un padrón único, oficial, central y actualizado, que será protegido de acuerdo a la ley de protección de datos personales (Ley 18331). Los integrantes de Casa Grande deberán estar adheridos al Frente Amplio y respetar los Estatutos vigentes.
+
+                                El padrón será abierto a toda la ciudadanía que se sienta parte de Casa Grande. Las personas podrán participar inscribiéndose en un formulario disponible de forma virtual y presencial. Desde que se participa por primera vez se pasa a ser miembro de la "ciudadanía" Casa Grande y se asumen los derechos y obligaciones concomitantes.</p>
+                            <br/>
+                            <b:row>
+                                <h:form>
+                                    <b:column offsetMd="3" colMd="3" offsetSm="3" colSm="3" offsetXs="3" colXs="3">
+                                        <b:selectBooleanCheckbox caption="Acepto" ajax="true" style="font-size:16px"/>
+
+                                    </b:column>
+                                    <b:column colMd="3" colSm="3" colXs="3">
+                                        <a href="registro.xhtml" class="btn btn-primary">Ser Parte</a>
+                                    </b:column>
+                                </h:form>
+                            </b:row>
+                        </b:panel>
+                    </b:column>
+
+
+                </b:row>
+
+
+            </b:container>
 
         </ui:define>
     </ui:composition>

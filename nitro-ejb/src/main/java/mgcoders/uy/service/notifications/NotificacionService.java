@@ -56,7 +56,7 @@ public class NotificacionService {
 
         String cuerpo = "<div>Gracias " + persona.getNombre() + "!\n" +
                 "<div></div>\n" +
-                "Te registraste en correctamente el Padr&oacute;n de Casa Grande.\n" +
+                "Te registraste correctamente en el Padr&oacute;n de Casa Grande.\n" +
                 "<div>Para poder verificar tu email, por favor haz click en el siguiente enlace:</div>\n" +
                 "<div></div>\n" +
                 "<div><a href=\"" + confirmationUrl + "\">Verificar Email</a></div>\n" +

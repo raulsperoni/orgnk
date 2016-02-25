@@ -22,13 +22,17 @@
 
 <h:head/>
 <h:body>
+
+
     <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                     xmlns:ui="http://java.sun.com/jsf/facelets"
                     xmlns:f="http://java.sun.com/jsf/core"
                     xmlns:h="http://java.sun.com/jsf/html"
                     xmlns:b="http://bootsfaces.net/ui"
-
                     template="/WEB-INF/templates/tempboo.xhtml">
+
+        <ui:define name="title">Registro Padrón Casa Grande</ui:define>
+
         <ui:define name="content">
 
             <b:panelGrid id="regpanel" colSpans="1,10,1">
@@ -39,20 +43,22 @@
                          rendered="#{!registrationController.success}">
 
 
-                    <h:form id="registro" styleClass="form-horizontal">
+                    <h:form id="registro">
 
 
                         <b:row>
 
                             <b:column colMd="4" offsetMd="2">
                                 <h:outputLabel for="nombre" value="Nombre:" class="control-label"/>
-                                <b:inputText id="nombre" value="#{nuevaPersona.nombre}" tooltip="Tu nombre completo"/>
+                                <b:inputText id="nombre" value="#{nuevaPersona.nombre}" tooltip="Tu nombre completo"
+                                             placeholder="Nombre Apellido"/>
 
                             </b:column>
                             <b:column colMd="4">
                                 <h:outputLabel for="email" value="Email:"/>
                                 <b:inputText id="email" value="#{nuevaPersona.email}"
-                                             tooltip="La dirección para comunicarnos con vos"/>
+                                             tooltip="La dirección para comunicarnos con vos"
+                                             placeholder="email@ejemplo.com"/>
                             </b:column>
 
                         </b:row>
@@ -70,7 +76,8 @@
                             </b:column>
                             <b:column colMd="2">
                                 <h:outputLabel for="fecha_nac" value="Nacimiento:" tooltip="Te fecha de nacimiento"/>
-                                <b:inputText id="fecha_nac" value="#{nuevaPersona.fecha_nacimiento}">
+                                <b:inputText id="fecha_nac" value="#{nuevaPersona.fecha_nacimiento}"
+                                             placeholder="05/02/1971">
                                     <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
                                 </b:inputText>
                             </b:column>
@@ -80,12 +87,12 @@
                             <b:column colMd="4" offsetMd="2">
                                 <h:outputLabel for="tel1" value="Teléfono 1:"/>
                                 <b:inputText id="tel1" value="#{nuevaPersona.telefono_1}"
-                                             tooltip="Un teléfono para contactarte" placeholder="59899887766"/>
+                                             tooltip="Un teléfono para contactarte" placeholder="099999999"/>
                             </b:column>
                             <b:column colMd="4">
                                 <h:outputLabel for="tel2" value="Teléfono 2:"/>
                                 <b:inputText id="tel2" value="#{nuevaPersona.telefono_2}"
-                                             tooltip="Opcionalmente nos podes dar otro número"/>
+                                             tooltip="Opcionalmente nos podes dar otro número" placeholder="44444444"/>
                             </b:column>
                         </b:row>
 
@@ -130,11 +137,12 @@
 
                             <b:column colMd="4" offsetMd="2">
                                 <h:outputLabel for="barrio" value="Barrio:"/>
-                                <b:inputText id="barrio" value="#{nuevaPersona.barrio}" tooltip="Tú barrio"/>
+                                <b:inputText id="barrio" value="#{nuevaPersona.barrio}" tooltip="Tú barrio"
+                                             placeholder="Barrio"/>
                             </b:column>
                             <b:column colMd="4">
                                 <h:outputLabel for="dir" value="Dirección:"/>
-                                <b:inputText id="dir" value="#{nuevaPersona.direccion}"/>
+                                <b:inputText id="dir" value="#{nuevaPersona.direccion}" placeholder="Calle, Número"/>
                             </b:column>
                         </b:row>
 
@@ -143,6 +151,7 @@
                             <b:column colMd="4" offsetMd="2">
                                 <h:outputLabel for="intereses" value="Temas de interés:"/>
                                 <b:inputTextarea id="intereses" value="#{nuevaPersona.temas_interes}" rows="3"
+                                                 placeholder="DDHH, Medio Ambiente, etc"
                                                  tooltip="Contános que temas te interesan"/>
                             </b:column>
                             <b:column colMd="4">

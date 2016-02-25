@@ -23,9 +23,9 @@
         http://xmlns.jcp.org/xml/ns/javaee
         http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
-    <lifecycle>
+    <!--<lifecycle>
         <phase-listener>mgcoders.uy.util.LifeCycleListener</phase-listener>
-    </lifecycle>
+    </lifecycle>-->
 
     <application>
         <resource-handler>org.omnifaces.resourcehandler.CombinedResourceHandler</resource-handler>

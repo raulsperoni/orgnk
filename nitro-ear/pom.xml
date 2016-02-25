@@ -74,6 +74,13 @@
                         have any modules (EJB-JARs and WARs) use them -->
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
                     <fileNameMapping>no-version</fileNameMapping>
+                    <modules>
+                        <webModule>
+                            <groupId>mgcoders.uy</groupId>
+                            <artifactId>nitro-web</artifactId>
+                            <contextRoot>/padron</contextRoot>
+                        </webModule>
+                    </modules>
                 </configuration>
             </plugin>
             <!-- The WildFly plugin deploys your ear to a local WildFly container -->
