@@ -85,7 +85,7 @@ public class DiscourseAPIService {
         Form formData = new Form();
         formData.add("username", user.getUsername());
         formData.add("name", user.getName());
-        formData.add("password", "lalalalala");
+        formData.add("password", user.getPersona().getPassword());
         formData.add("notifications", user.getEmail());
         formData.add("active", "true");
         ClientResponse response = webResource.path("users").queryParams(params).type(MediaType.APPLICATION_FORM_URLENCODED).accept(MediaType.APPLICATION_JSON_TYPE).post(ClientResponse.class, formData);
@@ -95,8 +95,9 @@ public class DiscourseAPIService {
         log.info("Respuesta crear usuario: " + output);
         Gson gson = new Gson();
         DiscourseCreateUserResponse resp = gson.fromJson(output, DiscourseCreateUserResponse.class);
-        if (resp.isSuccess()) log.info(resp.getMessage());
-        else log.severe(resp.getMessage());
+        if (resp != null && resp.isSuccess()) log.info(resp.getMessage());
+        else if (resp != null) log.severe(resp.getMessage());
+        else log.severe("Error desconocido con discourse");
         return resp;
     }
 

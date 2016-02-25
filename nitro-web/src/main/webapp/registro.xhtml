@@ -60,11 +60,13 @@
 
                             <b:column colMd="3" offsetMd="2">
                                 <h:outputLabel for="ci" value="CI:"/>
-                                <b:inputText id="ci" value="#{nuevaPersona.ci}" tooltip="El número de tu cédula"/>
+                                <b:inputText id="ci" value="#{nuevaPersona.ci}" tooltip="El número de tu cédula"
+                                             placeholder="1.111.111-3"/>
                             </b:column>
                             <b:column colMd="3">
                                 <h:outputLabel for="cc" value="CC:"/>
-                                <b:inputText id="cc" value="#{nuevaPersona.cc}" tooltip="El número de tu credencial"/>
+                                <b:inputText id="cc" value="#{nuevaPersona.cc}" tooltip="El número de tu credencial"
+                                             placeholder="KAA34567"/>
                             </b:column>
                             <b:column colMd="2">
                                 <h:outputLabel for="fecha_nac" value="Nacimiento:" tooltip="Te fecha de nacimiento"/>
@@ -78,7 +80,7 @@
                             <b:column colMd="4" offsetMd="2">
                                 <h:outputLabel for="tel1" value="Teléfono 1:"/>
                                 <b:inputText id="tel1" value="#{nuevaPersona.telefono_1}"
-                                             tooltip="Un teléfono para contactarte"/>
+                                             tooltip="Un teléfono para contactarte" placeholder="59899887766"/>
                             </b:column>
                             <b:column colMd="4">
                                 <h:outputLabel for="tel2" value="Teléfono 2:"/>

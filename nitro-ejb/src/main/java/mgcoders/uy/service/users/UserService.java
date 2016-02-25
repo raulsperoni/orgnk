@@ -38,7 +38,7 @@ public class UserService {
             nuevoUsuario = new DiscourseUser(persona);
             log.info("Usuario no existe creando en discourse... ");
             DiscourseCreateUserResponse response = discourseAPIService.createUser(nuevoUsuario);
-            if (response.isSuccess()) {
+            if (response != null && response.isSuccess()) {
                 nuevoUsuario.setId(response.getUser_id());
                 log.info("Usuario creado en el sistema: " + nuevoUsuario.toString());
                 if (discourseAPIService.aprobarUsuario(nuevoUsuario)) {
@@ -47,7 +47,7 @@ public class UserService {
                 }
             } else {
                 nuevoUsuario.setError(true);
-                nuevoUsuario.setErrorMessage(response.getMessage());
+                nuevoUsuario.setErrorMessage(response != null ? response.getMessage() : "Error desconocido");
                 log.severe("No se pudo crear usuario en discourse: " + nuevoUsuario.toString());
             }
         } else {
