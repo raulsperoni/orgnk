@@ -37,7 +37,6 @@ public class RegistrationController implements Serializable {
     @Inject
     private AuxController auxController;
 
-
     @Inject
     private SessionController sessionController;
 
@@ -48,6 +47,8 @@ public class RegistrationController implements Serializable {
     private List<Localidad> localidades;
     private boolean success = false;
     private String passwordConfirmation;
+    private boolean exterior = false;
+    private int paisSeleccionado;
 
 
     @Produces
@@ -64,12 +65,15 @@ public class RegistrationController implements Serializable {
     public void initNewMember() {
         nuevaPersona = new Persona();
         departamentoSeleccionado = 1;
+        cambioDepartamento(null);
         localidadSeleccionada = 1;
     }
 
     public void registrar() throws Exception {
         try {
+            nuevaPersona.setDepartamento(auxController.getDepartamento(departamentoSeleccionado));
             nuevaPersona.setLocalidad(auxController.getLocalidad(localidadSeleccionada));
+            nuevaPersona.setPais(auxController.getPais(paisSeleccionado));
             if (frecuenciaSeleccionada != null) {
                 nuevaPersona.setFrecuencia_aporte(Frecuencia.valueOf(frecuenciaSeleccionada));
             }
@@ -94,9 +98,10 @@ public class RegistrationController implements Serializable {
     }
 
     public void cambioDepartamento(AjaxBehaviorEvent event) {
+        exterior = (departamentoSeleccionado == 20);
         localidades = auxController.getLocalidades(departamentoSeleccionado);
-        nuevaPersona.setDepartamento(auxController.getDepartamento(departamentoSeleccionado));
-        System.out.println("cambio depto");
+        paisSeleccionado = departamentoSeleccionado == 1 ? 229 : 0;
+        System.out.println("Depto: " + departamentoSeleccionado + " Loc: " + localidadSeleccionada + " Pais: " + paisSeleccionado);
     }
 
     public String getPasswordConfirmation() {
@@ -164,5 +169,21 @@ public class RegistrationController implements Serializable {
 
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    public boolean isExterior() {
+        return exterior;
+    }
+
+    public void setExterior(boolean exterior) {
+        this.exterior = exterior;
+    }
+
+    public int getPaisSeleccionado() {
+        return paisSeleccionado;
+    }
+
+    public void setPaisSeleccionado(int paisSeleccionado) {
+        this.paisSeleccionado = paisSeleccionado;
     }
 }

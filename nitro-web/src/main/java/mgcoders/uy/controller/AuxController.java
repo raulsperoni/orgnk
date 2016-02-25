@@ -1,9 +1,6 @@
 package mgcoders.uy.controller;
 
-import mgcoders.uy.model.Actividad;
-import mgcoders.uy.model.Departamento;
-import mgcoders.uy.model.Frecuencia;
-import mgcoders.uy.model.Localidad;
+import mgcoders.uy.model.*;
 import mgcoders.uy.service.common.AuxService;
 
 import javax.annotation.PostConstruct;
@@ -25,6 +22,7 @@ public class AuxController {
 
 
     private List<Departamento> departamentoList;
+    private List<Pais> paisList;
     private Map<Integer, List<Localidad>> localidadMap = new HashMap<>();
     private Map<Integer, Departamento> departamentoMap = new HashMap<>();
     private Map<Integer, Localidad> localidadIndividualMap = new HashMap<>();
@@ -43,6 +41,7 @@ public class AuxController {
             departamentoMap.put(depto.getId(), depto);
         }
         actividadList = auxService.getActividades();
+        paisList = auxService.getPaises();
 
     }
 
@@ -80,7 +79,19 @@ public class AuxController {
         return localidadIndividualMap.get(idLocalidad);
     }
 
+    public Pais getPais(int idPais) {
+        return paisList.get(idPais);
+    }
+
     public List<Localidad> getLocalidades(int idDepartamento) {
         return localidadMap.get(idDepartamento);
+    }
+
+    public List<Pais> getPaisList() {
+        return paisList;
+    }
+
+    public void setPaisList(List<Pais> paisList) {
+        this.paisList = paisList;
     }
 }

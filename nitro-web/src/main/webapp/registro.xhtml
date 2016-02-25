@@ -100,19 +100,30 @@
                                                    itemLabel="#{d.nombre}"
                                                    itemValue="#{d.id}"/>
                                     <f:ajax listener="#{registrationController.cambioDepartamento}" event="change"
-                                            render="loc"
-                                            execute="@this"/>
+                                            render="localidadPais"
+                                            execute="@this localidadPais"/>
                                 </b:selectOneMenu>
                             </b:column>
-                            <b:column colMd="4">
-                                <h:outputLabel for="loc" value="Localidad:"/>
-                                <b:selectOneMenu id="loc" value="#{registrationController.localidadSeleccionada}"
-                                                 renderLabel="false" tooltip="Tú localidad">
-                                    <f:selectItems value="#{registrationController.localidades}" var="l"
-                                                   itemLabel="#{l.nombre}"
-                                                   itemValue="#{l.id}"/>
-                                </b:selectOneMenu>
-                            </b:column>
+                            <h:panelGroup id="localidadPais">
+                                <b:column colMd="4" rendered="#{!registrationController.exterior}">
+                                    <h:outputLabel for="loc" value="Localidad/Municipio:"/>
+                                    <b:selectOneMenu id="loc" value="#{registrationController.localidadSeleccionada}"
+                                                     renderLabel="false" tooltip="Tú localidad">
+                                        <f:selectItems value="#{registrationController.localidades}" var="l"
+                                                       itemLabel="#{l.nombre}"
+                                                       itemValue="#{l.id}"/>
+                                    </b:selectOneMenu>
+                                </b:column>
+                                <b:column colMd="4" rendered="#{registrationController.exterior}">
+                                    <h:outputLabel for="pais" value="País:"/>
+                                    <b:selectOneMenu id="pais" value="#{registrationController.paisSeleccionado}"
+                                                     renderLabel="false" tooltip="El país donde vivís">
+                                        <f:selectItems value="#{auxController.paisList}" var="p"
+                                                       itemLabel="#{p.nombre}"
+                                                       itemValue="#{p.id}"/>
+                                    </b:selectOneMenu>
+                                </b:column>
+                            </h:panelGroup>
                         </b:row>
 
                         <b:row>
@@ -191,7 +202,7 @@
                                 <b:commandButton action="#{registrationController.registrar}" ajax="true"
                                                  update="@form messages regpanel"
                                                  value="Registrar" look="primary" styleClass="pull-right" span="20px"
-                                />
+                                        />
 
                             </b:column>
 

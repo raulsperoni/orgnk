@@ -51,6 +51,9 @@ public class Persona implements Serializable {
     private Localidad localidad;
     private String barrio;
 
+    @ManyToOne
+    private Pais pais;
+
     private String temas_interes;
 
     @NotNull(message = "Debe elegir un monto")
@@ -189,6 +192,14 @@ public class Persona implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
     }
 
     @Override

@@ -40,4 +40,5 @@ public class WebResources {
         return FacesContext.getCurrentInstance();
     }
 
+
 }

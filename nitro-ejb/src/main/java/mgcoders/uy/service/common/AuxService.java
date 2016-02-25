@@ -3,6 +3,7 @@ package mgcoders.uy.service.common;
 import mgcoders.uy.model.Actividad;
 import mgcoders.uy.model.Departamento;
 import mgcoders.uy.model.Localidad;
+import mgcoders.uy.model.Pais;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -38,5 +39,10 @@ public class AuxService {
     public List<Actividad> getActividades() {
         Query query = em.createQuery("SELECT a FROM Actividad a");
         return (List<Actividad>) query.getResultList();
+    }
+
+    public List<Pais> getPaises() {
+        Query query = em.createQuery("SELECT p FROM Pais p");
+        return (List<Pais>) query.getResultList();
     }
 }
