@@ -5,6 +5,7 @@ import mgcoders.uy.discourse.DiscourseCreateUserResponse;
 import mgcoders.uy.discourse.DiscourseUser;
 import mgcoders.uy.events.ActivationEvent;
 import mgcoders.uy.model.Persona;
+import mgcoders.uy.util.Util;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -57,6 +58,8 @@ public class UserService {
         }
         em.persist(nuevoUsuario);
         log.info("Usuario creado en el sistema: " + nuevoUsuario.toString());
+        persona.setPassword(Util.obtenerHashPassword(persona.getId(), persona.getPassword()));
+        log.info("Password hasheado, reever esto, SECURITY HOLE");
     }
 
     public DiscourseUser getDiscourseUser(long persona_id) {

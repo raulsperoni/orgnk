@@ -45,4 +45,6 @@ public class AuxService {
         Query query = em.createQuery("SELECT p FROM Pais p");
         return (List<Pais>) query.getResultList();
     }
+
+
 }
