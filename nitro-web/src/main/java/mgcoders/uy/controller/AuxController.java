@@ -22,10 +22,11 @@ public class AuxController {
 
 
     private List<Departamento> departamentoList;
-    private List<Pais> paisList;
     private Map<Integer, List<Localidad>> localidadMap = new HashMap<>();
     private Map<Integer, Departamento> departamentoMap = new HashMap<>();
     private Map<Integer, Localidad> localidadIndividualMap = new HashMap<>();
+    private Map<Integer, Pais> paisMap = new HashMap<>();
+    private List<Pais> paisList;
     private Integer[] montos = {10, 20, 50, 100, 200, 500};
     private List<Actividad> actividadList;
 
@@ -42,6 +43,10 @@ public class AuxController {
         }
         actividadList = auxService.getActividades();
         paisList = auxService.getPaises();
+        for (Pais pais : paisList) {
+            paisMap.put(pais.getId(), pais);
+        }
+
 
     }
 
@@ -80,11 +85,7 @@ public class AuxController {
     }
 
     public Pais getPais(int idPais) {
-        return paisList.get(idPais);
-    }
-
-    public List<Localidad> getLocalidades(int idDepartamento) {
-        return localidadMap.get(idDepartamento);
+        return paisMap.get(idPais);
     }
 
     public List<Pais> getPaisList() {
@@ -93,5 +94,9 @@ public class AuxController {
 
     public void setPaisList(List<Pais> paisList) {
         this.paisList = paisList;
+    }
+
+    public List<Localidad> getLocalidades(int idDepartamento) {
+        return localidadMap.get(idDepartamento);
     }
 }

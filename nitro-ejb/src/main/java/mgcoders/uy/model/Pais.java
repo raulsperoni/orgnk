@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Pais implements Serializable {
 
     @Id
-    private long id;
+    private int id;
 
     private String iso;
 
@@ -33,11 +33,11 @@ public class Pais implements Serializable {
         this.iso = iso;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 }
