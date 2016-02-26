@@ -101,6 +101,32 @@ public class DiscourseAPIService {
         return resp;
     }
 
+    public boolean activarUsuario(DiscourseUser user) {
+
+        ClientConfig config = new DefaultClientConfig();
+        Client client = Client.create(config);
+        WebResource service = client.resource(UriBuilder.fromUri(DISCOURSE_API_HOST).build());
+        MultivaluedMap<String, String> params = new MultivaluedMapImpl();
+        params.add("api_key", DISCOURSE_API_KEY);
+        params.add("api_username", DISCOURSE_API_USER);
+        ClientResponse response = service.path("admin/users").path(String.valueOf(user.getId())).path("activate.json").queryParams(params).accept(MediaType.APPLICATION_JSON).put(ClientResponse.class);
+        log.info("Respuesta activar usuario: " + response.getStatus());
+        return response.getStatus() == 200;
+    }
+
+    public boolean desactivarUsuario(DiscourseUser user) {
+
+        ClientConfig config = new DefaultClientConfig();
+        Client client = Client.create(config);
+        WebResource service = client.resource(UriBuilder.fromUri(DISCOURSE_API_HOST).build());
+        MultivaluedMap<String, String> params = new MultivaluedMapImpl();
+        params.add("api_key", DISCOURSE_API_KEY);
+        params.add("api_username", DISCOURSE_API_USER);
+        ClientResponse response = service.path("admin/users").path(String.valueOf(user.getId())).path("deactivate.json").queryParams(params).accept(MediaType.APPLICATION_JSON).put(ClientResponse.class);
+        log.info("Respuesta activar usuario: " + response.getStatus());
+        return response.getStatus() == 200;
+    }
+
 
     public boolean aprobarUsuario(DiscourseUser user) {
 

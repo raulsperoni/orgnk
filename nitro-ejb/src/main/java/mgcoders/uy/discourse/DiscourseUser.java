@@ -115,11 +115,15 @@ public class DiscourseUser implements Serializable {
     @Override
     public String toString() {
         return "DiscourseUser{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", active=" + active +
+                "errorMessage='" + errorMessage + '\'' +
+                ", error=" + error +
+                ", name='" + name + '\'' +
                 ", approved=" + approved +
+                ", active=" + active +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", id=" + id +
+                ", persona_id=" + persona_id +
                 '}';
     }
 }

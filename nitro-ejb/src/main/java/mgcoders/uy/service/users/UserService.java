@@ -41,15 +41,22 @@ public class UserService {
             DiscourseCreateUserResponse response = discourseAPIService.createUser(nuevoUsuario);
             if (response != null && response.isSuccess()) {
                 nuevoUsuario.setId(response.getUser_id());
-                log.info("Usuario creado en el sistema: " + nuevoUsuario.toString());
+                log.info("Usuario creado en discourse: " + nuevoUsuario.getId());
+                if (discourseAPIService.desactivarUsuario(nuevoUsuario) && discourseAPIService.activarUsuario(nuevoUsuario)) {
+                    nuevoUsuario.setActive(true);
+                    log.info("Usuario activo en discourse: " + nuevoUsuario.getId());
+                } else {
+                    nuevoUsuario.setActive(false);
+                    log.info("Usuario no activo en discourse: " + nuevoUsuario.getId());
+                }
                 if (discourseAPIService.aprobarUsuario(nuevoUsuario)) {
                     nuevoUsuario.setApproved(true);
-                    log.info("Usuario aprobado en discourse: " + nuevoUsuario.toString());
+                    log.info("Usuario aprobado en discourse: " + nuevoUsuario.getId());
                 }
             } else {
                 nuevoUsuario.setError(true);
                 nuevoUsuario.setErrorMessage(response != null ? response.getMessage() : "Error desconocido");
-                log.severe("No se pudo crear usuario en discourse: " + nuevoUsuario.toString());
+                log.severe("No se pudo crear usuario en discourse: " + nuevoUsuario.getId());
             }
         } else {
             nuevoUsuario.setPersona(persona);
