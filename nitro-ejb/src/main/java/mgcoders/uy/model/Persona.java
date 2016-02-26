@@ -34,9 +34,9 @@ public class Persona implements Serializable {
     @NotNull(message = "La fecha de nacimiento no puede estar vacía")
     @Past(message = "La fecha debe ser anterior a hoy")
     private Date fecha_nacimiento;
-    @Pattern(regexp = "^((([0-9]{3})|0)([0-9]){8})|((4|2)[0-9]{7})$", message = "El formato del teléfono debe ser 59899111111")
+    @Pattern(regexp = "^((([0-9]{3})|0)([0-9]){8})|((4|2)[0-9]{7})$", message = "El formato del teléfono debe ser 099999999 o 59899111111")
     private String telefono_1;
-    @Pattern(regexp = "^((([0-9]{3})|0)([0-9]){8})|((4|2)[0-9]{7})$", message = "El formato del teléfono debe ser 59899111111")
+    @Pattern(regexp = "^(((([0-9]{3})|0)([0-9]){8})|((4|2)[0-9]{7}))?$", message = "El formato del teléfono debe ser 44444444 o 22222222")
     private String telefono_2;
     @Pattern(regexp = ".+", message = "Necesitamos un email para contactarte")
     @Email(message = "El mail es incorrecto")

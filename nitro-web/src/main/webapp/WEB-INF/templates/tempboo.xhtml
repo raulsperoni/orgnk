@@ -27,7 +27,8 @@
     <link rel="shortcut icon" href="/img/favicon.ico"/>
 </h:head>
 <h:body>
-    <b:navBar brandImg="resources/gfx/cg.png" fluid="true" brandAlign="center" style="height:22px;">
+    <b:navBar brandImg="resources/gfx/cg.png" fluid="true" brandAlign="center" style="height:22px;"
+              brandHref="index.jsf">
         <b:navbarLinks>
             <b:navLink value="Casa Grande" href="http://constanza.com.uy"></b:navLink>
             <b:navLink value="Ágora" href="http://agoracasagrande.uy"></b:navLink>
@@ -48,7 +49,8 @@
         <b:row>
             <b:column colMd="10" offsetMd="1">
 
-                <b:messages id="messages" showDetail="false" autoUpdate="true" closable="true" showSummary="true"/>
+                <b:messages id="messages" showDetail="false" autoUpdate="true" closable="true" showSummary="true"
+                            globalOnly="true"/>
             </b:column>
         </b:row>
         <ui:insert name="content">

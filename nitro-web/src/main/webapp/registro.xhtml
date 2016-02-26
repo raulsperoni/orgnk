@@ -49,14 +49,15 @@
                         <b:row>
 
                             <b:column colMd="4" offsetMd="2">
-                                <h:outputLabel for="nombre" value="Nombre:" class="control-label"/>
+                                <h:message for="nombre"/>
                                 <b:inputText id="nombre" value="#{nuevaPersona.nombre}" tooltip="Tu nombre completo"
-                                             placeholder="Nombre Apellido"/>
+                                             label="Nombre:"
+                                             placeholder="Nombre Apellido" renderLabel="true"/>
 
                             </b:column>
                             <b:column colMd="4">
-                                <h:outputLabel for="email" value="Email:"/>
-                                <b:inputText id="email" value="#{nuevaPersona.email}"
+                                <h:message for="email"/>
+                                <b:inputText id="email" value="#{nuevaPersona.email}" label="Email:" renderLabel="true"
                                              tooltip="La dirección para comunicarnos con vos"
                                              placeholder="email@ejemplo.com"/>
                             </b:column>
@@ -65,19 +66,20 @@
                         <b:row>
 
                             <b:column colMd="3" offsetMd="2">
-                                <h:outputLabel for="ci" value="CI:"/>
+                                <h:message for="ci"/>
                                 <b:inputText id="ci" value="#{nuevaPersona.ci}" tooltip="El número de tu cédula"
-                                             placeholder="1.111.111-3"/>
+                                             placeholder="1.111.111-3" label="CI:" renderLabel="true"/>
                             </b:column>
                             <b:column colMd="3">
-                                <h:outputLabel for="cc" value="CC:"/>
+                                <h:message for="cc"/>
                                 <b:inputText id="cc" value="#{nuevaPersona.cc}" tooltip="El número de tu credencial"
-                                             placeholder="KAA34567"/>
+                                             placeholder="KAA34567" label="CC:" renderLabel="true"/>
                             </b:column>
                             <b:column colMd="2">
-                                <h:outputLabel for="fecha_nac" value="Nacimiento:" tooltip="Te fecha de nacimiento"/>
+                                <h:message for="fecha_nac"/>
                                 <b:inputText id="fecha_nac" value="#{nuevaPersona.fecha_nacimiento}"
-                                             placeholder="05/02/1971">
+                                             label="Fecha Nacimiento:" renderLabel="true"
+                                             placeholder="05/02/1971" tooltip="Te fecha de nacimiento">
                                     <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
                                 </b:inputText>
                             </b:column>
@@ -85,13 +87,15 @@
                         <b:row>
 
                             <b:column colMd="4" offsetMd="2">
-                                <h:outputLabel for="tel1" value="Teléfono 1:"/>
-                                <b:inputText id="tel1" value="#{nuevaPersona.telefono_1}"
+                                <h:message for="tel1"/>
+                                <b:inputText id="tel1" value="#{nuevaPersona.telefono_1}" label="Teléfono 1:"
+                                             renderLabel="true"
                                              tooltip="Un teléfono para contactarte" placeholder="099999999"/>
                             </b:column>
                             <b:column colMd="4">
-                                <h:outputLabel for="tel2" value="Teléfono 2:"/>
-                                <b:inputText id="tel2" value="#{nuevaPersona.telefono_2}"
+                                <h:message for="tel2"/>
+                                <b:inputText id="tel2" value="#{nuevaPersona.telefono_2}" label="Teléfono 2:"
+                                             renderLabel="true"
                                              tooltip="Opcionalmente nos podes dar otro número" placeholder="44444444"/>
                             </b:column>
                         </b:row>
@@ -136,23 +140,25 @@
                         <b:row>
 
                             <b:column colMd="4" offsetMd="2">
-                                <h:outputLabel for="barrio" value="Barrio:"/>
+                                <h:message for="barrio"/>
                                 <b:inputText id="barrio" value="#{nuevaPersona.barrio}" tooltip="Tú barrio"
-                                             placeholder="Barrio"/>
+                                             placeholder="Barrio" label="Barrio:" renderLabel="true"/>
                             </b:column>
                             <b:column colMd="4">
-                                <h:outputLabel for="dir" value="Dirección:"/>
-                                <b:inputText id="dir" value="#{nuevaPersona.direccion}" placeholder="Calle, Número"/>
+                                <h:message for="dir"/>
+                                <b:inputText id="dir" value="#{nuevaPersona.direccion}" placeholder="Calle, Número"
+                                             label="Dirección:" renderLabel="true"/>
                             </b:column>
                         </b:row>
 
                         <b:row>
 
                             <b:column colMd="4" offsetMd="2">
-                                <h:outputLabel for="intereses" value="Temas de interés:"/>
+                                <h:message for="intereses"/>
                                 <b:inputTextarea id="intereses" value="#{nuevaPersona.temas_interes}" rows="3"
                                                  placeholder="DDHH, Medio Ambiente, etc"
-                                                 tooltip="Contános que temas te interesan"/>
+                                                 tooltip="Contános que temas te interesan" label="Temas de interés:"
+                                                 renderLabel="true"/>
                             </b:column>
                             <b:column colMd="4">
                                 <b:row>
@@ -183,8 +189,9 @@
                                         </b:selectOneMenu>
                                     </b:column>
                                 </b:row>
-                                <h:outputText
-                                        value="A Casa Grande la construímos entre todos, tu aporte ecónomico también es fundamental"/>
+                                <span class="help-block">A Casa Grande la construímos entre todos, tu aporte ecónomico también es fundamental.</span>
+                                <!--<h:outputText
+                                        value="A Casa Grande la construímos entre todos, tu aporte ecónomico también es fundamental"/>-->
 
                             </b:column>
 
@@ -193,13 +200,15 @@
                         <b:row>
 
                             <b:column colMd="4" offsetMd="2">
-                                <h:outputLabel for="password" value="Contraseña:"/>
-                                <b:inputSecret id="password" value="#{nuevaPersona.password}"
-                                               tooltip="Elegí una contraseña para las plataformas de Casa Grande"/>
+                                <h:message for="password"/>
+                                <b:inputSecret id="password" value="#{nuevaPersona.password}" label="Contraseña:"
+                                               renderLabel="true"
+                                               tooltip="Elegí una contraseña para acceder a nuestras plataformas, al menos 8 carácteres"/>
                             </b:column>
                             <b:column colMd="4">
-                                <h:outputLabel for="passwordConfirm" value="Confirmar contraseña:"/>
+                                <h:message for="passwordConfirm"/>
                                 <b:inputSecret id="passwordConfirm" tooltip="Repetí la contraseña"
+                                               label="Confirmar contraseña:" renderLabel="true"
                                                value="#{registrationController.passwordConfirmation}"/>
                             </b:column>
                         </b:row>
@@ -211,7 +220,7 @@
                                 <b:commandButton action="#{registrationController.registrar}" ajax="true"
                                                  update="@form messages regpanel"
                                                  value="Registrar" look="primary" styleClass="pull-right" span="20px"
-                                        />
+                                />
 
                             </b:column>
 
