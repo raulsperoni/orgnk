@@ -54,7 +54,7 @@ public class DiscourseAPIService {
         WebResource service = client.resource(UriBuilder.fromUri(DISCOURSE_API_HOST).build());
         MultivaluedMap<String, String> params = new MultivaluedMapImpl();
         params.add("api_key", DISCOURSE_API_KEY);
-        params.add("api_user", DISCOURSE_API_USER);
+        params.add("api_username", DISCOURSE_API_USER);
         params.add("filter", email);
         String output = service.path("admin/users/list/active.json").queryParams(params).accept(MediaType.APPLICATION_JSON).get(String.class);
 
@@ -81,12 +81,12 @@ public class DiscourseAPIService {
         WebResource webResource = client.resource(UriBuilder.fromUri(DISCOURSE_API_HOST).build());
         MultivaluedMap<String, String> params = new MultivaluedMapImpl();
         params.add("api_key", DISCOURSE_API_KEY);
-        params.add("api_user", DISCOURSE_API_USER);
+        params.add("api_username", DISCOURSE_API_USER);
         Form formData = new Form();
         formData.add("username", user.getUsername());
         formData.add("name", user.getName());
         formData.add("password", user.getPersona().getPassword());
-        formData.add("notifications", user.getEmail());
+        formData.add("email", user.getEmail());
         formData.add("active", "true");
         ClientResponse response = webResource.path("users").queryParams(params).type(MediaType.APPLICATION_FORM_URLENCODED).accept(MediaType.APPLICATION_JSON_TYPE).post(ClientResponse.class, formData);
         String output = response.getEntity(String.class);
@@ -109,7 +109,7 @@ public class DiscourseAPIService {
         WebResource service = client.resource(UriBuilder.fromUri(DISCOURSE_API_HOST).build());
         MultivaluedMap<String, String> params = new MultivaluedMapImpl();
         params.add("api_key", DISCOURSE_API_KEY);
-        params.add("api_user", DISCOURSE_API_USER);
+        params.add("api_username", DISCOURSE_API_USER);
         ClientResponse response = service.path("admin/users").path(String.valueOf(user.getId())).path("approve").queryParams(params).accept(MediaType.APPLICATION_JSON).put(ClientResponse.class);
         log.info("Respuesta aprobar usuario: " + response.getStatus());
         return response.getStatus() == 200;

@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by raul on 21/02/16.
  */
 @Entity
-@NamedQuery(name = "checkToken", query = "SELECT a from ActivationToken a where token = :token")
+@NamedQuery(name = "checkToken", query = "SELECT a from ActivationToken a where a.token = :token")
 public class ActivationToken {
     private static final int EXPIRATION = 60 * 24;
 

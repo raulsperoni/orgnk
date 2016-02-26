@@ -52,5 +52,6 @@ public class SessionBean {
         for (Properties p : propertiesList) {
             organikaProperties.put(p.getKey(), p.getValue());
         }
+
     }
 }
