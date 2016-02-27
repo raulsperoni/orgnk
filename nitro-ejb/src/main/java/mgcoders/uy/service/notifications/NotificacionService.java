@@ -57,7 +57,7 @@ public class NotificacionService {
         } else {
             host = "http://" + organikaProperties.get(Properties.ORGANIKA_IP) + ":" + organikaProperties.get(Properties.ORGANIKA_PORT);
         }
-        String confirmationUrl = host + "/" + organikaProperties.get(Properties.ORGANIKA_APP) + "/activacion.jsf?token=" + token;
+        String confirmationUrl = host + "/activacion.jsf?token=" + token;
         email.setFrom(organikaProperties.get(Properties.NOTIFICATION_FROM_ADDRESS));
 
         String cuerpo = "<div>Gracias " + persona.getNombre() + "!\n" +
