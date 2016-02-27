@@ -1,8 +1,7 @@
 wildfy:
   build: wildfly
   ports:
-    - 3311:8080
-    - 9990:9990
+    - 8080:8080
   links:
     - pg
   volumes:

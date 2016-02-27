@@ -78,7 +78,7 @@
                         <webModule>
                             <groupId>mgcoders.uy</groupId>
                             <artifactId>nitro-web</artifactId>
-                            <contextRoot>/padron</contextRoot>
+                            <contextRoot>/</contextRoot>
                         </webModule>
                     </modules>
                 </configuration>
