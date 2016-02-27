@@ -18,6 +18,8 @@ public class Properties {
     public static final String ORGANIKA_IP = "organika_ip";
     public static final String ORGANIKA_PORT = "organika_port";
     public static final String ORGANIKA_APP = "organika_app";
+    public static final String ORGANIKA_HOST = "organika_host";
+    public static final String ORGANIKA_USE_HOST = "organika_use_host";
     public static final String DISCOURSE_API_KEY = "discourse_api_key";
     public static final String DISCOURSE_API_USER = "discourse_api_user";
     public static final String DISCOURSE_API_HOST = "discourse_api_host";

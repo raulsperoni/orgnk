@@ -51,7 +51,13 @@ public class NotificacionService {
         } else {
             email.addTo(persona.getEmail());
         }
-        String confirmationUrl = "http://" + organikaProperties.get(Properties.ORGANIKA_IP) + ":" + organikaProperties.get(Properties.ORGANIKA_PORT) + "/" + organikaProperties.get(Properties.ORGANIKA_APP) + "/activacion.jsf?token=" + token;
+        String host;
+        if (organikaProperties.get(Properties.ORGANIKA_USE_HOST).equals("1")) {
+            host = organikaProperties.get(Properties.ORGANIKA_HOST);
+        } else {
+            host = "http://" + organikaProperties.get(Properties.ORGANIKA_IP) + ":" + organikaProperties.get(Properties.ORGANIKA_PORT);
+        }
+        String confirmationUrl = host + "/" + organikaProperties.get(Properties.ORGANIKA_APP) + "/activacion.jsf?token=" + token;
         email.setFrom(organikaProperties.get(Properties.NOTIFICATION_FROM_ADDRESS));
 
         String cuerpo = "<div>Gracias " + persona.getNombre() + "!\n" +
