@@ -1,5 +1,6 @@
 wildfy:
   build: wildfly
+  restart: always
   ports:
     - 8080:8080
   links:
@@ -8,6 +9,7 @@ wildfy:
     - ./deployments:/opt/jboss/wildfly/standalone/deployments/
 pg:
   image: postgres:9.5
+  restart: always
   volumes:
     - ./postgres:/docker-entrypoint-initdb.d
   environment:
