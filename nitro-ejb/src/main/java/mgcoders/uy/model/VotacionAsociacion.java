@@ -3,6 +3,7 @@ package mgcoders.uy.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by RSperoni on 24/11/2015.
@@ -26,12 +27,12 @@ public class VotacionAsociacion {
     @Id
     @ManyToOne
     @PrimaryKeyJoinColumn(name = "votante_id", referencedColumnName = "id")
-    private Votante votante;
+    private VotingUser votingUser;
 
-    public VotacionAsociacion(Votacion votacion, Votante votante) {
+    public VotacionAsociacion(Votacion votacion, VotingUser votingUser) {
         this.votacion = votacion;
-        this.votante = votante;
-        this.tokenAutorizacion = "token";
+        this.votingUser = votingUser;
+        this.tokenAutorizacion = UUID.randomUUID().toString();
     }
 
     public VotacionAsociacion() {
@@ -57,7 +58,7 @@ public class VotacionAsociacion {
         return votacion;
     }
 
-    public Votante getVotante() {
-        return votante;
+    public VotingUser getVotingUser() {
+        return votingUser;
     }
 }

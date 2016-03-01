@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class VotacionAsociacionId implements Serializable {
 
     private long votacion;
-    private long votante;
+    private long votingUser;
     private String tokenAutorizacion;
 
     @Override
@@ -19,7 +19,7 @@ public class VotacionAsociacionId implements Serializable {
         VotacionAsociacionId that = (VotacionAsociacionId) o;
 
         if (votacion != that.votacion) return false;
-        if (votante != that.votante) return false;
+        if (votingUser != that.votingUser) return false;
         return !(tokenAutorizacion != null ? !tokenAutorizacion.equals(that.tokenAutorizacion) : that.tokenAutorizacion != null);
 
     }
@@ -27,7 +27,7 @@ public class VotacionAsociacionId implements Serializable {
     @Override
     public int hashCode() {
         int result = (int) (votacion ^ (votacion >>> 32));
-        result = 31 * result + (int) (votante ^ (votante >>> 32));
+        result = 31 * result + (int) (votingUser ^ (votingUser >>> 32));
         result = 31 * result + (tokenAutorizacion != null ? tokenAutorizacion.hashCode() : 0);
         return result;
     }

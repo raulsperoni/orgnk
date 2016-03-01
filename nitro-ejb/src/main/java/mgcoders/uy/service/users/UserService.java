@@ -5,8 +5,10 @@ import mgcoders.uy.discourse.DiscourseCreateUserResponse;
 import mgcoders.uy.discourse.DiscourseUser;
 import mgcoders.uy.events.ActivationEvent;
 import mgcoders.uy.model.Persona;
+import mgcoders.uy.model.VotingUser;
 import mgcoders.uy.util.Util;
 
+import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -30,7 +32,7 @@ public class UserService {
     private EntityManager em;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public void nuevoUsuario(@Observes(during = TransactionPhase.AFTER_SUCCESS) ActivationEvent event) {
+    public void newDiscourseUser(@Observes(during = TransactionPhase.AFTER_SUCCESS) ActivationEvent event) {
 
         Persona persona = em.find(Persona.class, event.getPersona_id());
         DiscourseUser nuevoUsuario = discourseAPIService.searchUser(persona.getEmail());
@@ -73,5 +75,11 @@ public class UserService {
         return em.find(DiscourseUser.class, persona_id);
     }
 
-
+    @Asynchronous
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    public void newVotingUser(@Observes(during = TransactionPhase.AFTER_SUCCESS) ActivationEvent event) {
+        Persona persona = em.find(Persona.class, event.getPersona_id());
+        VotingUser newUser = new VotingUser(persona);
+        em.persist(newUser);
+    }
 }

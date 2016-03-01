@@ -39,10 +39,10 @@ public class Votacion implements Serializable {
     @OneToMany(mappedBy = "votacion", cascade = CascadeType.PERSIST)
     private List<VotacionAsociacion> votantes = new ArrayList<>();
 
-    public void addVotante(Votante votante) {
-        VotacionAsociacion asociacion = new VotacionAsociacion(this, votante);
+    public void addVotante(VotingUser votingUser) {
+        VotacionAsociacion asociacion = new VotacionAsociacion(this, votingUser);
         this.votantes.add(asociacion);
-        votante.getVotaciones().add(asociacion);
+        votingUser.getVotaciones().add(asociacion);
     }
 
     public List<Pregunta> getPreguntas() {
