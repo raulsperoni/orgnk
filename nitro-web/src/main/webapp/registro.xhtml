@@ -72,8 +72,9 @@
                                         <h:message for="fecha_nac"/>
                                         <b:inputText id="fecha_nac" value="#{nuevaPersona.fecha_nacimiento}"
                                                      label="Fecha Nacimiento:" renderLabel="true" maxlength="10"
+                                                     converterMessage="El formato de la fecha debe ser dd/MM/aaaa"
                                                      placeholder="05/02/1971" tooltip="Te fecha de nacimiento">
-                                            <f:convertDateTime type="date" pattern="dd/MM/yyyy" locale="SPANISH"/>
+                                            <f:convertDateTime type="date" pattern="dd/MM/yyyy" locale="es"/>
                                         </b:inputText>
                                     </b:column>
                                 </b:row>
