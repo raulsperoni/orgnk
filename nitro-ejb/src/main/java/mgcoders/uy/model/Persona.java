@@ -33,6 +33,7 @@ public class Persona implements Serializable {
     private String cc;
     @NotNull(message = "La fecha de nacimiento no puede estar vacía")
     @Past(message = "La fecha debe ser anterior a hoy")
+    @Temporal(TemporalType.DATE)
     private Date fecha_nacimiento;
     @Pattern(regexp = "^((([0-9]{3})|0)([0-9]){8})|((4|2)[0-9]{7})$", message = "El formato del teléfono debe ser 099999999 o 59899111111")
     private String telefono_1;

@@ -80,16 +80,13 @@ public class RegistrationController implements Serializable {
             if (nuevaPersona.getPassword().equals(passwordConfirmation)) {
                 personaService.registrar(nuevaPersona);
                 sessionController.setPersonaConectada(nuevaPersona);
-                facesContext.addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Le hemos enviado un correo para verificar su email."));
-                initNewMember();
                 success = true;
             } else {
                 FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "Las contraseñas no coinciden");
                 facesContext.addMessage(null, m);
             }
         } catch (ConstraintViolationException e) {
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "La cédula o el notifications ya existen");
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "La cédula o el email ya existen");
             facesContext.addMessage(null, m);
         } catch (Exception e) {
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "error del sistema, contáctenos");
