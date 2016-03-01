@@ -3,7 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui"
-        >
+>
 
 <h:head/>
 <h:body>
@@ -15,76 +15,91 @@
         <ui:define name="title">Gracias #{activationController.persona.nombre}</ui:define>
 
         <ui:define name="content">
-            <b:panelGrid id="regpanel" colSpans="1,10,1">
+            <b:panelGrid id="regpanel" colSpans="12">
 
-                <b:column colMd="2"></b:column>
-                <b:panel title="Registro Correcto" look="success" collapsible="false">
-                <h:outputLabel value="#{activationController.persona.nombre}, te damos la bienvenida a Casa Grande."/>
-                <h:panelGroup layout="block" rendered="#{activationController.valid}">
-                    <p style="font-weight: 600">Tu correo electrónico fue correctamente validado y el registro fue correcto.</p>
-
-                    <p style="font-weight: 600">Podrás acceder a nuestro espacio de discusión online: <a
-                            href="http://agoracasagrande.uy">Ágora Casa Grande</a> con tu email y contraseña elegida. Si previamente accediste al Ágora deberás seguir usando la misma contraseña.
-                    </p>
+                <b:row>
+                    <b:column colLg="10" offsetLg="1">
+                        <b:jumbotron rendered="#{activationController.valid}">
+                            <h4>#{activationController.persona.nombre}, ya sos parte.</h4>
 
 
-                    <h:panelGroup rendered="#{ultimaActividad != null}">
+                            <p>Tu correo electrónico fue correctamente validado y el registro fue correcto.
+                            </p>
 
-                        <h:outputLabel value="Próxima actividad: #{ultimaActividad.nombre}"/>
+                            <p></p>
+                            <h5>Conocé nuestra plataforma de participación: <a
+                                    href="http://agoracasagrande.uy">Ágora Casa Grande</a></h5>
 
-                        <p>Desde: #{ultimaActividad.fechaDesde}</p>
+                            <p>Podrás iniciar sesión en nuestro espacio de discusión online ingresando a <a
+                                    href="http://agoracasagrande.uy">agoracasagrande.uy</a>
+                                con tu email y contraseña elegida. Si previamente accediste al Ágora deberás seguir usando la misma contraseña.
+                            </p>
 
-                        <p>Hasta: #{ultimaActividad.fechaHasta}</p>
+                            <h:panelGroup rendered="#{ultimaActividad != null}">
 
-                        <p>#{ultimaActividad.descripcion}</p>
+                                <h:outputLabel value="Próxima actividad: #{ultimaActividad.nombre}"/>
 
-                        <h:form>
-                            <b:row>
+                                <p>Desde: #{ultimaActividad.fechaDesde}</p>
 
-                                <b:column colMd="2" offsetMd="4">
-                                    <h:outputLabel for="asiste" value="Asistirás?" class="control-label"/>
-                                    <b:selectBooleanCheckbox id="asiste"
-                                                             value="#{activationController.asistencia.asiste}"
-                                                             tooltip="Si pensás asistir o no"/>
-                                </b:column>
-                                <b:column colMd="2">
-                                    <h:outputLabel for="alojamiento" value="Alojamiento:" class="control-label"/>
-                                    <b:selectBooleanCheckbox id="alojamiento"
-                                                             value="#{activationController.asistencia.requiereAlojamiento}"
-                                                             tooltip="En caso de ser posible, requerís alojamiento en casa de un compañero?"/>
-                                </b:column>
+                                <p>Hasta: #{ultimaActividad.fechaHasta}</p>
+
+                                <p>#{ultimaActividad.descripcion}</p>
+
+                                <h:form>
+                                    <b:row>
+
+                                        <b:column colMd="2" offsetMd="4">
+                                            <h:outputLabel for="asiste" value="Asistirás?" class="control-label"/>
+                                            <b:selectBooleanCheckbox id="asiste"
+                                                                     value="#{activationController.asistencia.asiste}"
+                                                                     tooltip="Si pensás asistir o no"/>
+                                        </b:column>
+                                        <b:column colMd="2">
+                                            <h:outputLabel for="alojamiento" value="Alojamiento:"
+                                                           class="control-label"/>
+                                            <b:selectBooleanCheckbox id="alojamiento"
+                                                                     value="#{activationController.asistencia.requiereAlojamiento}"
+                                                                     tooltip="En caso de ser posible, requerís alojamiento en casa de un compañero?"/>
+                                        </b:column>
 
 
-                            </b:row>
-                            <b:row>
-                                <b:column colMd="3" offsetMd="4">
-                                    <h:outputLabel for="coment" value="Comentario a los organizadores:"/>
-                                    <b:inputTextarea id="coment" value="#{activationController.asistencia.comentario}"
-                                                     rows="3"
-                                                     tooltip="Algo que nos quieras comentar previo a la actividad"/>
-                                </b:column>
-                            </b:row>
-                            <b:row>
-                                <b:column colMd="3" offsetMd="4">
+                                    </b:row>
+                                    <b:row>
+                                        <b:column colMd="3" offsetMd="4">
+                                            <h:outputLabel for="coment" value="Comentario a los organizadores:"/>
+                                            <b:inputTextarea id="coment"
+                                                             value="#{activationController.asistencia.comentario}"
+                                                             rows="3"
+                                                             tooltip="Algo que nos quieras comentar previo a la actividad"/>
+                                        </b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column colMd="3" offsetMd="4">
 
-                                    <b:commandButton action="#{activationController.registrarAsistencia}" ajax="true"
-                                                     update="@form messages"
-                                                     value="Registrar Asistencia" look="primary" styleClass="pull-right"
-                                                     span="20px"
+                                            <b:commandButton action="#{activationController.registrarAsistencia}"
+                                                             ajax="true"
+                                                             update="@form messages"
+                                                             value="Registrar Asistencia" look="primary"
+                                                             styleClass="pull-right"
+                                                             span="20px"
                                             />
 
-                                </b:column>
-                            </b:row>
-                        </h:form>
-                    </h:panelGroup>
-                </h:panelGroup>
-                <h:panelGroup layout="block" rendered="#{!activationController.valid}">
-                    <p>La activación falló!</p>
-                    <h:form>
-                        ...
-                    </h:form>
-                </h:panelGroup>
-            </b:panel>
+                                        </b:column>
+                                    </b:row>
+                                </h:form>
+                            </h:panelGroup>
+
+
+                        </b:jumbotron>
+                    </b:column>
+                    <b:column colLg="10" offsetLg="1">
+                        <b:jumbotron rendered="#{!activationController.valid}">
+                            <h4>La activación falló.</h4>
+
+
+                        </b:jumbotron>
+                    </b:column>
+                </b:row>
             </b:panelGrid>
 
         </ui:define>

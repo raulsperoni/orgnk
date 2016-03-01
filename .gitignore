@@ -70,6 +70,7 @@ crashlytics.properties
 crashlytics-build.properties
 
 /nitro-ejb/src/main/resources/import.sql
+/nitro-ejb/src/main/resources/META-INF/persistence.xml
 *.sql
 
 
