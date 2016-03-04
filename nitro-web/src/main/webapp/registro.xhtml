@@ -240,11 +240,21 @@
                     var a = document.getElementById("shareFacebook");
                     a.onclick = function () {
                         FB.ui({
-                            method: 'share_open_graph',
-                            action_type: 'og.publish',
-                            action_properties: JSON.stringify({
-                                object: 'https://mcg.uy/',
-                            })
+                            method: 'feed',
+                            message: 'Learning about Facebook Platform',
+                            name: 'Operation Developer Love',
+                            caption: 'The Facebook Connect JavaScript SDK',
+                            description: (
+                                    'A small JavaScript library that allows you to harness ' +
+                                    'the power of Facebook, bringing the user\'s identity, ' +
+                                    'social graph and distribution power to your site.'
+                            ),
+                            link: 'http://mcg.uy/',
+                            picture: 'https://mcg.uy/resources/gfx/sumate.png',
+                            actions: [
+                                {name: 'mcg', link: 'http://fbrell.com/'}
+                            ],
+                            user_message_prompt: 'Me acabo de sumar al padrón de Casa Grande!'
                         }, function (response) {
                             // Debug response (optional)
                             console.log(response);
