@@ -226,7 +226,7 @@
                             <h4>Nuestra casa es grande, invitá a otros a sumarse:</h4>
 
                             <div class="ssk-group" style="display:block;">
-                                <a id="shareFacebook" href="#" class="ssk ssk-facebook"></a>
+                                <a id="shareFacebook" href="#" class="ssk ssk-facebook" onclick="fb_share()"></a>
                                 <a href="https://twitter.com/home?status=Me%20acabo%20de%20registrar%20en%20el%20padr%C3%B3n%20de%20%23CasaGrande%20http%3A//mcg.uy"
                                    class="ssk ssk-twitter"></a>
                                 <a href="whatsapp://send?text=https://twitter.com/home?status=Me%20acabo%20de%20registrar%20en%20el%20padr%C3%B3n%20de%20%23CasaGrande%20http%3A//mcg.uy"
@@ -237,9 +237,7 @@
                 </b:row>
             </b:panelGrid>
             <script type="text/javascript">
-                window.onload = function () {
-                    var a = document.getElementById("shareFacebook");
-                    a.onclick = function () {
+                function fb_share() {
                         FB.ui({
                             method: 'feed',
                             name: 'Sumate a Casa Grande',
@@ -254,7 +252,6 @@
                             // Debug response (optional)
                             console.log(response);
                         });
-                    }
                 }
             </script>
         </ui:define>
