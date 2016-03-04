@@ -17,9 +17,9 @@ pg:
     POSTGRES_PASSWORD: postgres
     POSTGRES_DB: nitro
   volumes_from:
-    - postgres-data
+    - postgresdata
 
-postgres-data:
+postgresdata:
   image: postgres:9.5
   # This is a data container, so we want to exit as soon as the container is created
   command: /bin/true
