@@ -2,7 +2,7 @@ wildfy:
   build: wildfly
   restart: always
   ports:
-    - 8080:8080
+    - 127.0.0.1:8080:8080
   links:
     - pg
   volumes:
@@ -16,4 +16,18 @@ pg:
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: postgres
     POSTGRES_DB: nitro
+  ports:
+    - 127.0.0.1:5432:5432
+backup:
+  build: postgres/postgresql-to-s3-backup-with-docker
+  restart: always
+  enviroment:
+    DATABASE_IP: '127.0.0.1'
+    DATABASE_PORT: '5432'
+    DATABASE_NAME: 'nitro'
+    DATABASE_USERNAME: 'postgres'
+    DATABASE_PASSSWORD: 'postgres'
+    DESTINATION: 'organikacg/backup'
+    AWS_SECRET_KEY: ''
+    AWS_ACCESS_KEY: ''
 
