@@ -36,6 +36,30 @@
 
 </h:head>
 <h:body>
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1674514022813810',
+                xfbml: true,
+                version: 'v2.5'
+            });
+
+
+        };
+
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
     <b:navBar brandImg="resources/gfx/cg.png" fluid="true" brandAlign="center" style="height:22px;"
               brandHref="index.jsf">
         <b:navbarLinks>

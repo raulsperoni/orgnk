@@ -214,7 +214,7 @@
                 </b:row>
                 <b:row>
                     <b:column colLg="10" offsetLg="1">
-                        <b:jumbotron rendered="#{registrationController.success}">
+                        <b:jumbotron rendered="#{!registrationController.success}">
                             <h4>#{registrationController.nuevaPersona.nombre}, bienvenido a <b>Casa Grande</b></h4>
 
 
@@ -226,7 +226,7 @@
                             <h4>Nuestra casa es grande, invitá a otros a sumarse:</h4>
 
                             <div class="ssk-group" style="display:block;">
-                                <a href="" class="ssk ssk-facebook"></a>
+                                <a id="shareFacebook" href="#" class="ssk ssk-facebook"></a>
                                 <a href="" class="ssk ssk-twitter"></a>
                                 <a href="" class="ssk ssk-email"></a>
                                 <a href="" class="ssk ssk-whatsapp"></a>
@@ -235,6 +235,23 @@
                     </b:column>
                 </b:row>
             </b:panelGrid>
+            <script type="text/javascript">
+                window.onload = function () {
+                    var a = document.getElementById("shareFacebook");
+                    a.onclick = function () {
+                        FB.ui({
+                            method: 'share_open_graph',
+                            action_type: 'og.publish',
+                            action_properties: JSON.stringify({
+                                object: 'https://mcg.uy/',
+                            })
+                        }, function (response) {
+                            // Debug response (optional)
+                            console.log(response);
+                        });
+                    }
+                }
+            </script>
         </ui:define>
     </ui:composition>
 </h:body>

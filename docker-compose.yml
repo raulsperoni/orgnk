@@ -28,15 +28,14 @@ postgres-data:
     - /var/lib/postgresql
 
 backup:
-  image: mgcoders/postgres-s3-backup
+  image: mgcoders/postgres-s3-backup:9.5
   restart: always
   links:
     - pg
   environment:
     PG_S3_BACKUP_BUCKET: 'organikacg/backup'
-    PG_S3_BACKUP_ACCESS_KEY:
-    PG_S3_BACKUP_SECRET_KEY:
+    PG_S3_BACKUP_ACCESS_KEY: ''
+    PG_S3_BACKUP_SECRET_KEY: ''
     PG_S3_BACKUP_HOST: 'pg'
     PG_S3_BACKUP_USER: 'postgres'
     PG_S3_BACKUP_DB : 'nitro'
-
