@@ -38,4 +38,5 @@ backup:
     PG_S3_BACKUP_SECRET_KEY: ''
     PG_S3_BACKUP_HOST: 'pg'
     PG_S3_BACKUP_USER: 'postgres'
+    PG_S3_BACKUP_PASSWORD: 'postgres'
     PG_S3_BACKUP_DB : 'nitro'
