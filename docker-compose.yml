@@ -16,17 +16,17 @@ pg:
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: postgres
     POSTGRES_DB: nitro
-  ports:
-    - 127.0.0.1:5432:5432
 backup:
   build: postgres/bkp
   restart: always
-  enviroment:
-    DATABASE_IP: '127.0.0.1'
+  links:
+    - pg
+  environment:
+    DATABASE_IP: 'pg'
     DATABASE_PORT: '5432'
     DATABASE_NAME: 'nitro'
     DATABASE_USERNAME: 'postgres'
-    DATABASE_PASSSWORD: 'postgres'
+    DATABASE_PASSWORD: 'postgres'
     DESTINATION: 'organikacg/backup'
     AWS_SECRET_KEY: ''
     AWS_ACCESS_KEY: ''
