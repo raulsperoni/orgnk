@@ -1,7 +1,5 @@
 package mgcoders.uy.controller;
 
-import mgcoders.uy.model.Persona;
-
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -13,13 +11,14 @@ import java.io.Serializable;
 @SessionScoped
 public class SessionController implements Serializable {
 
-    private Persona personaConectada;
 
-    public Persona getPersonaConectada() {
-        return personaConectada;
+    private boolean adminConectado = false;
+
+    public boolean isAdminConectado() {
+        return adminConectado;
     }
 
-    public void setPersonaConectada(Persona personaConectada) {
-        this.personaConectada = personaConectada;
+    public void setAdminConectado(boolean adminConectado) {
+        this.adminConectado = adminConectado;
     }
 }

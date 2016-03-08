@@ -1,10 +1,14 @@
 package mgcoders.uy.service.activities;
 
+import mgcoders.uy.model.Actividad;
 import mgcoders.uy.model.Asistencia;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -20,6 +24,12 @@ public class ActivityService {
 
     public void registrarAsistencia(Asistencia asistencia) {
         em.persist(asistencia);
+    }
+
+    public List<Actividad> actividadesAbiertas() {
+        Query query = em.createQuery("SELECT a FROM Actividad a where a.fechaDesde >= :now");
+        query.setParameter("now", new Date());
+        return (List<Actividad>) query.getResultList();
     }
 
 
