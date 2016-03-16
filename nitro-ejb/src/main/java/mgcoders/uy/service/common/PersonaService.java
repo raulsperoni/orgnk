@@ -31,6 +31,13 @@ public class PersonaService {
         nuevoRegistroEvent.fire(evt);
     }
 
+    public boolean existe(String ci, String email) {
+        Query query = em.createQuery("SELECT p FROM Persona p where p.ci = :ci or p.email = :email ");
+        query.setParameter("ci", ci);
+        query.setParameter("email", email);
+        return query.getResultList().size() > 0;
+    }
+
     public List<Persona> buscar(String criteria) {
         Query query = em.createQuery("SELECT p FROM Persona p where p.ci like :criteria or p.nombre like :criteria or p.email like :criteria");
         query.setParameter("criteria", criteria);

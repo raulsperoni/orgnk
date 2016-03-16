@@ -37,6 +37,9 @@ public class RegistrationController implements Serializable {
     @Inject
     private AuxController auxController;
 
+    @Inject
+    private SessionController sessionController;
+
     private Persona nuevaPersona;
     private int departamentoSeleccionado;
     private int localidadSeleccionada;
@@ -77,6 +80,14 @@ public class RegistrationController implements Serializable {
             if (nuevaPersona.getPassword().equals(passwordConfirmation)) {
                 personaService.registrar(nuevaPersona);
                 success = true;
+                if (!personaService.existe(nuevaPersona.getCi(), nuevaPersona.getEmail())) {
+                    personaService.registrar(nuevaPersona);
+                    sessionController.setPersonaConectada(nuevaPersona);
+                    success = true;
+                } else {
+                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se pudo registrar", "El email o la cédula ya existen");
+                    facesContext.addMessage(null, m);
+                }
             } else {
                 FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "Las contraseñas no coinciden");
                 facesContext.addMessage(null, m);

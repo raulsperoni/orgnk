@@ -65,8 +65,8 @@ public class NotificacionService {
                 "Te registraste correctamente en el Padr&oacute;n de Casa Grande.\n" +
                 "<div>Para poder verificar tu email, por favor haz click en el siguiente enlace:</div>\n" +
                 "<div></div>\n" +
-                "<div><a href=\"" + confirmationUrl + "\">Verificar Email</a></div>\n" +
-                "</div>\n" +
+                "<div><a href=\"" + confirmationUrl + "\">Click aqu&iacute; para verificar Email</a></div>\n" +
+                "</div>\n\n\n" +
                 "<div></div>";
 
         email.setHtml(cuerpo);

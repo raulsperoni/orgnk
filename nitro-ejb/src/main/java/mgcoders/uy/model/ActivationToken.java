@@ -10,7 +10,7 @@ import java.util.Date;
 @Entity
 @NamedQuery(name = "checkToken", query = "SELECT a from ActivationToken a where a.token = :token")
 public class ActivationToken {
-    private static final int EXPIRATION = 60 * 24;
+    private static final int EXPIRATION = 60 * 72;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
