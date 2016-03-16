@@ -37,8 +37,6 @@ public class RegistrationController implements Serializable {
     @Inject
     private AuxController auxController;
 
-    @Inject
-    private SessionController sessionController;
 
     private Persona nuevaPersona;
     private int departamentoSeleccionado;
@@ -82,7 +80,6 @@ public class RegistrationController implements Serializable {
                 success = true;
                 if (!personaService.existe(nuevaPersona.getCi(), nuevaPersona.getEmail())) {
                     personaService.registrar(nuevaPersona);
-                    sessionController.setPersonaConectada(nuevaPersona);
                     success = true;
                 } else {
                     FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se pudo registrar", "El email o la cédula ya existen");

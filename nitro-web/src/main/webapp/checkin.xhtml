@@ -31,7 +31,7 @@
         <ui:define name="content">
 
 
-            <b:container fluid="true" rendered="#{checkinController.valid}" id="box">
+            <b:container fluid="true" rendered="#{checkinController.valid}">
                 <b:row>
                     <b:column offsetLg="2" colLg="8">
                         <b:panel look="primary" title="CheckIn Actividades Casa Grande" collapsible="false">
@@ -51,14 +51,15 @@
                                 <b:column colMd="5">
                                     <h:message for="busqueda"/>
                                     <b:inputText id="busqueda" value="#{checkinController.criterioBusqueda}"
-                                                 onchange="checkinController.buscarPersona();" update="box"
+                                                 onkeyup="CheckinController.buscarPersona();console.log('afterOnKeyUp')"
+                                                 update="box"
                                                  label="Buscar Persona:"
                                                  renderLabel="true" maxlength="40"
                                                  tooltip="Cédula o nombre">
                                     </b:inputText>
                                 </b:column>
                                 <b:row>
-                                    <b:column colMd="10" offsetLg="1">
+                                    <b:column colMd="10" offsetLg="1" id="box">
                                         <b:selectOneMenu id="persona" value="#{checkinController.personaSeleccionada}">
                                             <f:selectItems value="#{checkinController.personasList}" var="p"
                                                            itemLabel="#{p.nombre} - #{p.ci} - #{p.email}"

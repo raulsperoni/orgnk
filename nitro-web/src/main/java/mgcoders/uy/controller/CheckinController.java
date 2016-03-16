@@ -75,8 +75,10 @@ public class CheckinController {
         }
     }
 
-    public void buscarPersona() {
+    public String buscarPersona() {
+        System.out.println("ss");
         personasList = personaService.buscar(criterioBusqueda);
+        return null;
     }
 
     public boolean isValid() {
@@ -112,6 +114,7 @@ public class CheckinController {
     }
 
     public String getCriterioBusqueda() {
+        System.out.println("dDS");
         return criterioBusqueda;
     }
 
