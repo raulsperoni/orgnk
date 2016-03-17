@@ -15,6 +15,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,29 +25,22 @@ import java.util.List;
 @RequestScoped
 public class CheckinController {
 
+    List<Asistencia> asistenciaList;
     @Inject
     private SessionController sessionController;
-
     @Inject
     private AdminService adminService;
-
     @Inject
     private ActivityService activityService;
-
     @Inject
     private FacesContext facesContext;
-
     @Inject
     private PersonaService personaService;
-
-    private Asistencia nuevaAsistencia;
-    private int actividadSeleccionada;
+    private Actividad actividadSeleccionada;
     private List<Actividad> actividadList;
     private String criterioBusqueda;
     private List<Persona> personasList;
-    private long personaSeleccionada;
-
-
+    private Persona personaSeleccionada;
     @ManagedProperty(value = "#{param.token}")
     private String key;
     private boolean valid;
@@ -58,14 +52,16 @@ public class CheckinController {
         }
         valid = sessionController.isAdminConectado();
         actividadList = activityService.actividadesAbiertas();
-        nuevaAsistencia = new Asistencia();
+        actividadSeleccionada = actividadList.size() > 0 ? actividadList.get(0) : null;
+        personasList = personaService.buscarTodas();
+        asistenciaList = activityService.buscarAsistencias(actividadSeleccionada);
     }
 
     public void registrar() throws Exception {
         try {
-            activityService.registrarAsistencia(nuevaAsistencia);
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "CheckIn correcto", "bla");
-            facesContext.addMessage(null, m);
+            activityService.registrarAsistencia(personaSeleccionada, actividadSeleccionada);
+            personaSeleccionada = null;
+            asistenciaList = activityService.buscarAsistencias(actividadSeleccionada);
         } catch (ConstraintViolationException e) {
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "La cédula o el email ya existen");
             facesContext.addMessage(null, m);
@@ -75,10 +71,14 @@ public class CheckinController {
         }
     }
 
-    public String buscarPersona() {
-        System.out.println("ss");
-        personasList = personaService.buscar(criterioBusqueda);
-        return null;
+    public List<Persona> buscarPersona(String criterioBusqueda) {
+        List<Persona> selected = new ArrayList<>();
+        for (Persona p : personasList) {
+            if (p.getNombre().toLowerCase().contains(criterioBusqueda.toLowerCase()) || p.getCi().contains(criterioBusqueda) || p.getEmail().toLowerCase().contains(criterioBusqueda.toLowerCase())) {
+                selected.add(p);
+            }
+        }
+        return selected;
     }
 
     public boolean isValid() {
@@ -97,11 +97,11 @@ public class CheckinController {
         this.key = key;
     }
 
-    public int getActividadSeleccionada() {
+    public Actividad getActividadSeleccionada() {
         return actividadSeleccionada;
     }
 
-    public void setActividadSeleccionada(int actividadSeleccionada) {
+    public void setActividadSeleccionada(Actividad actividadSeleccionada) {
         this.actividadSeleccionada = actividadSeleccionada;
     }
 
@@ -114,7 +114,6 @@ public class CheckinController {
     }
 
     public String getCriterioBusqueda() {
-        System.out.println("dDS");
         return criterioBusqueda;
     }
 
@@ -130,11 +129,19 @@ public class CheckinController {
         this.personasList = personasList;
     }
 
-    public long getPersonaSeleccionada() {
+    public Persona getPersonaSeleccionada() {
         return personaSeleccionada;
     }
 
-    public void setPersonaSeleccionada(long personaSeleccionada) {
+    public void setPersonaSeleccionada(Persona personaSeleccionada) {
         this.personaSeleccionada = personaSeleccionada;
+    }
+
+    public List<Asistencia> getAsistenciaList() {
+        return asistenciaList;
+    }
+
+    public void setAsistenciaList(List<Asistencia> asistenciaList) {
+        this.asistenciaList = asistenciaList;
     }
 }

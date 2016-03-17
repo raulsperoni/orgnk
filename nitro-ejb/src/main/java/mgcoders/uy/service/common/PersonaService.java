@@ -38,6 +38,14 @@ public class PersonaService {
         return query.getResultList().size() > 0;
     }
 
+    public Persona buscar(long id) {
+        return em.find(Persona.class, id);
+    }
+
+    public List<Persona> buscarTodas() {
+        return (List<Persona>) em.createQuery("SELECT p from Persona p").getResultList();
+    }
+
     public List<Persona> buscar(String criteria) {
         Query query = em.createQuery("SELECT p FROM Persona p where p.ci like :criteria or p.nombre like :criteria or p.email like :criteria");
         query.setParameter("criteria", criteria);

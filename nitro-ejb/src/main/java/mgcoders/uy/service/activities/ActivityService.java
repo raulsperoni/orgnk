@@ -2,6 +2,7 @@ package mgcoders.uy.service.activities;
 
 import mgcoders.uy.model.Actividad;
 import mgcoders.uy.model.Asistencia;
+import mgcoders.uy.model.Persona;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -22,7 +23,12 @@ public class ActivityService {
     @Inject
     private EntityManager em;
 
-    public void registrarAsistencia(Asistencia asistencia) {
+    public void registrarAsistencia(Persona p, Actividad a) {
+        a = em.find(Actividad.class, a.getId());
+        p = em.find(Persona.class, p.getId());
+        Asistencia asistencia = new Asistencia();
+        asistencia.setActividad(a);
+        asistencia.setPersona(p);
         em.persist(asistencia);
     }
 
@@ -33,4 +39,13 @@ public class ActivityService {
     }
 
 
+    public Actividad buscar(long id) {
+        return em.find(Actividad.class, id);
+    }
+
+    public List<Asistencia> buscarAsistencias(Actividad actividadSeleccionada) {
+        Query query = em.createQuery("SELECT a FROM Asistencia a where a.actividad = :actividad order by a.persona.nombre asc");
+        query.setParameter("actividad", actividadSeleccionada);
+        return (List<Asistencia>) query.getResultList();
+    }
 }
