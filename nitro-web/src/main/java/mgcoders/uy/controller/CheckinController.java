@@ -45,13 +45,14 @@ public class CheckinController {
 
     @PostConstruct
     public void init() {
-        key = String.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("token"));
-        if (key != null) {
-            sessionController.setAdminConectado(adminService.checkIfAdmin(key));
-        }
         valid = sessionController.isAdminConectado();
+        if (!valid) {
+            key = String.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("token"));
+            if (key != null) {
+                sessionController.setAdminConectado(adminService.checkIfAdmin(key));
+            }
+        }
         actividadList = activityService.actividadesAbiertas();
-        actividadSeleccionada = actividadList.size() > 0 ? actividadList.get(0) : null;
         personasList = personaService.buscarTodas();
         buscarAsistencias();
     }
