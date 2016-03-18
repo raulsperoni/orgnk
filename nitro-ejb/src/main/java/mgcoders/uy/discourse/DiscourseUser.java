@@ -31,7 +31,8 @@ public class DiscourseUser implements Serializable {
     }
 
     public DiscourseUser(Persona persona) {
-        this.username = persona.getNombre().toLowerCase().replace(' ', '_');
+        String base = persona.getNombre().toLowerCase().replace(' ', '_');
+        this.username = base.length() > 20 ? base.substring(0, 19) : base;
         this.email = persona.getEmail();
         this.active = true;
         this.persona = persona;

@@ -7,6 +7,7 @@ import java.util.Date;
 
 /**
  * Created by RSperoni on 23/02/2016.
+ * Ojo campos que no sirven, revisar.
  */
 
 @Entity
@@ -24,11 +25,11 @@ public class Asistencia implements Serializable {
     private Persona persona;
 
     @NotNull
-    private boolean confirmado;
+    private boolean confirmado = true;
 
-    private boolean asiste;
+    private boolean asiste = true;
 
-    private boolean requiereAlojamiento;
+    private boolean requiereAlojamiento = false;
 
     private String comentario;
 

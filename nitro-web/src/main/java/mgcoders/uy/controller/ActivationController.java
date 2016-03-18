@@ -6,13 +6,11 @@ import mgcoders.uy.service.activation.ActivationService;
 import mgcoders.uy.service.activities.ActivityService;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.validation.ConstraintViolationException;
 
 /**
  * Created by raul on 21/02/16.
@@ -43,24 +41,6 @@ public class ActivationController {
         valid = persona != null;
         asistencia = new Asistencia();
     }
-
-
-    public void registrarAsistencia() throws Exception {
-        try {
-
-            activityService.registrarAsistencia(asistencia);
-            facesContext.addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Gracias"));
-        } catch (ConstraintViolationException e) {
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "Quizá ya confirmaste");
-            facesContext.addMessage(null, m);
-        } catch (Exception e) {
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "error del sistema, contáctenos");
-            facesContext.addMessage(null, m);
-        }
-    }
-
-
 
     public String getKey() {
         return key;
