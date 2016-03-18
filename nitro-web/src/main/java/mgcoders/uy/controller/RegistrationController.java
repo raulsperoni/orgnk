@@ -76,8 +76,6 @@ public class RegistrationController implements Serializable {
                 nuevaPersona.setFrecuencia_aporte(Frecuencia.valueOf(frecuenciaSeleccionada));
             }
             if (nuevaPersona.getPassword().equals(passwordConfirmation)) {
-                personaService.registrar(nuevaPersona);
-                success = true;
                 if (!personaService.existe(nuevaPersona.getCi(), nuevaPersona.getEmail())) {
                     personaService.registrar(nuevaPersona);
                     success = true;

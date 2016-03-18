@@ -10,8 +10,7 @@ import mgcoders.uy.service.common.PersonaService;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
@@ -22,7 +21,7 @@ import java.util.List;
  * Created by raul on 08/03/16.
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class CheckinController {
 
     List<Asistencia> asistenciaList;
@@ -41,12 +40,12 @@ public class CheckinController {
     private String criterioBusqueda;
     private List<Persona> personasList;
     private Persona personaSeleccionada;
-    @ManagedProperty(value = "#{param.token}")
     private String key;
     private boolean valid;
 
     @PostConstruct
     public void init() {
+        key = String.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("token"));
         if (key != null) {
             sessionController.setAdminConectado(adminService.checkIfAdmin(key));
         }
@@ -54,6 +53,10 @@ public class CheckinController {
         actividadList = activityService.actividadesAbiertas();
         actividadSeleccionada = actividadList.size() > 0 ? actividadList.get(0) : null;
         personasList = personaService.buscarTodas();
+        buscarAsistencias();
+    }
+
+    public void buscarAsistencias() {
         asistenciaList = activityService.buscarAsistencias(actividadSeleccionada);
     }
 
@@ -61,7 +64,7 @@ public class CheckinController {
         try {
             activityService.registrarAsistencia(personaSeleccionada, actividadSeleccionada);
             personaSeleccionada = null;
-            asistenciaList = activityService.buscarAsistencias(actividadSeleccionada);
+            buscarAsistencias();
         } catch (ConstraintViolationException e) {
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El registro falló", "La cédula o el email ya existen");
             facesContext.addMessage(null, m);

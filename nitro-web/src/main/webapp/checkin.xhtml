@@ -47,7 +47,7 @@
                                         <f:selectItems value="#{checkinController.actividadList}" var="f"
                                                        itemLabel="#{f.nombre} - #{f.descripcion}"
                                                        itemValue="#{f}"/>
-                                        <f:ajax listener="#{registrationController.cambioDepartamento}"
+                                        <f:ajax listener="#{checkinController.buscarAsistencias}"
                                                 event="change"
                                                 render="panelAsistencias"
                                                 execute="@this act"/>
@@ -76,7 +76,8 @@
                                     <b:column colLg="10" offsetLg="1">
 
                                         <b:commandButton action="#{checkinController.registrar}" ajax="true"
-                                                         update="@form messages busqueda panelAsistencias"
+                                                         process="@form"
+                                                         update="messages busqueda panelAsistencias"
                                                          value="Registrar" look="primary" styleClass="pull-right"
                                                          span="20px"
                                         />
@@ -99,13 +100,11 @@
                                             <p:graphicImage name="gfx/excel.png"/>
                                             <p:dataExporter type="xls" target="tbl" fileName="asistentes"
                                                             pageOnly="true"/>
-                                            <f:ajax execute="@form" render="@none"/>
                                         </h:commandLink>
                                         <h:commandLink>
                                             <p:graphicImage name="gfx/pdf.png"/>
                                             <p:dataExporter type="pdf" target="tbl" fileName="asistentes"
                                                             pageOnly="true"/>
-                                            <f:ajax execute="@form" render="@none"/>
                                         </h:commandLink>
                                     </f:facet>
 
