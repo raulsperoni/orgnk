@@ -99,11 +99,13 @@
                                             <p:graphicImage name="gfx/excel.png"/>
                                             <p:dataExporter type="xls" target="tbl" fileName="asistentes"
                                                             pageOnly="true"/>
+                                            <f:ajax execute="@form" render="@none"/>
                                         </h:commandLink>
                                         <h:commandLink>
                                             <p:graphicImage name="gfx/pdf.png"/>
                                             <p:dataExporter type="pdf" target="tbl" fileName="asistentes"
                                                             pageOnly="true"/>
+                                            <f:ajax execute="@form" render="@none"/>
                                         </h:commandLink>
                                     </f:facet>
 
