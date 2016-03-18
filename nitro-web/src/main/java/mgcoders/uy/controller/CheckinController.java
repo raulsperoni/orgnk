@@ -10,7 +10,8 @@ import mgcoders.uy.service.common.PersonaService;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
@@ -21,7 +22,7 @@ import java.util.List;
  * Created by raul on 08/03/16.
  */
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class CheckinController {
 
     List<Asistencia> asistenciaList;
@@ -35,30 +36,31 @@ public class CheckinController {
     private FacesContext facesContext;
     @Inject
     private PersonaService personaService;
-    private Actividad actividadSeleccionada;
+    private Actividad actividadSeleccionada = null;
     private List<Actividad> actividadList;
-    private String criterioBusqueda;
+    private String criterioBusqueda = "";
     private List<Persona> personasList;
     private Persona personaSeleccionada;
+    @ManagedProperty(value = "#{param.token}")
     private String key;
-    private boolean valid;
+    private boolean valid = false;
 
     @PostConstruct
     public void init() {
-        valid = sessionController.isAdminConectado();
         if (!valid) {
-            key = String.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("token"));
             if (key != null) {
                 sessionController.setAdminConectado(adminService.checkIfAdmin(key));
             }
         }
+        valid = sessionController.isAdminConectado();
         actividadList = activityService.actividadesAbiertas();
         personasList = personaService.buscarTodas();
+        actividadSeleccionada = actividadList.size() > 0 ? actividadList.get(0) : null;
         buscarAsistencias();
     }
 
     public void buscarAsistencias() {
-        asistenciaList = activityService.buscarAsistencias(actividadSeleccionada);
+        asistenciaList = actividadSeleccionada != null ? activityService.buscarAsistencias(actividadSeleccionada) : new ArrayList<Asistencia>();
     }
 
     public void registrar() throws Exception {

@@ -33,7 +33,7 @@
 
             <b:container fluid="true" rendered="#{checkinController.valid}">
                 <b:row>
-                    <b:column colLg="5" offsetLg="1">
+                    <b:column colLg="4" offsetLg="1">
                         <b:panel look="primary" title="CheckIn Actividades Casa Grande" collapsible="false">
                             <h:form id="registro">
 
@@ -46,7 +46,7 @@
                                                      tooltip="Seleccione la actividad">
                                         <f:selectItems value="#{checkinController.actividadList}" var="f"
                                                        itemLabel="#{f.nombre} - #{f.descripcion}"
-                                                       itemValue="#{f}"/>
+                                                       itemValue="#{f}" noSelectionValue=""/>
                                         <f:ajax listener="#{checkinController.buscarAsistencias}"
                                                 event="change"
                                                 render="panelAsistencias"
@@ -67,7 +67,7 @@
                                                             var="p" converter="personaConverter" minQueryLength="3"
                                                             maxResults="5"
                                                             itemLabel="#{p.nombre} - #{p.ci} - #{p.email}"
-                                                            itemValue="#{p}" styleClass="form-control" emptyMessage=""
+                                                            itemValue="#{p}" styleClass="form-control"
                                                             inputStyle="width: 100%"/>
                                         </div>
                                     </b:column>
@@ -87,13 +87,15 @@
                             </h:form>
                         </b:panel>
                     </b:column>
-                    <b:column colLg="5">
-                        <b:panel look="primary" title="Asistentes" collapsible="false" id="panelAsistencias">
+                    <b:column colLg="6" id="panelAsistencias">
+                        <b:panel look="success"
+                                 title="Asistentes #{checkinController.actividadSeleccionada.nombre} #{checkinController.actividadSeleccionada.descripcion} ##{checkinController.asistenciaList.size()}"
+                                 collapsible="false" rendered="#{checkinController.actividadSeleccionada!=null}">
                             <h:form>
-
+                                <div>
                                 <p:dataTable value="#{checkinController.asistenciaList}" var="a" scrollable="true"
-                                             id="tbl"
-                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                             id="tbl" paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                                              paginator="true" rows="10">
                                     <f:facet name="{Exporters}">
                                         <h:commandLink>
@@ -126,6 +128,7 @@
 
 
                                 </p:dataTable>
+                                </div>
                             </h:form>
                         </b:panel>
                     </b:column>
