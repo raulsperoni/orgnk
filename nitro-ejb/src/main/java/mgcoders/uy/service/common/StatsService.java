@@ -27,7 +27,7 @@ public class StatsService {
     }
 
     public long countActivadas() {
-        Query query = em.createQuery("SELECT p FROM Persona p join ActivationToken a on a.id=p.id where a.verified = True");
+        Query query = em.createQuery("SELECT a FROM ActivationToken a where a.verified = True");
         return ((List<Departamento>) query.getResultList()).size();
     }
 

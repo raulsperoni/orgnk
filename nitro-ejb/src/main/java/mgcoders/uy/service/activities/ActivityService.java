@@ -48,4 +48,10 @@ public class ActivityService {
         query.setParameter("actividad", actividadSeleccionada);
         return (List<Asistencia>) query.getResultList();
     }
+
+    public long getActividadCuorum(long id) {
+        Query query = em.createQuery("SELECT a FROM Asistencia a where a.actividad.id = :id");
+        query.setParameter("id", id);
+        return ((List<Asistencia>) query.getResultList()).size();
+    }
 }
