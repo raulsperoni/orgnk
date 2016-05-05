@@ -4,16 +4,19 @@ import mgcoders.uy.discourse.DiscourseAPIService;
 import mgcoders.uy.discourse.DiscourseCreateUserResponse;
 import mgcoders.uy.discourse.DiscourseUser;
 import mgcoders.uy.events.ActivationEvent;
+import mgcoders.uy.events.DiscourseUserCreatedEvent;
 import mgcoders.uy.model.Persona;
 import mgcoders.uy.util.Util;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.TransactionPhase;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.util.Date;
 import java.util.logging.Logger;
 
 /**
@@ -24,6 +27,8 @@ public class UserService {
 
     @Inject
     DiscourseAPIService discourseAPIService;
+    @Inject
+    Event<DiscourseUserCreatedEvent> discourseUserCreatedEventEvent;
     @Inject
     private Logger log;
     @Inject
@@ -53,6 +58,7 @@ public class UserService {
                     nuevoUsuario.setApproved(true);
                     log.info("Usuario aprobado en discourse: " + nuevoUsuario.getId());
                 }
+                discourseUserCreatedEventEvent.fire(new DiscourseUserCreatedEvent(persona.getId(), new Date(), persona.getPassword()));
             } else {
                 nuevoUsuario.setError(true);
                 nuevoUsuario.setErrorMessage(response != null ? response.getMessage() : "Error desconocido");

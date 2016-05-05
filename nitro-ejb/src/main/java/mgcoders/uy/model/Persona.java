@@ -1,5 +1,6 @@
 package mgcoders.uy.model;
 
+import mgcoders.uy.util.Util;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -21,7 +22,7 @@ public class Persona implements Serializable {
 
     private boolean enabled = false;
     @Pattern(regexp = ".{8,}", message = "La contraseña debe ser de más de 8 caracteres")
-    private String password;
+    private String password = Util.generarPassword();
 
     @NotNull
     @Pattern(regexp = ".+", message = "El nombre es obligatorio")

@@ -24,6 +24,13 @@ public class Properties {
     public static final String DISCOURSE_API_USER = "discourse_api_user";
     public static final String DISCOURSE_API_HOST = "discourse_api_host";
     public static final String ADMIN_TOKEN = "admin_token";
+    public static final String NOTIFICATION_NUEVO_COMUNICACION = "notifica_comunicacion";
+    public static final String NOTIFICATION_NUEVO_FINANZAS = "notifica_finanzas";
+    public static final String NOTIFICATION_NUEVO_AGORA = "notifica_agora";
+    public static final String NOTIFICATION_NUEVO_ORGANIZACION = "notifica_organizacion";
+
+
+
 
 
 

@@ -1,6 +1,7 @@
 package mgcoders.uy.discourse;
 
 import mgcoders.uy.model.Persona;
+import mgcoders.uy.util.Util;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -31,8 +32,7 @@ public class DiscourseUser implements Serializable {
     }
 
     public DiscourseUser(Persona persona) {
-        String base = persona.getNombre().toLowerCase().replace(' ', '_');
-        this.username = base.length() > 20 ? base.substring(0, 19) : base;
+        this.username = Util.generarNombreUsuario(persona.getNombre());
         this.email = persona.getEmail();
         this.active = true;
         this.persona = persona;

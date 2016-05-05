@@ -185,21 +185,21 @@
                                         <span class="help-block">A Casa Grande la construímos entre todos, tu aporte ecónomico también es fundamental.</span>
                                     </b:column>
                                 </b:row>
-                                <b:row>
-                                    <b:column colMd="4" offsetMd="2">
-                                        <h:message for="password"/>
-                                        <b:inputSecret id="password" value="#{nuevaPersona.password}"
-                                                       label="Contraseña:"
-                                                       renderLabel="true" maxlength="40"
-                                                       tooltip="Elegí una contraseña para acceder a nuestras plataformas, al menos 8 carácteres"/>
-                                    </b:column>
-                                    <b:column colMd="4">
-                                        <h:message for="passwordConfirm"/>
-                                        <b:inputSecret id="passwordConfirm" tooltip="Repetí la contraseña"
-                                                       label="Confirmar contraseña:" renderLabel="true" maxlength="40"
-                                                       value="#{registrationController.passwordConfirmation}"/>
-                                    </b:column>
-                                </b:row>
+                                <!-- <b:row>
+                                     <b:column colMd="4" offsetMd="2">
+                                         <h:message for="password"/>
+                                         <b:inputSecret id="password" value="#{nuevaPersona.password}"
+                                                        label="Contraseña:"
+                                                        renderLabel="true" maxlength="40"
+                                                        tooltip="Elegí una contraseña para acceder a nuestras plataformas, al menos 8 carácteres"/>
+                                     </b:column>
+                                     <b:column colMd="4">
+                                         <h:message for="passwordConfirm"/>
+                                         <b:inputSecret id="passwordConfirm" tooltip="Repetí la contraseña"
+                                                        label="Confirmar contraseña:" renderLabel="true" maxlength="40"
+                                                        value="#{registrationController.passwordConfirmation}"/>
+                                     </b:column>
+                                 </b:row>-->
                                 <b:row>
                                     <b:column colMd="6" offsetMd="6">
                                         <b:commandButton action="#{registrationController.registrar}" ajax="true"
