@@ -87,7 +87,7 @@ public class DiscourseAPIService {
         formData.add("name", user.getName());
         formData.add("password", user.getPersona().getPassword());
         formData.add("email", user.getEmail());
-        formData.add("active", "true");
+        formData.add("active", true);
         ClientResponse response = webResource.path("users").queryParams(params).type(MediaType.APPLICATION_FORM_URLENCODED).accept(MediaType.APPLICATION_JSON_TYPE).post(ClientResponse.class, formData);
         String output = response.getEntity(String.class);
 
