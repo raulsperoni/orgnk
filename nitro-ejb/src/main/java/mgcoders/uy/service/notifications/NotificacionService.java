@@ -98,7 +98,8 @@ public class NotificacionService {
         if (organikaProperties.get(Properties.NOTIFICATION_TRAP_EMAILS).equals("1")) {
             email.addTo(organikaProperties.get(Properties.NOTIFICATION_TRAP_EMAILS_ADDRESS));
         } else {
-            email.addTo(persona.getEmail());
+            email.addTo(new String[]{organikaProperties.get(Properties.NOTIFICATION_NUEVO_AGORA), organikaProperties.get(Properties.NOTIFICATION_NUEVO_COMUNICACION),
+                    organikaProperties.get(Properties.NOTIFICATION_NUEVO_FINANZAS), organikaProperties.get(Properties.NOTIFICATION_NUEVO_ORGANIZACION)});
         }
 
 
