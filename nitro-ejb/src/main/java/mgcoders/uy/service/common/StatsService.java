@@ -1,5 +1,6 @@
 package mgcoders.uy.service.common;
 
+import mgcoders.uy.model.ActivationToken;
 import mgcoders.uy.model.Departamento;
 
 import javax.ejb.Stateless;
@@ -29,6 +30,17 @@ public class StatsService {
     public long countActivadas() {
         Query query = em.createQuery("SELECT a FROM ActivationToken a where a.verified = True");
         return ((List<Departamento>) query.getResultList()).size();
+    }
+
+    public String personaInfo(String email) {
+        Query query = em.createQuery("SELECT a FROM ActivationToken a,Persona p where a.persona = p and p.email = :email");
+        query.setParameter("email", email);
+        List<ActivationToken> personas = (List<ActivationToken>) query.getResultList();
+        String result = "";
+        for (ActivationToken p : personas) {
+            result += "Verificado: " + p.isVerified() + (p.isVerified() ? "" : p.getToken()) + "\n";
+        }
+        return result;
     }
 
 

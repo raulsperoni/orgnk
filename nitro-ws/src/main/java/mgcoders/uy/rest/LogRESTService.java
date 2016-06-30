@@ -54,6 +54,15 @@ public class LogRESTService {
     }
 
     @GET
+    @Path("persona/info/{token}/{email}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPersonasActiveCount(@PathParam("token") String token, @PathParam("email") String email) throws Exception {
+        if (adminService.checkIfAdmin(token))
+            return statsService.personaInfo(email);
+        else return "";
+    }
+
+    @GET
     @Path("actividad/{token}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Actividad> getActividades(@PathParam("token") String token) throws Exception {
