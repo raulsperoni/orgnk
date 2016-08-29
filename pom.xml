@@ -37,6 +37,7 @@
         <module>nitro-web</module>
         <module>nitro-ear</module>
         <module>nitro-ws</module>
+        <module>nitro-admin-web</module>
     </modules>
 
 

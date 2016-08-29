@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<!--
+    JBoss, Home of Professional Open Source
+    Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. See the copyright.txt in the
+    distribution for a full listing of individual contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link id="currentCSS" rel="stylesheet" type="text/css" href="https://bootswatch.com/paper/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../resources/css/social-share-kit.css" type="text/css"/>
+    <title><ui:insert name="title">Titulo</ui:insert></title>
+    <link rel="shortcut icon" href="images/favicon.ico"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
+    <meta property="og:image" content="resources/gfx/sumate.png"></meta>
+    <meta property="og:title" content="Padrón de Casa Grande"/>
+    <meta property="og:description"
+          content="El padrón será abierto a toda la ciudadanía que se sienta parte de Casa Grande. Las personas podrán participar inscribiéndose en un formulario disponible de forma virtual y presencial."/>
+
+</h:head>
+<h:body>
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1674514022813810',
+                xfbml: true,
+                version: 'v2.5'
+            });
+
+
+        };
+
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <b:navBar brandImg="resources/gfx/cg.png" fluid="true" brandAlign="center" style="height:22px;"
+              brandHref="index.jsf">
+        <b:navbarLinks>
+            <b:navLink value="Casa Grande" href="http://constanza.com.uy"></b:navLink>
+            <b:navLink value="Ágora" href="http://agoracasagrande.uy"></b:navLink>
+
+            <!--<b:dropMenu value="Links">
+                   <b:navLink value="Action" href="#"></b:navLink>
+                   <b:navLink value="Another action" href="#"></b:navLink>
+                   <b:navLink value="Something else here" href="#"></b:navLink>
+                   <b:navLink></b:navLink>
+                   <b:navLink header="Nav header"></b:navLink>
+                   <b:navLink value="Separated link" href="#"></b:navLink>
+                   <b:navLink value="One more separated link" href="#"></b:navLink>
+               </b:dropMenu>-->
+        </b:navbarLinks>
+    </b:navBar>
+    <b:container fluid="true">
+
+        <b:row>
+            <b:column colMd="10" offsetMd="1">
+
+                <b:messages id="messages" showDetail="false" autoUpdate="true" closable="true" showSummary="true"
+                            globalOnly="true"/>
+            </b:column>
+        </b:row>
+        <ui:insert name="content">
+            [Template content will be inserted here]
+        </ui:insert>
+        <b:row>
+            <b:column colLg="1" offsetLg="1">
+                <b:row>
+                    <img src="resources/gfx/fa.png" height="50px" style="padding-left: 5px;"></img>
+                </b:row><b:row>
+                <img src="resources/gfx/rsz_logo.png" height="80px"></img>
+            </b:row>
+
+            </b:column>
+            <b:column colLg="8">
+
+                <ul class="list-unstyled">
+                    <li><a href="https://twitter.com/CasaGrande_FA">Twitter</a></li>
+                    <li><a href="https://www.facebook.com/ConstanzaMoreira2014">Facebook</a></li>
+                    <li><a href="https://www.youtube.com/user/constanzamoreira">YouTube</a></li>
+                    <li><a href="">Email</a></li>
+                </ul>
+                <p>Casa Grande - Frente Amplio</p>
+            </b:column>
+
+
+        </b:row>
+        <b:row>
+            <b:column offsetLg="9" colLg="3" styleClass="pull-right">
+                <p>Desarrollado por <img src="resources/gfx/mglogo.png" height="50px"
+                                         style="padding-left: 10px;"></img><a href="http://mgcoders.uy">mgcoders.uy</a>
+                </p>
+
+
+            </b:column>
+        </b:row>
+    </b:container>
+
+
+</h:body>
+</html>
